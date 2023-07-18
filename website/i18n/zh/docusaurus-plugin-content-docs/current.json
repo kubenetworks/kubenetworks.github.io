@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "下一篇",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Functions": {
+    "message": "功能",
+    "description": "The label for category Functions in sidebar docs"
+  },
+  "sidebar.docs.category.Functions.link.generated-index.description": {
+    "message": "请阅读",
+    "description": "The generated-index page description for category Functions in sidebar docs"
+  },
+  "sidebar.docs.category.FAQ": {
+    "message": "问答",
+    "description": "The label for category FAQ in sidebar docs"
+  },
+  "sidebar.docs.category.FAQ.link.generated-index.description": {
+    "message": "请阅读",
+    "description": "The generated-index page description for category FAQ in sidebar docs"
+  }
+}

@@ -5,20 +5,30 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
+import Translate, {translate} from '@docusaurus/Translate';
+
 import styles from './index.module.css';
+import config from '@generated/docusaurus.config';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <img style={{ width: 300, height: 100, objectFit: "cover" }} src={require('@site/static/img/logo.jpeg').default} />
+        <p className="hero__subtitle">
+          <Translate>Cloud Native Dev Environment</Translate>
+        </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            to="/docs/quickstart">
+              <Translate>QuickStart</Translate>
+          </Link>
+          <Link
+            className={styles.homepageVersion}
+            to="https://github.com/KubeNetworks/kubevpn/releases/tag/v1.1.34">
+            v1.1.34
           </Link>
         </div>
       </div>
@@ -30,8 +40,10 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={translate({
+        message: "Homepage"
+      })}
+      description={config.tagline}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Functions": {
+    "message": "Functions",
+    "description": "The label for category Functions in sidebar docs"
+  },
+  "sidebar.docs.category.Functions.link.generated-index.description": {
+    "message": "Please Read:",
+    "description": "The generated-index page description for category Functions in sidebar docs"
+  },
+  "sidebar.docs.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar docs"
+  },
+  "sidebar.docs.category.FAQ.link.generated-index.description": {
+    "message": "Please Read:",
+    "description": "The generated-index page description for category FAQ in sidebar docs"
+  }
+}
