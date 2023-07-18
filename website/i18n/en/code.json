@@ -6,13 +6,13 @@
     "message": "access remote kubernetes cluster network"
   },
   "Local to Remote": {
-    "message": "Remote to Local"
+    "message": "Local to Remote"
   },
   "remote kubernetes cluster service can also access your local service": {
     "message": "remote kubernetes cluster service can also access your local service"
   },
   "And more": {
-    "message": "Remote to Local"
+    "message": "And more"
   },
   "run your kubernetes pod on local Docker container with same environment、volume、and network": {
     "message": "run your kubernetes pod on local Docker container with same environment、volume、and network"
