@@ -10,14 +10,26 @@ sidebar_position: 7
 例如:
 
 ```shell
-docker run -it --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v /Users/naison/.kube/config:/root/.kube/config naison/kubevpn:v1.1.21
+docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/config:/root/.kube/config --platform linux/amd64 naison/kubevpn:v2.0.0
 ```
 
 ```shell
-➜  ~ docker run -it --privileged -c authors -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v /Users/naison/.kube/vke:/root/.kube/config -v /Users/naison/Desktop/kubevpn/bin:/app naison/kubevpn:v1.1.21
-root@4d0c3c4eae2b:/# hostname
-4d0c3c4eae2b
-root@4d0c3c4eae2b:/# kubevpn -n kube-system --image naison/kubevpn:v1.1.21 --headers user=naison --network container:4d0c3c4eae2b --entrypoint /bin/bash dev deployment/authors
+➜  ~ docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/vke:/root/.kube/config --platform linux/amd64 naison/kubevpn:v2.0.0
+Unable to find image 'naison/kubevpn:v2.0.0' locally
+v2.0.0: Pulling from naison/kubevpn
+445a6a12be2b: Already exists
+bd6c670dd834: Pull complete
+64a7297475a2: Pull complete
+33fa2e3224db: Pull complete
+e008f553422a: Pull complete
+5132e0110ddc: Pull complete
+5b2243de1f1a: Pull complete
+662a712db21d: Pull complete
+4f4fb700ef54: Pull complete
+33f0298d1d4f: Pull complete
+Digest: sha256:115b975a97edd0b41ce7a0bc1d8428e6b8569c91a72fe31ea0bada63c685742e
+Status: Downloaded newer image for naison/kubevpn:v2.0.0
+root@d0b3dab8912a:/app# kubevpn dev deployment/authors --headers user=naison -it --entrypoint sh
 
 ----------------------------------------------------------------------------------
     Warn: Use sudo to execute command kubevpn can not use user env KUBECONFIG.
@@ -25,66 +37,47 @@ root@4d0c3c4eae2b:/# kubevpn -n kube-system --image naison/kubevpn:v1.1.21 --hea
     Current env KUBECONFIG value:
 ----------------------------------------------------------------------------------
 
+hostname is d0b3dab8912a
+connectting to cluster
+start to connect
 got cidr from cache
-traffic manager not exist, try to create it...
-pod [kubevpn-traffic-manager] status is Pending
-Container Reason Message
-
-pod [kubevpn-traffic-manager] status is Pending
-Container     Reason            Message
-control-plane ContainerCreating
-vpn           ContainerCreating
-webhook       ContainerCreating
-
-pod [kubevpn-traffic-manager] status is Running
-Container     Reason           Message
-control-plane ContainerRunning
-vpn           ContainerRunning
-webhook       ContainerRunning
-
+get cidr successfully
 update ref count successfully
-Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
-Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
-deployment "authors" successfully rolled out
+traffic manager already exist, reuse it
 port forward ready
 tunnel connected
 dns service ok
+start to create remote inbound pod for Deployment.apps/authors
+patch workload default/Deployment.apps/authors with sidecar
+rollout status for Deployment.apps/authors
+Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
+deployment "authors" successfully rolled out
+rollout status for Deployment.apps/authors successfully
+create remote inbound pod for Deployment.apps/authors successfully
 tar: removing leading '/' from member names
-/tmp/3122262358661539581:/var/run/secrets/kubernetes.io/serviceaccount
-tar: Removing leading '/' from member names
-tar: Removing leading '/' from hard link targets
-/tmp/7677066538742627822:/var/run/secrets/kubernetes.io/serviceaccount
-latest: Pulling from naison/authors
-Digest: sha256:2e7b2d6a4c6143cde888fcdb70ba091d533e11de70e13e151adff7510a5d52d4
-Status: Downloaded newer image for naison/authors:latest
-Created container: authors_kube-system_kubevpn_c68e4
-Wait container authors_kube-system_kubevpn_c68e4 to be running...
-Container authors_kube-system_kubevpn_c68e4 is running now
-Created container: nginx_kube-system_kubevpn_c68e7
-Wait container nginx_kube-system_kubevpn_c68e7 to be running...
-Container nginx_kube-system_kubevpn_c68e7 is running now
+/tmp/6460902982794789917:/var/run/secrets/kubernetes.io/serviceaccount
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from hard link targets
+/tmp/5028895788722532426:/var/run/secrets/kubernetes.io/serviceaccount
+network mode is container:d0b3dab8912a
+Created container: nginx_default_kubevpn_6df63
+Wait container nginx_default_kubevpn_6df63 to be running...
+Container nginx_default_kubevpn_6df63 is running now
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+Created main container: authors_default_kubevpn_6df5f
 /opt/microservices # ps -ef
 PID   USER     TIME  COMMAND
     1 root      0:00 {bash} /usr/bin/qemu-x86_64 /bin/bash /bin/bash
-   60 root      0:07 {kubevpn} /usr/bin/qemu-x86_64 kubevpn kubevpn dev deployment/authors -n kube-system --image naison/kubevpn:v1.1.21 --headers user=naison --parent
-   73 root      0:00 {tail} /usr/bin/qemu-x86_64 /usr/bin/tail tail -f /dev/null
-   80 root      0:00 {nginx} /usr/bin/qemu-x86_64 /usr/sbin/nginx nginx -g daemon off;
-   92 root      0:00 {sh} /usr/bin/qemu-x86_64 /bin/sh /bin/sh
-  156 101       0:00 {nginx} /usr/bin/qemu-x86_64 /usr/sbin/nginx nginx -g daemon off;
-  158 101       0:00 {nginx} /usr/bin/qemu-x86_64 /usr/sbin/nginx nginx -g daemon off;
-  160 101       0:00 {nginx} /usr/bin/qemu-x86_64 /usr/sbin/nginx nginx -g daemon off;
-  162 101       0:00 {nginx} /usr/bin/qemu-x86_64 /usr/sbin/nginx nginx -g daemon off;
-  164 root      0:00 ps -ef
-/opt/microservices # ls
-app
-/opt/microservices # apk add curl
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.14/main/x86_64/APKINDEX.tar.gz
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.14/community/x86_64/APKINDEX.tar.gz
-(1/4) Installing brotli-libs (1.0.9-r5)
-(2/4) Installing nghttp2-libs (1.43.0-r0)
-(3/4) Installing libcurl (7.79.1-r5)
-(4/4) Installing curl (7.79.1-r5)
+   14 root      0:02 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn kubevpn dev deployment/authors --headers
+   25 root      0:01 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn /usr/local/bin/kubevpn daemon
+   37 root      0:04 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn /usr/local/bin/kubevpn daemon --sudo
+   53 root      0:00 nginx: master process nginx -g daemon off;
+(4/4) Installing curl (8.0.1-r0)
 Executing busybox-1.33.1-r3.trigger
+OK: 8 MiB in 19 packagesnx: worker process
+/opt/microservices #
+/opt/microservices # apk add curl
 OK: 8 MiB in 19 packages
 /opt/microservices # curl localhost:80
 <!DOCTYPE html>
@@ -112,11 +105,39 @@ Commercial support is available at
 </html>
 /opt/microservices # ls
 app
-/opt/microservices # exit
+/opt/microservices # ls -alh
+total 6M
+drwxr-xr-x    2 root     root        4.0K Oct 18  2021 .
+drwxr-xr-x    1 root     root        4.0K Oct 18  2021 ..
+-rwxr-xr-x    1 root     root        6.3M Oct 18  2021 app
+/opt/microservices # ./app &
+/opt/microservices # 2023/09/30 14:27:32 Start listening http port 9080 ...
+
+/opt/microservices # curl authors:9080/health
+/opt/microservices # curl authors:9080/health
+{"status":"Authors is healthy"}/opt/microservices #
+/opt/microservices # curl localhost:9080/health
+{"status":"Authors is healthy"}/opt/microservices # exit
 prepare to exit, cleaning up
 update ref count successfully
-ref-count is zero, prepare to clean up resource
-clean up successful
-root@4d0c3c4eae2b:/# exit
+tun device closed
+leave resource: deployments.apps/authors
+workload default/deployments.apps/authors is controlled by a controller
+leave resource: deployments.apps/authors successfully
+clean up successfully
+prepare to exit, cleaning up
+update ref count successfully
+clean up successfully
+root@d0b3dab8912a:/app# exit
 exit
+➜  ~
+```
+
+```text
+➜  ~ docker ps
+CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS         PORTS     NAMES
+1cd576b51b66   naison/authors:latest           "sh"                     4 minutes ago   Up 4 minutes             authors_default_kubevpn_6df5f
+56a6793df82d   nginx:latest                    "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes             nginx_default_kubevpn_6df63
+d0b3dab8912a   naison/kubevpn:v2.0.0     "/bin/bash"              5 minutes ago   Up 5 minutes             upbeat_noyce
+➜  ~
 ```

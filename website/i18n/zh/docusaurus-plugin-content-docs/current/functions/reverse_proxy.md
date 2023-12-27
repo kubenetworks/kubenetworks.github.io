@@ -6,30 +6,19 @@ sidebar_position: 4
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage
-got cidr from cache
-traffic manager not exist, try to create it...
-pod [kubevpn-traffic-manager] status is Running
-Container     Reason           Message
-control-plane ContainerRunning
-vpn           ContainerRunning
-webhook       ContainerRunning
-
-update ref count successfully
-Waiting for deployment "productpage" rollout to finish: 1 out of 2 new replicas have been updated...
-Waiting for deployment "productpage" rollout to finish: 1 out of 2 new replicas have been updated...
-Waiting for deployment "productpage" rollout to finish: 1 out of 2 new replicas have been updated...
+already connect to cluster
+start to create remote inbound pod for deployment/productpage
+workload default/deployment/productpage is controlled by a controller
+rollout status for deployment/productpage
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 deployment "productpage" successfully rolled out
-port forward ready
-your ip is 223.254.0.101
-tunnel connected
-dns service ok
-
----------------------------------------------------------------------------
-    Now you can access resources in the kubernetes cluster, enjoy it :)
----------------------------------------------------------------------------
-
+rollout status for deployment/productpage successfully
+create remote inbound pod for deployment/productpage successfully
++---------------------------------------------------------------------------+
+|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
++---------------------------------------------------------------------------+
+➜  ~
 ```
 
 ```go

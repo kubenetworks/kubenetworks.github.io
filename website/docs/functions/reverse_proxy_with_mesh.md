@@ -8,31 +8,22 @@ Support HTTP, GRPC and WebSocket etc. with specific header `"a: 1"` will route t
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage --headers a=1
-got cidr from cache
-traffic manager not exist, try to create it...
-pod [kubevpn-traffic-manager] status is Running
-Container     Reason           Message
-control-plane ContainerRunning
-vpn           ContainerRunning
-webhook       ContainerRunning
-
-update ref count successfully
-Waiting for deployment "productpage" rollout to finish: 1 out of 2 new replicas have been updated...
-Waiting for deployment "productpage" rollout to finish: 1 out of 2 new replicas have been updated...
-Waiting for deployment "productpage" rollout to finish: 1 out of 2 new replicas have been updated...
+already connect to cluster
+start to create remote inbound pod for deployment/productpage
+patch workload default/deployment/productpage with sidecar
+rollout status for deployment/productpage
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 deployment "productpage" successfully rolled out
-port forward ready
-your ip is 223.254.0.101
-tunnel connected
-dns service ok
-
----------------------------------------------------------------------------
-    Now you can access resources in the kubernetes cluster, enjoy it :)
----------------------------------------------------------------------------
-
+rollout status for deployment/productpage successfully
+create remote inbound pod for deployment/productpage successfully
++---------------------------------------------------------------------------+
+|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
++---------------------------------------------------------------------------+
+➜  ~
 ```
+
+first access without header "a: 1", it will access existing pod on kubernetes cluster.
 
 ```shell
 ➜  ~ curl productpage:9080
@@ -46,7 +37,10 @@ dns service ok
 ...
 ```
 
+Now let's access local service with header `"a: 1"`
+
 ```shell
 ➜  ~ curl productpage:9080 -H "a: 1"
-Hello world!%
+>>Received request: GET / from xxx.xxx.xxx.xxx:51296
+Hello world!  
 ```
