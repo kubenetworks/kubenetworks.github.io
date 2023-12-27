@@ -16,7 +16,7 @@ const config = {
   url: 'https://kubenetworks.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: isDev ? '/' : '/kubevpn-docs',
+  baseUrl: isDev ? '/' : '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -44,14 +44,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/KubeNetworks/kubevpn-docs/tree/master/website/docs',
+            'https://github.com/KubeNetworks/kubenetworks.github.io/tree/master/website/docs',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-          'https://github.com/KubeNetworks/kubevpn-docs/tree/master/website/blog',
+          'https://github.com/KubeNetworks/kubenetworks.github.io/tree/master/website/blog',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -113,7 +113,7 @@ const config = {
               },
               {
                 label: 'KubeVPN Docs',
-                href: 'https://github.com/KubeNetworks/kubevpn-docs',
+                href: 'https://github.com/KubeNetworks/kubenetworks.github.io',
               },
             ],
           },
@@ -121,8 +121,8 @@ const config = {
             title: 'Latest Release',
             items: [
               {
-                label: 'v1.1.34',
-                href: 'https://github.com/KubeNetworks/kubevpn/releases/tag/v1.1.34',
+                label: 'v2.2.0',
+                href: 'https://github.com/KubeNetworks/kubevpn/releases/tag/v2.2.0',
               },
               {
                 label: 'Archives',

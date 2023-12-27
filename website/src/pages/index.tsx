@@ -27,8 +27,8 @@ function HomepageHeader() {
           </Link>
           <Link
             className={styles.homepageVersion}
-            to="https://github.com/KubeNetworks/kubevpn/releases/tag/v1.1.34">
-            v1.1.34
+            to="https://github.com/KubeNetworks/kubevpn/releases/tag/v2.2.0">
+            v2.2.0
           </Link>
         </div>
       </div>
