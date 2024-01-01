@@ -150,5 +150,5 @@ d0b3dab8912a   naison/kubevpn:v2.0.0     "/bin/bash"              5 minutes ago 
 * For clean up after test
 
 ```shell
-kubectl delete -f https://raw.githubusercontent.com/KubeNetworks/kubevpn/master/samples/bookinfo.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
 ```

@@ -1,6 +1,6 @@
 # Docs for KubeVPN
 
-***[KubeVPN](https://github.com/KubeNetworks/kubevpn)***
+***[KubeVPN](https://github.com/kubenetworks/kubevpn)***
 
 ![logo](./assets/logo_cropped.png)
 

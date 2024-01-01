@@ -8,13 +8,13 @@ KubeVPN 是一个云原生开发工具, 可以在本地连接云端 kubernetes �
 
 ## 从 Github release 下载编译好的二进制文件
 
-[链接](https://github.com/KubeNetworks/kubevpn/releases/latest)
+[链接](https://github.com/kubenetworks/kubevpn/releases/latest)
 
 ## 从 自定义 Krew 仓库安装
 
 ```shell
 (
-  kubectl krew index add kubevpn https://github.com/KubeNetworks/kubevpn.git && \
+  kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git && \
   kubectl krew install kubevpn/kubevpn && kubectl kubevpn
 )
 ```
@@ -23,7 +23,7 @@ KubeVPN 是一个云原生开发工具, 可以在本地连接云端 kubernetes �
 
 ```shell
 (
-  git clone https://github.com/KubeNetworks/kubevpn.git && \
+  git clone https://github.com/kubenetworks/kubevpn.git && \
   cd kubevpn && make kubevpn && ./bin/kubevpn
 )
 
@@ -32,6 +32,6 @@ KubeVPN 是一个云原生开发工具, 可以在本地连接云端 kubernetes �
 ## 安装 bookinfo 作为 demo 应用
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/KubeNetworks/kubevpn/master/samples/bookinfo.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
 ```
 

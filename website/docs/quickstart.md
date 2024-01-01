@@ -11,13 +11,13 @@ totally.
 
 ## Install from GitHub release
 
-[LINK](https://github.com/KubeNetworks/kubevpn/releases/latest)
+[LINK](https://github.com/kubenetworks/kubevpn/releases/latest)
 
 ## Install from custom krew index
 
 ```shell
 (
-  kubectl krew index add kubevpn https://github.com/KubeNetworks/kubevpn.git && \
+  kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git && \
   kubectl krew install kubevpn/kubevpn && kubectl kubevpn
 )
 ```
@@ -26,7 +26,7 @@ totally.
 
 ```shell
 (
-  git clone https://github.com/KubeNetworks/kubevpn.git && \
+  git clone https://github.com/kubenetworks/kubevpn.git && \
   cd kubevpn && make kubevpn && ./bin/kubevpn
 )
 
@@ -35,11 +35,11 @@ totally.
 ## Install bookinfo as demo application
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/KubeNetworks/kubevpn/master/samples/bookinfo.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
 ```
 
 For clean up after test
 
 ```shell
-kubectl delete -f https://raw.githubusercontent.com/KubeNetworks/kubevpn/master/samples/bookinfo.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
 ```

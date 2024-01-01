@@ -20,7 +20,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'KubeNetworks', // Usually your GitHub org/user name.
+  organizationName: 'kubenetworks', // Usually your GitHub org/user name.
   projectName: 'kubevpn', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -44,14 +44,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/KubeNetworks/kubenetworks.github.io/tree/master/website/docs',
+            'https://github.com/kubenetworks/kubenetworks.github.io/tree/master/website/docs',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-          'https://github.com/KubeNetworks/kubenetworks.github.io/tree/master/website/blog',
+          'https://github.com/kubenetworks/kubenetworks.github.io/tree/master/website/blog',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -95,7 +95,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/KubeNetworks/kubevpn',
+            href: 'https://github.com/kubenetworks/kubevpn',
             label: 'GitHub',
             position: 'right',
           },
@@ -109,11 +109,11 @@ const config = {
             items: [
               {
                 label: 'KubeVPN',
-                href: 'https://github.com/KubeNetworks/kubevpn',
+                href: 'https://github.com/kubenetworks/kubevpn',
               },
               {
                 label: 'KubeVPN Docs',
-                href: 'https://github.com/KubeNetworks/kubenetworks.github.io',
+                href: 'https://github.com/kubenetworks/kubenetworks.github.io',
               },
             ],
           },
@@ -122,16 +122,16 @@ const config = {
             items: [
               {
                 label: 'v2.2.0',
-                href: 'https://github.com/KubeNetworks/kubevpn/releases/tag/v2.2.0',
+                href: 'https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.0',
               },
               {
                 label: 'Archives',
-                href: 'https://github.com/KubeNetworks/kubevpn/releases',
+                href: 'https://github.com/kubenetworks/kubevpn/releases',
               },
             ],
           },
         ],
-        copyright: `${new Date().getFullYear()} KubeNetworks / Built with Docusaurus`,
+        copyright: `${new Date().getFullYear()} kubenetworks / Built with Docusaurus`,
       },
       prism: {
         theme: lightCodeTheme,
