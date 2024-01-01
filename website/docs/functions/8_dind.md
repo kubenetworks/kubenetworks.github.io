@@ -1,13 +1,14 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
-# DinD ( Docker in Docker ) 在 Docker 中使用 kubevpn
+# DinD ( Docker in Docker ) use kubevpn in Docker
 
-如果你想在本地使用 Docker in Docker (DinD) 的方式启动开发模式, 由于程序会读写 `/tmp` 目录，您需要手动添加参数 `-v /tmp:/tmp`, 还有一点需要注意, 如果使用 DinD
-模式，为了共享容器网络和 pid, 还需要指定参数 `--network`
+If you want to start the development mode locally using Docker in Docker (DinD), because the program will read and
+write the `/tmp` directory, you need to manually add the parameter `-v /tmp:/tmp` (outer docker) and other thing is you
+need to special parameter `--network` (inner docker) for sharing network and pid
 
-例如:
+Example:
 
 ```shell
 docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/config:/root/.kube/config --platform linux/amd64 naison/kubevpn:v2.0.0
@@ -77,45 +78,47 @@ PID   USER     TIME  COMMAND
 Executing busybox-1.33.1-r3.trigger
 OK: 8 MiB in 19 packagesnx: worker process
 /opt/microservices #
+
+/opt/microservices # cat > hello.go <<EOF
+package main
+
+import (
+    "fmt"
+    "io"
+    "net/http"
+)
+
+func main() {
+    http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+        _, _ = io.WriteString(writer, "Hello world!")
+        fmt.Println(">> Container Received request: %s %s from %s\n", request.Method, request.RequestURI, request.RemoteAddr)
+    })
+    fmt.Println("Start listening http port 9080 ...")
+    _ = http.ListenAndServe(":9080", nil)
+}
+EOF
+/opt/microservices # go build hello.go
+/opt/microservices # 
+//opt/microservices # ls -alh
+total 12M    
+drwxr-xr-x    1 root     root          26 Nov  4 10:29 .
+drwxr-xr-x    1 root     root          26 Oct 18  2021 ..
+-rwxr-xr-x    1 root     root        6.3M Oct 18  2021 app
+-rwxr-xr-x    1 root     root        5.8M Nov  4 10:29 hello
+-rw-r--r--    1 root     root         387 Nov  4 10:28 hello.go
+/opt/microservices # 
 /opt/microservices # apk add curl
 OK: 8 MiB in 19 packages
-/opt/microservices # curl localhost:80
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
+/opt/microservices # ./hello &
+/opt/microservices # Start listening http port 9080 ...
+[2]+  Done                       ./hello
+/opt/microservices # curl localhost:9080
+>> Container Received request: GET / from 127.0.0.1:41230
+Hello world!/opt/microservices # 
 
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-/opt/microservices # ls
-app
-/opt/microservices # ls -alh
-total 6M
-drwxr-xr-x    2 root     root        4.0K Oct 18  2021 .
-drwxr-xr-x    1 root     root        4.0K Oct 18  2021 ..
--rwxr-xr-x    1 root     root        6.3M Oct 18  2021 app
-/opt/microservices # ./app &
-/opt/microservices # 2023/09/30 14:27:32 Start listening http port 9080 ...
-
-/opt/microservices # curl authors:9080/health
-/opt/microservices # curl authors:9080/health
-{"status":"Authors is healthy"}/opt/microservices #
+/opt/microservices # curl authors:9080/health -H "a: 1"
+>>Received request: GET /health from 223.254.0.109:57930
+                                                        Hello world!/opt/microservices # 
 /opt/microservices # curl localhost:9080/health
 {"status":"Authors is healthy"}/opt/microservices # exit
 prepare to exit, cleaning up
@@ -133,6 +136,8 @@ exit
 ➜  ~
 ```
 
+during test, check what container is running
+
 ```text
 ➜  ~ docker ps
 CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS         PORTS     NAMES
@@ -140,4 +145,10 @@ CONTAINER ID   IMAGE                           COMMAND                  CREATED 
 56a6793df82d   nginx:latest                    "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes             nginx_default_kubevpn_6df63
 d0b3dab8912a   naison/kubevpn:v2.0.0     "/bin/bash"              5 minutes ago   Up 5 minutes             upbeat_noyce
 ➜  ~
+```
+
+* For clean up after test
+
+```shell
+kubectl delete -f https://raw.githubusercontent.com/KubeNetworks/kubevpn/master/samples/bookinfo.yaml
 ```

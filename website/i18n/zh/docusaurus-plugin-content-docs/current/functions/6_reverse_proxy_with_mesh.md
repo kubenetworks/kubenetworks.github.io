@@ -1,10 +1,10 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
-# Reverse proxy with mesh
+# 反向代理支持 service mesh
 
-Support HTTP, GRPC and WebSocket etc. with specific header `"a: 1"` will route to your local machine
+支持 HTTP, GRPC 和 WebSocket 等, 携带了指定 header `"a: 1"` 的流量，将会路由到本地
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage --headers a=1
@@ -23,8 +23,6 @@ create remote inbound pod for deployment/productpage successfully
 ➜  ~
 ```
 
-first access without header "a: 1", it will access existing pod on kubernetes cluster.
-
 ```shell
 ➜  ~ curl productpage:9080
 <!DOCTYPE html>
@@ -37,10 +35,7 @@ first access without header "a: 1", it will access existing pod on kubernetes cl
 ...
 ```
 
-Now let's access local service with header `"a: 1"`
-
 ```shell
 ➜  ~ curl productpage:9080 -H "a: 1"
->>Received request: GET / from xxx.xxx.xxx.xxx:51296
-Hello world!  
+Hello world!%
 ```
