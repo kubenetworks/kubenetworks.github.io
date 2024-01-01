@@ -1,21 +1,21 @@
 {
-  "Remote to Local": {
-    "message": "Remote to Local"
+  "Local to Remote": {
+    "message": "Local connect to remote k8s cluster network"
   },
   "access remote kubernetes cluster network": {
-    "message": "access remote kubernetes cluster network"
+    "message": "Access remote kubernetes cluster network via service name or Pod IP / Service IP"
   },
-  "Local to Remote": {
-    "message": "Local to Remote"
+  "Remote to Local": {
+    "message": "Intercept remote k8s cluster service inbound traffic to local pc"
   },
   "remote kubernetes cluster service can also access your local service": {
-    "message": "remote kubernetes cluster service can also access your local service"
+    "message": "Intercept remote k8s cluster service inbound traffic to local pc"
   },
   "And more": {
-    "message": "And more"
+    "message": "Dev mode"
   },
   "run your kubernetes pod on local Docker container with same environment、volume、and network": {
-    "message": "run your kubernetes pod on local Docker container with same environment、volume、and network"
+    "message": "Use Docker locally to simulate a k8s pod runtime (same environment variable、volume、and network)"
   },
   "Cloud Native Dev Environment": {
     "message": "Cloud Native Dev Environment"
