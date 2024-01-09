@@ -15,9 +15,9 @@
     "message": "KubeVPN 文档",
     "description": "The label of footer link with label=KubeVPN Docs linking to https://github.com/kubenetworks/kubenetworks.github.io"
   },
-  "link.item.label.v2.2.0": {
-    "message": "v2.2.0",
-    "description": "The label of footer link with label=v2.2.0 linking to https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.0"
+  "link.item.label.v2.2.1": {
+    "message": "v2.2.1",
+    "description": "The label of footer link with label=v2.2.1 linking to https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.1"
   },
   "link.item.label.Archives": {
     "message": "归档",

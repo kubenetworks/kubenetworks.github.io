@@ -121,8 +121,8 @@ const config = {
             title: 'Latest Release',
             items: [
               {
-                label: 'v2.2.0',
-                href: 'https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.0',
+                label: 'v2.2.1',
+                href: 'https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.1',
               },
               {
                 label: 'Archives',
