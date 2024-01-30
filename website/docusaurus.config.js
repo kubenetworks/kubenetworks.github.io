@@ -4,7 +4,7 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-const isDev = process.env.NODE_ENV?.toLocaleLowerCase() !== "production"
+const isDev = process.env.NODE_ENV?.toLocaleLowerCase() !== 'production';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -51,7 +51,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-          'https://github.com/kubenetworks/kubenetworks.github.io/tree/master/website/blog',
+            'https://github.com/kubenetworks/kubenetworks.github.io/tree/master/website/blog',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -121,8 +121,8 @@ const config = {
             title: 'Latest Release',
             items: [
               {
-                label: 'v2.2.1',
-                href: 'https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.1',
+                label: 'latest',
+                href: 'https://github.com/kubenetworks/kubevpn/releases/latest',
               },
               {
                 label: 'Archives',
