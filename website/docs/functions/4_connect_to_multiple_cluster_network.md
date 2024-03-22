@@ -4,6 +4,9 @@ sidebar_position: 4
 
 # Connect to multiple kubernetes cluster network
 
+- Mode `lite`: can connect to multiple cluster network, design for only connecting to multiple cluster network.
+- Mode `Full`: not only connect to cluster network, it also supports proxy workloads inbound traffic to local PC.
+
 ```shell
 ➜  ~ kubevpn status
 ID Mode Cluster               Kubeconfig                 Namespace Status
