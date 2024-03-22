@@ -4,6 +4,9 @@ sidebar_position: 4
 
 # 链接到多个集群网络
 
+- 模式 `轻量`: 可以链接到多个集群网络，但是仅支持链接到多集群。
+- 模式 `全量`: 不仅支持链接到单个集群网络，还可以拦截工作负载流量到本地电脑。
+
 ```shell
 ➜  ~ kubevpn status
 ID Mode Cluster               Kubeconfig                 Namespace Status
