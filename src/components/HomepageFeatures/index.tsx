@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 import Translate from '@docusaurus/Translate';
 
 type FeatureItem = {
-    title: React.JSX.JSXElement;
-    Svg: React.JSX.ComponentType<React.JSX.ComponentProps<'svg'>>;
-    description: React.JSX.JSXElement;
+    title: React.JSX.Element;
+    Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+    description: React.JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
@@ -54,7 +54,7 @@ function Feature({title, Svg, description}: FeatureItem) {
     );
 }
 
-export default function HomepageFeatures(): React.JSX.JSXElement {
+export default function HomepageFeatures(): React.JSX.Element {
     return (
         <section className={styles.features}>
             <div className="container">

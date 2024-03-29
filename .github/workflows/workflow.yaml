@@ -34,13 +34,12 @@ jobs:
           lfs: true
       - name: Build website
         run: |
-          cd website
           npm install
           npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: website/build
+          path: build
 
   # Deployment job
   github-pages-deploy:

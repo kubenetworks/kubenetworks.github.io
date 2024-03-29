@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer').themes.github;
+const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 
 const isDev = process.env.NODE_ENV?.toLocaleLowerCase() !== 'production';
 
@@ -89,6 +89,12 @@ const config = {
             sidebarId: 'faq',
             position: 'left',
             label: 'FAQ',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'blog',
+            position: 'left',
+            label: 'Blog',
           },
           {
             type: 'localeDropdown',
