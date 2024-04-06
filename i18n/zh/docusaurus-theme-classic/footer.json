@@ -1,6 +1,6 @@
 {
-  "link.title.Github": {
-    "message": "Github",
+  "link.title.GitHub": {
+    "message": "GitHub",
     "description": "The title of the footer links column with title=Github in the footer"
   },
   "link.title.Latest Release": {
@@ -15,13 +15,17 @@
     "message": "KubeVPN 文档",
     "description": "The label of footer link with label=KubeVPN Docs linking to https://github.com/kubenetworks/kubenetworks.github.io"
   },
-  "link.item.label.v2.2.1": {
-    "message": "latest",
-    "description": "The label of footer link with label=v2.2.1 linking to https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.1"
+  "link.item.label.Latest": {
+    "message": "最新",
+    "description": "The label of footer link with label=Latest linking to https://github.com/kubenetworks/kubevpn/releases/tag/v2.2.1"
   },
   "link.item.label.Archives": {
     "message": "归档",
     "description": "The label of footer link with label=Archives linking to https://github.com/kubenetworks/kubevpn/releases"
+  },
+  "link.item.label.Blog": {
+    "message": "博客",
+    "description": "The label of footer link with label=Blog"
   },
   "copyright": {
     "message": "2023 kubenetworks / 使用 Docusaurus 搭建",

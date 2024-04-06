@@ -111,7 +111,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Github',
+            title: 'GitHub',
             items: [
               {
                 label: 'KubeVPN',
@@ -127,12 +127,21 @@ const config = {
             title: 'Latest Release',
             items: [
               {
-                label: 'latest',
+                label: 'Latest',
                 href: 'https://github.com/kubenetworks/kubevpn/releases/latest',
               },
               {
                 label: 'Archives',
                 href: 'https://github.com/kubenetworks/kubevpn/releases',
+              },
+            ],
+          },
+          {
+            title: 'Blog',
+            items: [
+              {
+                label: 'Blog',
+                href: 'https://wencaiwulue.github.io/',
               },
             ],
           },
