@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# 域名解析功能
+# 域名解析
 
 ```shell
 ➜  ~ curl productpage.default.svc.cluster.local:9080

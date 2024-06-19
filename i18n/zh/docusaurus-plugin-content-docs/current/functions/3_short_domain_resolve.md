@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# 短域名解析功能
+# 短域名解析
 
 ```shell
 ➜  ~ curl productpage:9080
