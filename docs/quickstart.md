@@ -41,9 +41,11 @@ NOTES:
 
 # Install client
 
-## Install from GitHub release
+## Install from brew
 
-[LINK](https://github.com/kubenetworks/kubevpn/releases/latest)
+```shell
+brew install kubevpn
+```
 
 ## Install from custom krew index
 
@@ -53,6 +55,10 @@ NOTES:
   kubectl krew install kubevpn/kubevpn && kubectl kubevpn
 )
 ```
+
+## Install from GitHub release
+
+[LINK](https://github.com/kubenetworks/kubevpn/releases/latest)
 
 ## Install from build it manually
 

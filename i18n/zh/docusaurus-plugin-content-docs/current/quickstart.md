@@ -42,11 +42,13 @@ NOTES:
 
 # 安装 kubevpn client
 
-## 从 Github release 下载编译好的二进制文件
+## 使用 brew 安装
 
-[链接](https://github.com/kubenetworks/kubevpn/releases/latest)
+```shell
+brew install kubevpn
+```
 
-## 从 自定义 Krew 仓库安装
+## 从自定义 krew 仓库安装
 
 ```shell
 (
@@ -55,15 +57,9 @@ NOTES:
 )
 ```
 
-## 自己构建二进制文件
+## 从 Github release 下载编译好的二进制文件
 
-```shell
-(
-  git clone https://github.com/kubenetworks/kubevpn.git && \
-  cd kubevpn && make kubevpn && ./bin/kubevpn
-)
-
-```
+[链接](https://github.com/kubenetworks/kubevpn/releases/latest)
 
 ## 安装 bookinfo 作为 demo 应用
 
