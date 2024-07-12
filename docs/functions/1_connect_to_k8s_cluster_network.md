@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Connect to k8s cluster network
+# Connect to kubernetes cluster
 
 ```shell
 ➜  ~ kubevpn connect

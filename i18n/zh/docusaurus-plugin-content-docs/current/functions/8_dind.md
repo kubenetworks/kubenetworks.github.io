@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# DinD ( Docker in Docker ) 在 Docker 中使用 kubevpn
+# 在 Docker 中使用 KubeVPN (Docker in Docker)
 
 如果你想在本地使用 Docker in Docker (DinD) 的方式启动开发模式, 由于程序会读写 `/tmp` 目录，您需要手动添加参数 `-v /tmp:/tmp`, 还有一点需要注意, 如果使用 DinD
 模式，为了共享容器网络和 pid, 还需要指定参数 `--network`

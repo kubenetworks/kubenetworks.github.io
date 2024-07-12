@@ -4,8 +4,16 @@
     "description": "The label for version current"
   },
   "sidebar.docs.category.Functions": {
-    "message": "功能",
+    "message": "主要功能",
     "description": "The label for category Functions in sidebar docs"
+  },
+  "sidebar.docs.category.Architecture": {
+    "message": "原理架构",
+    "description": "The label for category Architecture in sidebar docs"
+  },
+  "sidebar.docs.category.Blog": {
+    "message": "博客",
+    "description": "The label for category Blog in sidebar docs"
   },
   "sidebar.docs.category.Functions.link.generated-index.description": {
     "message": "请阅读",

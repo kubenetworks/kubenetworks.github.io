@@ -15,6 +15,10 @@
     "message": "Functions",
     "description": "Navbar item with label Functions"
   },
+  "item.label.Architecture": {
+    "message": "Architecture",
+    "description": "Navbar item with label Architecture"
+  },
   "item.label.FAQ": {
     "message": "FAQ",
     "description": "Navbar item with label FAQ"

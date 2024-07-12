@@ -39,6 +39,10 @@ NOTES:
   ping $POD_IP
 ```
 
+```shell
+helm upgrade kubevpn kubevpn/kubevpn --set image.repository=eps-bioos-dev-cn-beijing.cr.volces.com/infcprelease/kubevpn --set 'imagePullSecrets[0].name=registry' -n vke-system --debug --set image.tag=v2.2.2
+```
+
 # Install client
 
 ## Install from brew

@@ -2,7 +2,7 @@
 sidebar_position: 9
 ---
 
-# Support multiple Protocol
+# Support multiple protocol
 
 - TCP
 - UDP

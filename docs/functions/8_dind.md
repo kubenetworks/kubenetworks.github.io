@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# DinD ( Docker in Docker ) use kubevpn in Docker
+# Run KubeVPN in Docker (Docker in Docker)
 
 If you want to start the development mode locally using Docker in Docker (DinD), because the program will read and
 write the `/tmp` directory, you need to manually add the parameter `-v /tmp:/tmp` (outer docker) and other thing is you

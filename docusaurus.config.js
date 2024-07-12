@@ -86,6 +86,12 @@ const config = {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'architecture',
+            position: 'left',
+            label: 'Architecture',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'faq',
             position: 'left',
             label: 'FAQ',

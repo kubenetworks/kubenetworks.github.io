@@ -2,10 +2,11 @@
 sidebar_position: 7
 ---
 
-# Dev mode in local 🐳
+# Dev mode in Docker
 
-Run the Kubernetes pod in the local Docker container, and cooperate with the service mesh to intercept the traffic with
-the specified header to the local, or all the traffic to the local.
+Run the Kubernetes pod in the local Docker container 🐳, and cooperate with the service mesh to intercept the traffic
+with
+the specified header or all the traffic to the local Docker container.
 
 ```shell
 ➜  ~ kubevpn dev deployment/authors --headers a=1 -it --rm --entrypoint sh
