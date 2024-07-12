@@ -4,7 +4,8 @@ sidebar_position: 1
 
 # QuickStart
 
-KubeVPN offers a Cloud Native Dev Environment, connect to kubernetes cluster network, you can access remote kubernetes cluster
+KubeVPN offers a Cloud Native Dev Environment, connect to kubernetes cluster network, you can access remote kubernetes
+cluster
 network, remote kubernetes cluster service can also access your local service. and more, you can run your kubernetes pod
 on local Docker container with same environment、volume、and network. you can develop your application on local PC
 totally.
@@ -39,8 +40,10 @@ NOTES:
   ping $POD_IP
 ```
 
+if using private docker registry, use the following command to install:
+
 ```shell
-helm upgrade kubevpn kubevpn/kubevpn --set image.repository=eps-bioos-dev-cn-beijing.cr.volces.com/infcprelease/kubevpn --set 'imagePullSecrets[0].name=registry' -n vke-system --debug --set image.tag=v2.2.2
+helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn --set 'imagePullSecrets[0].name=registry' -n default --debug --set image.tag=v2.2.2
 ```
 
 # Install client
