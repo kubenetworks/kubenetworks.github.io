@@ -9,7 +9,7 @@ with
 the specified header or all the traffic to the local Docker container.
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --headers a=1 -it --rm --entrypoint sh
+➜  ~ kubevpn dev deployment/authors --headers a=1 --entrypoint sh
 connectting to cluster
 start to connect
 got cidr from cache
@@ -109,13 +109,13 @@ docker logs $(docker ps --format '{{.Names}}' | grep nginx_default_kubevpn)
 If you just want to start up a docker image, you can use simple way like this:
 
 ```shell
-kubevpn dev deployment/authors --no-proxy -it --rm
+kubevpn dev deployment/authors --no-proxy
 ```
 
 Example：
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --no-proxy -it --rm
+➜  ~ kubevpn dev deployment/authors --no-proxy
 connectting to cluster
 start to connect
 got cidr from cache
