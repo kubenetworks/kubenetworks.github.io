@@ -15,18 +15,16 @@ ID Mode Cluster               Kubeconfig                 Namespace Status
 
 ```shell
 ➜  ~ kubevpn connect -n default --kubeconfig ~/.kube/dev_config --lite
-start to connect
-got cidr from cache
-get cidr successfully
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-adding route...
-dns service ok
-+---------------------------------------------------------------------------+
-|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
-+---------------------------------------------------------------------------+
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
++----------------------------------------------------------+
+| Now you can access resources in the kubernetes cluster ! |
++----------------------------------------------------------+
 ```
 
 ```shell

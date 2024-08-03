@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# 使用 KubeVPN dev 模式快速开发 ry-server 服务
+# 使用 dev 模式本地调试 server
 
 ## 环境准备
 
@@ -13,7 +13,7 @@ KubeVPN: CLI
     Version: v1.1.30
     Image: docker.io/naison/kubevpn:v1.1.30 # 默认会使用这个镜像在集群中创建pod，用于打通网络，可以使用 --image 参数覆盖
     Branch: HEAD
-    Git commit: dd88ef6168009ba145b9ca7b94cc066bc60b9941
+    Git commit: dd88ef6
     Built time: 2023-04-11 12:56:11
     Built OS/Arch: linux/amd64
     Built Go version: go1.19.8
@@ -47,22 +47,22 @@ Host ry-dev-agd
     IdentityFile /Users/bytedance/.ssh/ry-dev-agd # 支持家目录，即：~/.ssh/ry.pem
 ```
 
-## 进行开发
+## 进行调试 debug
 
 ```shell
-kubevpn dev -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --docker-image docker.io/naison/kubevpn:v1.1.30 --entrypoint "tail -f /dev/null" -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64 deployment/ry-server
+kubevpn dev -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64 deployment/ry-server
 ```
 
 整体用法和 kubectl 很相似，具体参数说明:
 
-- deployment/ry-server: 要代理的资源，可以支持多个，比如：deployment/ry-server deployment/ry-work, 或者 deployment ry-server ry-worker
+- deployment/ry-server: 要代理的资源，可以支持多个，比如：deployment/ry-server deployment/ry-worker
 - -n: k8s namespace
 - --kubeconfig：集群的kubeconfig
 - --ssh-alias: 跳板机 ssh 信息，读取 ~/.ssh/config 中的配置块
 - --headers：携带指定header的流量，会被代理到本地。
 - --transfer-image: 传输镜像到远端，
 - --image 指定镜像用以启动 pod，可以从命令 kubevpn version 看到会用到的镜像名称，如果此镜像不存在，--transfer-image 为 true 时，会自动转存镜像
-- --docker-image 用于在本地启动服务时所用的镜像名称
+- --dev-image 用于在本地启动服务时所用的镜像名称
 - --entrypoint 本地镜像的入口，如果不指定，则使用 deployment/ry-server 中的启动命令
 - -p 将本地启动的 container 端口映射为主机端口，会自动把 pod 中的 Ports 的端口映射到主机，可以用这个参数，增加新的映射
 - -v 指定挂载 volume，将本地目录挂载到容器中
@@ -71,19 +71,22 @@ kubevpn dev -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd
 可以看到一大串日志, 然后进入一个 terminal
 
 ```text
-➜  .kube kubevpn dev deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --docker-image docker.io/naison/kubevpn:v1.1.30 --entrypoint "tail -f /dev/null" -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
+➜  .kube kubevpn dev deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
 Password:
-wait jump to bastion host...
-using temp kubeconfig /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/3610723699.kubeconfig
-got cidr from cache
-update ref count successfully
-traffic manager already exist, reuse it
+Waiting jump to bastion host...
++--------------------------------------------------------------------------------------------------+
+| To use: export KUBECONFIG=/var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/3610723699.kubeconfig |
++--------------------------------------------------------------------------------------------------+
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
 Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
 deployment "ry-server" successfully rolled out
-port forward ready
-tunnel connected
-dns service ok
 tar: Removing leading `/' from member names
 tar: Removing leading `/' from hard link targets
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/7517008559616659874:/var/run/secrets/kubernetes.io/serviceaccount
@@ -151,19 +154,22 @@ Warn 2023-04-28 16:25:47,744 v1(7) logger.go:185  epscp.ry.server - default - 0 
 ## 完整日志
 
 ```text
-➜  .kube kubevpn dev deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --docker-image docker.io/naison/kubevpn:v1.1.30 --entrypoint "tail -f /dev/null" -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
+➜  .kube kubevpn dev deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
 Password:
-wait jump to bastion host...
-using temp kubeconfig /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/3610723699.kubeconfig
-got cidr from cache
-update ref count successfully
-traffic manager already exist, reuse it
+Waiting jump to bastion host...
++--------------------------------------------------------------------------------------------------+
+| To use: export KUBECONFIG=/var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/3610723699.kubeconfig |
++--------------------------------------------------------------------------------------------------+
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
 Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
 deployment "ry-server" successfully rolled out
-port forward ready
-tunnel connected
-dns service ok
 tar: Removing leading `/' from member names
 tar: Removing leading `/' from hard link targets
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/7517008559616659874:/var/run/secrets/kubernetes.io/serviceaccount

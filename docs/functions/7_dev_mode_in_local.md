@@ -10,23 +10,20 @@ the specified header or all the traffic to the local Docker container.
 
 ```shell
 ➜  ~ kubevpn dev deployment/authors --headers a=1 --entrypoint sh
-connectting to cluster
-start to connect
-got cidr from cache
-get cidr successfully
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-dns service ok
-start to create remote inbound pod for Deployment.apps/authors
-patch workload default/Deployment.apps/authors with sidecar
-rollout status for Deployment.apps/authors
-Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
+Injecting inbound sidecar for deployment/authors
+Patching workload deployment/authors
+Checking rollout status for deployment/authors
+Waiting for deployment "authors" rollout to finish: 0 out of 1 new replicas have been updated...
 Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
 deployment "authors" successfully rolled out
-rollout status for Deployment.apps/authors successfully
-create remote inbound pod for Deployment.apps/authors successfully
+Rollout successfully for Deployment.apps/authors 
 tar: removing leading '/' from member names
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/4563987760170736212:/var/run/secrets/kubernetes.io/serviceaccount
 tar: Removing leading `/' from member names
@@ -66,16 +63,14 @@ OK: 8 MiB in 19 packages
 {"status":"Authors is healthy"} /opt/microservices # echo "continue testing pod access..."
 continue testing pod access...
 /opt/microservices # exit
-prepare to exit, cleaning up
-update ref count successfully
-tun device closed
-leave resource: deployments.apps/authors
-workload default/deployments.apps/authors is controlled by a controller
-leave resource: deployments.apps/authors successfully
-clean up successfully
-prepare to exit, cleaning up
-update ref count successfully
-clean up successfully
+Created container: default_authors
+Wait container default_authors to be running...
+Container default_authors is running now
+Disconnecting from the cluster...
+Leaving workload deployments.apps/authors
+Disconnecting from the cluster...
+Performing cleanup operations
+Clearing DNS settings
 ➜  ~
 ```
 
@@ -109,22 +104,20 @@ docker logs $(docker ps --format '{{.Names}}' | grep nginx_default_kubevpn)
 If you just want to start up a docker image, you can use simple way like this:
 
 ```shell
-kubevpn dev deployment/authors --no-proxy
+kubevpn dev deployment/authors --no-proxy -it --rm
 ```
 
 Example：
 
 ```shell
 ➜  ~ kubevpn dev deployment/authors --no-proxy
-connectting to cluster
-start to connect
-got cidr from cache
-get cidr successfully
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-dns service ok
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
 tar: removing leading '/' from member names
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/5631078868924498209:/var/run/secrets/kubernetes.io/serviceaccount
 tar: Removing leading `/' from member names
@@ -142,7 +135,7 @@ Created main container: authors_default_kubevpn_ff34b
 
 Now the main process will hang up to show you log.
 
-If you want to specify the image to start the container locally, you can use the parameter `--docker-image`. When the
+If you want to specify the image to start the container locally, you can use the parameter `--dev-image`. When the
 image does not exist locally, it will be pulled from the corresponding mirror warehouse. If you want to specify startup
 parameters, you can use `--entrypoint` parameter, replace it with the command you want to execute, such
 as `--entrypoint /bin/bash`, for more parameters, see `kubevpn dev --help`.

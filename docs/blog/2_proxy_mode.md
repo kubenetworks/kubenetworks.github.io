@@ -2,18 +2,18 @@
 sidebar_position: 2
 ---
 
-# 使用 KubeVPN proxy 模式快速开发 ry-server 服务
+# 使用 proxy 模式本地调试 server
 
 ## 环境准备
 
-- 下载最新版 KubeVPN，[链接](https://github.com/wencaiwulue/kubevpn/releases/tag/v1.1.30)
+- 下载最新版 KubeVPN，[链接](https://github.com/wencaiwulue/kubevpn/releases/latest)
 
 ```shell
 KubeVPN: CLI
     Version: v1.1.30
     Image: docker.io/naison/kubevpn:v1.1.30 # 默认会使用这个镜像在集群中创建pod，用于打通网络，可以使用 --image 参数覆盖
     Branch: HEAD
-    Git commit: dd88ef6168009ba145b9ca7b94cc066bc60b9941
+    Git commit: dd88ef6
     Built time: 2023-04-11 12:56:11
     Built OS/Arch: linux/amd64
     Built Go version: go1.19.8
@@ -47,17 +47,15 @@ Host ry-dev-agd
     IdentityFile /Users/bytedance/.ssh/ry-dev-agd # 支持家目录，即：~/.ssh/ry.pem
 ```
 
-## 进行开发
+## 进行调试 debug
 
 ```shell
-# 
 kubevpn proxy deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --transfer-image --headers user=naison
 ```
 
 整体用法和 kubectl 很相似，具体参数说明:
 
-- deployment/ry-server: 要代理的资源，可以支持多个，比如：deployment/ry-server deployment/ry-work, 或者 deployment
-  ry-server ry-worker
+- deployment/ry-server: 要代理的资源，可以支持多个，比如：deployment/ry-server deployment/ry-worker
 - -n: k8s namespace
 - --kubeconfig：集群的kubeconfig
 - --ssh-alias: 跳板机 ssh 信息，读取 ~/.ssh/config 中的配置块
@@ -83,8 +81,8 @@ bbdf022509e9: Pull complete
 Digest: sha256:6d86154f2643f1e6219b1dae93cf3540aaf3e9e1a31e094f8ea90d2d19a32d2d
 Status: Downloaded newer image for naison/kubevpn:v1.1.30
 WARNING: image with reference naison/kubevpn was found but does not match the specified platform: wanted linux/amd64, actual: linux/arm64
-saving image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 to temp file /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/2713528184.tar
-Transfering image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30
+Saving image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 to temp file /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/2713528184.tar
+Transferring image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30
 Length: 68276642 (415.38M)
 Transferring image file... 100% [==================================================] (3.2 MB/s)
 bash: docker: command not found
@@ -97,30 +95,32 @@ manifest-sha256:355e531a8fc6fa0ebc34cdd24be5aa68d99a9cee660916ab250c046fdb0c8f31
 config-sha256:7e87baffe4c5c04dd560436bb04c5f751b2f7a2cf544ff92a492283454003fc5:   done           |++++++++++++++++++++++++++++++++++++++|
 elapsed: 3.1 s                                                                    total:  5.9 Ki (1.9 KiB/s)
 Loaded image: vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30
-wait jump to bastion host...
-using temp kubeconfig /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig # 注意这个kubeconfig，拿出来
-got cidr from cache
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-dns service ok
-
-+---------------------------------------------------------------------------+
-|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
-+---------------------------------------------------------------------------+
-
+Waiting jump to bastion host...
++-------------------------------------------------------------------------------------------------+
+| To use: export KUBECONFIG=/var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig |
++-------------------------------------------------------------------------------------------------+
+Connected to cluster
+Injecting inbound sidecar for deployment/ry-server
+Checking rollout status for deployment/ry-server
+Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
+Rollout successfully for deployment/ry-server
++----------------------------------------------------------+
+| Now you can access resources in the kubernetes cluster ! |
++----------------------------------------------------------+
 ```
 
 ## 在本地启动服务
 
-首先，薅一下环境变量，注意从日志中观察到的kubeconfig
+首先，薅一下环境变量，注意从日志中观察到的 kubeconfig
 
 ```text
 ...
-wait jump to bastion host...
-using temp kubeconfig /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig # 注意这个kubeconfig，拿出来
-got cidr from cache
+Waiting jump to bastion host...
++-------------------------------------------------------------------------------------------------+
+| To use: export KUBECONFIG=/var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig | # 注意这个kubeconfig，拿出来
++-------------------------------------------------------------------------------------------------+
+Connected to cluster
 ...
 ```
 

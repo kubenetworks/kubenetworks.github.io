@@ -8,23 +8,20 @@ sidebar_position: 7
 
 ```shell
 ➜  ~ kubevpn dev deployment/authors --headers a=1 --entrypoint sh
-connectting to cluster
-start to connect
-got cidr from cache
-get cidr successfully
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-dns service ok
-start to create remote inbound pod for Deployment.apps/authors
-patch workload default/Deployment.apps/authors with sidecar
-rollout status for Deployment.apps/authors
-Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
+Injecting inbound sidecar for deployment/authors
+Patching workload deployment/authors
+Checking rollout status for deployment/authors
+Waiting for deployment "authors" rollout to finish: 0 out of 1 new replicas have been updated...
 Waiting for deployment "authors" rollout to finish: 1 old replicas are pending termination...
 deployment "authors" successfully rolled out
-rollout status for Deployment.apps/authors successfully
-create remote inbound pod for Deployment.apps/authors successfully
+Rollout successfully for Deployment.apps/authors 
 tar: removing leading '/' from member names
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/4563987760170736212:/var/run/secrets/kubernetes.io/serviceaccount
 tar: Removing leading `/' from member names
@@ -61,17 +58,17 @@ OK: 8 MiB in 19 packages
 /opt/microservices # 2023/09/30 13:41:58 Start listening http port 9080 ...
 
 /opt/microservices # curl localhost:9080/health
-{"status":"Authors is healthy"}/opt/microservices # exit
-prepare to exit, cleaning up
-update ref count successfully
-tun device closed
-leave resource: deployments.apps/authors
-workload default/deployments.apps/authors is controlled by a controller
-leave resource: deployments.apps/authors successfully
-clean up successfully
-prepare to exit, cleaning up
-update ref count successfully
-clean up successfully
+{"status":"Authors is healthy"} /opt/microservices # echo "continue testing pod access..."
+continue testing pod access...
+/opt/microservices # exit
+Created container: default_authors
+Wait container default_authors to be running...
+Container default_authors is running now
+Disconnecting from the cluster...
+Leaving workload deployments.apps/authors
+Disconnecting from the cluster...
+Performing cleanup operations
+Clearing DNS settings
 ➜  ~
 ```
 
@@ -89,22 +86,20 @@ fc04e42799a5   nginx:latest                    "/docker-entrypoint.…"   37 sec
 如果你只是想在本地启动镜像，可以用一种简单的方式：
 
 ```shell
-kubevpn dev deployment/authors --no-proxy
+kubevpn dev deployment/authors --no-proxy -it --rm
 ```
 
 例如：
 
 ```shell
 ➜  ~ kubevpn dev deployment/authors --no-proxy
-connectting to cluster
-start to connect
-got cidr from cache
-get cidr successfully
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-dns service ok
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
 tar: removing leading '/' from member names
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/5631078868924498209:/var/run/secrets/kubernetes.io/serviceaccount
 tar: Removing leading `/' from member names
@@ -122,5 +117,5 @@ Created main container: authors_default_kubevpn_ff34b
 
 此时程序会挂起，默认为显示日志
 
-如果你想指定在本地启动容器的镜像, 可以使用参数 `--docker-image`, 当本地不存在该镜像时, 会从对应的镜像仓库拉取。如果你想指定启动参数，可以使用 `--entrypoint`
+如果你想指定在本地启动容器的镜像, 可以使用参数 `--dev-image`, 当本地不存在该镜像时, 会从对应的镜像仓库拉取。如果你想指定启动参数，可以使用 `--entrypoint`
 参数，替换为你想要执行的命令，比如 `--entrypoint /bin/bash`, 更多使用参数，请参见 `kubevpn dev --help`.

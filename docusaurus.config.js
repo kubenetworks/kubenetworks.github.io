@@ -106,11 +106,6 @@ const config = {
             type: 'localeDropdown',
             position: 'right',
           },
-          {
-            href: 'https://github.com/kubenetworks/kubevpn',
-            label: 'GitHub',
-            position: 'right',
-          },
         ],
       },
       footer: {
@@ -133,7 +128,7 @@ const config = {
             title: 'Latest Release',
             items: [
               {
-                label: 'Latest',
+                label: 'GitHub',
                 href: 'https://github.com/kubenetworks/kubevpn/releases/latest',
               },
               {

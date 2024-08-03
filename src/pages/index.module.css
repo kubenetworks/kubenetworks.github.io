@@ -21,13 +21,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
 }
 
-.homepageVersion {
-  color: white;
-  margin: 20px;
-}
-
-.homepageVersion:hover {
-  color: whitesmoke;
+.githubLogo {
+  width: 20px;
+  height: 20px;
 }

@@ -7,41 +7,37 @@ sidebar_position: 1
 ```shell
 ➜  ~ kubevpn connect
 Password:
-start to connect
-get cidr from cluster info...
-get cidr from cluster info ok
-get cidr from cni...
-wait pod cni-net-dir-kubevpn to be running timeout, reason , ignore
-get cidr from svc...
-get cidr from svc ok
-get cidr successfully
-traffic manager not exist, try to create it...
-label namespace default
-create serviceAccount kubevpn-traffic-manager
-create roles kubevpn-traffic-manager
-create roleBinding kubevpn-traffic-manager
-create service kubevpn-traffic-manager
-create deployment kubevpn-traffic-manager
-pod kubevpn-traffic-manager-66d969fd45-9zlbp is Pending
+Starting connect
+Getting network CIDR from cluster info...
+Getting network CIDR from CNI...
+Getting network CIDR from services...
+Labeling Namespace default
+Creating ServiceAccount kubevpn-traffic-manager
+Creating Roles kubevpn-traffic-manager
+Creating RoleBinding kubevpn-traffic-manager
+Creating Service kubevpn-traffic-manager
+Creating MutatingWebhookConfiguration kubevpn-traffic-manager
+Creating Deployment kubevpn-traffic-manager
+
+Pod kubevpn-traffic-manager-66d969fd45-9zlbp is Pending
 Container     Reason            Message
 control-plane ContainerCreating
 vpn           ContainerCreating
 webhook       ContainerCreating
 
-pod kubevpn-traffic-manager-66d969fd45-9zlbp is Running
+Pod kubevpn-traffic-manager-66d969fd45-9zlbp is Running
 Container     Reason           Message
 control-plane ContainerRunning
 vpn           ContainerRunning
 webhook       ContainerRunning
 
-Creating mutatingWebhook_configuration for kubevpn-traffic-manager
-update ref count successfully
-port forward ready
-tunnel connected
-dns service ok
-+---------------------------------------------------------------------------+
-|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
-+---------------------------------------------------------------------------+
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
++----------------------------------------------------------+
+| Now you can access resources in the kubernetes cluster ! |
++----------------------------------------------------------+
 ➜  ~
 ```
 

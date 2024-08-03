@@ -6,18 +6,15 @@ sidebar_position: 5
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage
-already connect to cluster
-start to create remote inbound pod for deployment/productpage
-workload default/deployment/productpage is controlled by a controller
-rollout status for deployment/productpage
+Connected to cluster
+Injecting inbound sidecar for deployment/productpage
+Checking rollout status for deployment/productpage
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
-deployment "productpage" successfully rolled out
-rollout status for deployment/productpage successfully
-create remote inbound pod for deployment/productpage successfully
-+---------------------------------------------------------------------------+
-|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
-+---------------------------------------------------------------------------+
+Rollout successfully for deployment/productpage
++----------------------------------------------------------+
+| Now you can access resources in the kubernetes cluster ! |
++----------------------------------------------------------+
 ➜  ~
 ```
 

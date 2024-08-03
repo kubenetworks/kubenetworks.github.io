@@ -19,8 +19,8 @@ function HomepageHeader() {
     fetch(
       'https://raw.githubusercontent.com/kubenetworks/kubevpn/master/plugins/stable.txt',
     )
-      .then(res => res.text())
-      .then(ver => setVer(ver));
+        .then(res => res.ok ? res.text() : undefined)
+        .then(ver => ver && setVer(ver));
   }, []);
 
   return (
@@ -35,15 +35,22 @@ function HomepageHeader() {
         </p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
-            to="/docs/quickstart"
+              style={{width: 144, paddingRight: 0, paddingLeft: 0}}
+              className="button button--secondary button--lg"
+              to="/docs/quickstart"
           >
             <Translate>QuickStart</Translate>
           </Link>
           <Link
-            className={styles.homepageVersion}
-            to="https://github.com/kubenetworks/kubevpn/releases/latest"
+              style={{width: 144, paddingRight: 0, paddingLeft: 0, display: "flex", justifyContent: "center", alignItems: "center"}}
+              className="button button--secondary button--lg"
+              to="https://github.com/kubenetworks/kubevpn/releases/latest"
           >
+          <img
+              style={{ marginRight: 8}}
+              className={styles.githubLogo}
+              src="img/github.svg"
+          ></img>
             {ver}
           </Link>
         </div>

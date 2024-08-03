@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 使用 KubeVPN connect 模式快速开发 ry-server 服务
+# 使用 connect 模式本地调试 server
 
 ## 环境准备
 
@@ -13,7 +13,7 @@ KubeVPN: CLI
     Version: v1.1.30
     Image: docker.io/naison/kubevpn:v1.1.30 # 默认会使用这个镜像在集群中创建pod，用于打通网络，可以使用 --image 参数覆盖
     Branch: HEAD
-    Git commit: dd88ef6168009ba145b9ca7b94cc066bc60b9941
+    Git commit: dd88ef6
     Built time: 2023-04-11 12:56:11
     Built OS/Arch: linux/amd64
     Built Go version: go1.19.8
@@ -47,10 +47,9 @@ Host ry-dev-agd
     IdentityFile /Users/bytedance/.ssh/ry-dev-agd # 支持家目录，即：~/.ssh/ry.pem
 ```
 
-## 进行开发
+## 进行调试 debug
 
 ```shell
-# 
 kubevpn connect -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --transfer-image
 ```
 
@@ -60,7 +59,8 @@ kubevpn connect -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev
 - --kubeconfig：集群的kubeconfig
 - --ssh-alias: 跳板机 ssh 信息，读取 ~/.ssh/config 中的配置块
 - --transfer-image: 传输镜像到远端，
-- --image 指定镜像用以启动 pod，可以从命令 kubevpn version 看到会用到的镜像名称，如果此镜像不存在，--transfer-image 为 true 时，会自动转存镜像
+- --image 指定镜像用以启动 pod，可以从命令 kubevpn version 看到会用到的镜像名称，如果此镜像不存在，--transfer-image 为 true
+  时，会自动转存镜像
 
 可以看到一大串日志：
 
@@ -79,8 +79,8 @@ bbdf022509e9: Pull complete
 Digest: sha256:6d86154f2643f1e6219b1dae93cf3540aaf3e9e1a31e094f8ea90d2d19a32d2d
 Status: Downloaded newer image for naison/kubevpn:v1.1.30
 WARNING: image with reference naison/kubevpn was found but does not match the specified platform: wanted linux/amd64, actual: linux/arm64
-saving image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 to temp file /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/2713528184.tar
-Transfering image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30
+Saving image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 to temp file /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/2713528184.tar
+Transferring image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30
 Length: 68276642 (415.38M)
 Transferring image file... 100% [==================================================] (3.2 MB/s)
 bash: docker: command not found
@@ -93,30 +93,33 @@ manifest-sha256:355e531a8fc6fa0ebc34cdd24be5aa68d99a9cee660916ab250c046fdb0c8f31
 config-sha256:7e87baffe4c5c04dd560436bb04c5f751b2f7a2cf544ff92a492283454003fc5:   done           |++++++++++++++++++++++++++++++++++++++|
 elapsed: 3.1 s                                                                    total:  5.9 Ki (1.9 KiB/s)
 Loaded image: vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30
-wait jump to bastion host...
-using temp kubeconfig /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig # 注意这个kubeconfig，拿出来
-got cidr from cache
-update ref count successfully
-traffic manager already exist, reuse it
-port forward ready
-tunnel connected
-dns service ok
-
-+---------------------------------------------------------------------------+
-|    Now you can access resources in the kubernetes cluster, enjoy it :)    |
-+---------------------------------------------------------------------------+
-
+Waiting jump to bastion host...
++-------------------------------------------------------------------------------------------------+
+| To use: export KUBECONFIG=/var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig |
++-------------------------------------------------------------------------------------------------+
+Starting connect
+Got network CIDR from cache
+Use exist traffic manager
+Forwarding port...
+Connected tunnel
+Adding route...
+Configured DNS service
++----------------------------------------------------------+
+| Now you can access resources in the kubernetes cluster ! |
++----------------------------------------------------------+
 ```
 
 ## 在本地启动服务
 
-首先，薅一下环境变量，注意从日志中观察到的kubeconfig
+首先，薅一下环境变量，注意从日志中观察到的 kubeconfig
 
 ```text
 ...
-wait jump to bastion host...
-using temp kubeconfig /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig # 注意这个kubeconfig，拿出来
-got cidr from cache
+Waiting jump to bastion host...
++-------------------------------------------------------------------------------------------------+
+| To use: export KUBECONFIG=/var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/342259381.kubeconfig |
++-------------------------------------------------------------------------------------------------+
+Starting connect
 ...
 ```
 
