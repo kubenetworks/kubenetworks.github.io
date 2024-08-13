@@ -44,7 +44,7 @@ function HomepageHeader() {
           <Link
               style={{width: 144, paddingRight: 0, paddingLeft: 0, display: "flex", justifyContent: "center", alignItems: "center"}}
               className="button button--secondary button--lg"
-              to="https://github.com/kubenetworks/kubevpn/releases/latest"
+              to="https://github.com/kubenetworks/kubevpn"
           >
           <img
               style={{ marginRight: 8}}
