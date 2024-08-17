@@ -48,13 +48,13 @@ helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGIST
 
 # Install client
 
-## Install from brew
+## Install from brew ( macOS / Linux )
 
 ```shell
 brew install kubevpn
 ```
 
-## Install from custom krew index
+## Install from custom krew index ( macOS / Linux / Windows )
 
 ```shell
 (
@@ -63,19 +63,9 @@ brew install kubevpn
 )
 ```
 
-## Install from GitHub release
+## Install from GitHub release ( macOS / Linux / Windows )
 
 [LINK](https://github.com/kubenetworks/kubevpn/releases/latest)
-
-## Install from build it manually
-
-```shell
-(
-  git clone https://github.com/kubenetworks/kubevpn.git && \
-  cd kubevpn && make kubevpn && ./bin/kubevpn
-)
-
-```
 
 ## Install kubevpn-traffic-manager in cluster
 

@@ -42,13 +42,13 @@ NOTES:
 
 # 安装 kubevpn client
 
-## 使用 brew 安装
+## 使用 brew 安装 ( macOS / Linux )
 
 ```shell
 brew install kubevpn
 ```
 
-## 从自定义 krew 仓库安装
+## 从自定义 krew 仓库安装 ( macOS / Linux / Windows )
 
 ```shell
 (
@@ -57,7 +57,7 @@ brew install kubevpn
 )
 ```
 
-## 从 Github release 下载编译好的二进制文件
+## 从 Github release 下载 ( macOS / Linux / Windows )
 
 [链接](https://github.com/kubenetworks/kubevpn/releases/latest)
 
@@ -67,3 +67,8 @@ brew install kubevpn
 kubectl apply -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
 ```
 
+测试完成后清理可以执行以下命令
+
+```shell
+kubectl delete -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
+```
