@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # 反向代理支持服务网格
 
-支持 HTTP, GRPC 和 WebSocket 等, 携带了指定 header `"a: 1"` 的流量，将会路由到本地
+支持 HTTP, gRPC, Thrift 和 WebSocket 等, 携带了指定 header `"a: 1"` 的流量，将会路由到本地
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage --headers a=1

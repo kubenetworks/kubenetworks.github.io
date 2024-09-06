@@ -10,7 +10,7 @@ network, remote kubernetes cluster service can also access your local service. a
 on local Docker container with same environment、volume、and network. you can develop your application on local PC
 totally.
 
-# Install server
+# Install server (optional)
 
 you can install kubevpn server previously (it will automatically install by kubevpn by command `kubevpn connect`)
 
@@ -48,28 +48,72 @@ helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGIST
 
 # Install client
 
-## Install from brew ( macOS / Linux )
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="macOS" label="macOS" default>
+
+### Use brew
 
 ```shell
 brew install kubevpn
 ```
 
-## Install from custom krew index ( macOS / Linux / Windows )
+### Use krew
 
 ```shell
-(
-  kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git && \
-  kubectl krew install kubevpn/kubevpn && kubectl kubevpn
-)
+kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
+kubectl krew install kubevpn/kubevpn
+kubectl kubevpn
 ```
 
-## Install from GitHub release ( macOS / Linux / Windows )
+### Download from GitHub release
 
-[LINK](https://github.com/kubenetworks/kubevpn/releases/latest)
+[https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
 
-## Install kubevpn-traffic-manager in cluster
+</TabItem>
+<TabItem value="Linux" label="Linux">
 
-## Install bookinfo as demo application
+### Use brew
+
+```shell
+brew install kubevpn
+```
+
+### Use krew
+
+```shell
+kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
+kubectl krew install kubevpn/kubevpn
+kubectl kubevpn
+```
+
+### Download from GitHub release
+
+[https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
+
+</TabItem>
+
+<TabItem value="Windows" label="Windows">
+
+### Use krew
+
+```shell
+kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
+kubectl krew install kubevpn/kubevpn
+kubectl kubevpn
+```
+
+### Download from GitHub release
+
+[https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
+
+</TabItem>
+
+</Tabs>
+
+# Install bookinfo as demo application
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml

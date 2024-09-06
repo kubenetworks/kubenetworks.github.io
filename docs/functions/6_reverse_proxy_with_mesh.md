@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Reverse proxy with mesh
 
-Support HTTP, GRPC and WebSocket etc. with specific header `"a: 1"` will route to your local machine
+Support HTTP, gRPC, Thrift and WebSocket etc. with specific header `"a: 1"` will route to your local machine
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage --headers a=1

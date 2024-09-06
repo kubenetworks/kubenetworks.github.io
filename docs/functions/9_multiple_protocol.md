@@ -7,7 +7,8 @@ sidebar_position: 9
 - TCP
 - UDP
 - ICMP
-- GRPC
+- gRPC
+- Thrift
 - WebSocket
 - HTTP
 - ...
