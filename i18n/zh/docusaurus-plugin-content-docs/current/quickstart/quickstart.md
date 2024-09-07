@@ -89,6 +89,13 @@ kubectl kubevpn
 
 <TabItem value="Windows" label="Windows">
 
+### 使用 [scoop](https://scoop.sh/) (Windows)
+
+```shell
+scoop bucket add extras
+scoop install kubevpn
+```
+
 ### 使用 krew
 
 ```shell

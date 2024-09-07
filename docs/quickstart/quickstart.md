@@ -97,6 +97,13 @@ kubectl kubevpn
 
 <TabItem value="Windows" label="Windows">
 
+### Install from [scoop](https://scoop.sh/) (Windows)
+
+```shell
+scoop bucket add extras
+scoop install kubevpn
+```
+
 ### Use krew
 
 ```shell
