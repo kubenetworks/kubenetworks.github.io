@@ -46,13 +46,13 @@ import TabItem from '@theme/TabItem';
 <Tabs>
   <TabItem value="macOS" label="macOS" default>
 
-### 使用 brew
+### 使用 [brew](https://brew.sh/)
 
 ```shell
 brew install kubevpn
 ```
 
-### 使用 krew
+### 使用 [krew](https://krew.sigs.k8s.io/)
 
 ```shell
 kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
@@ -67,13 +67,13 @@ kubectl kubevpn
 </TabItem>
 <TabItem value="Linux" label="Linux">
 
-### 使用 brew
+### 使用 [brew](https://brew.sh/)
 
 ```shell
 brew install kubevpn
 ```
 
-### 使用 krew
+### 使用 [krew](https://krew.sigs.k8s.io/)
 
 ```shell
 kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
@@ -89,14 +89,14 @@ kubectl kubevpn
 
 <TabItem value="Windows" label="Windows">
 
-### 使用 [scoop](https://scoop.sh/) (Windows)
+### 使用 [scoop](https://scoop.sh/)
 
 ```shell
 scoop bucket add extras
 scoop install kubevpn
 ```
 
-### 使用 krew
+### 使用 [krew](https://krew.sigs.k8s.io/)
 
 ```shell
 kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
