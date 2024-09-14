@@ -27,10 +27,10 @@ kubevpn dev deployment/productpage
 kubevpn dev service/productpage
 ```
 
-## Develop workloads with mesh, traffic with header a=1, will hit local PC, otherwise no effect
+## Develop workloads with mesh, traffic with HTTP header foo=bar, will hit local PC, otherwise no effect
 
 ```shell
-kubevpn dev service/productpage --headers a=1
+kubevpn dev service/productpage --headers foo=bar
 ```
 
 ## Develop workloads without proxy traffic
@@ -125,7 +125,7 @@ GSSAPI password
 
 -H, --headers=[]:
 Traffic with special headers with reverse it to local PC, you should startup your service after reverse
-workloads successfully, If not special, redirect all traffic to local PC, format is k=v, like: k1=v1,k2=v2
+workloads successfully, If not special, redirect all traffic to local PC, format: <KEY>=<VALUE>, like: k1=v1,k2=v2
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 use this image to startup container

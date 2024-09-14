@@ -4,7 +4,7 @@ sidebar_position: 13
 
 # Kubevpn logs
 
-Print the logs for the kubevpn daemon gRPC server. It will show both the sudo daemon and daemon gRPC server logs.
+Print the logs for the kubevpn daemon gRPC server. It will show both the sudo daemon and user daemon gRPC server logs.
 
 ## Examples
 

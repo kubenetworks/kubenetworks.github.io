@@ -4,6 +4,8 @@ sidebar_position: 5
 
 # 反向代理
 
+使用命令 `kubevpn proxy` 代理所有的入站流量到本地电脑。
+
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage
 Connected to cluster
@@ -17,6 +19,8 @@ Rollout successfully for deployment/productpage
 +----------------------------------------------------------+
 ➜  ~
 ```
+
+此时在本地使用 `go` 启动一个服务，用于承接流量。
 
 ```go
 package main
@@ -34,9 +38,19 @@ func main() {
 }
 ```
 
+运行
+
+```shell
+go run hello.go &
+```
+
+使用 `service` name 的方式，直接访问集群中的 `productpage` 服务。
+
 ```shell
 ➜  ~ curl productpage:9080
 Hello world!%
 ➜  ~ curl productpage.default.svc.cluster.local:9080
 Hello world!%
 ```
+
+可以看到直接击中了本地电脑的服务。

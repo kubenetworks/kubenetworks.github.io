@@ -4,10 +4,10 @@ sidebar_position: 6
 
 # Reverse proxy with mesh
 
-Support HTTP, gRPC, Thrift and WebSocket etc. with specific header `"a: 1"` will route to your local machine
+Support HTTP, gRPC, Thrift and WebSocket etc. with specific header `"foo: bar"` will route to your local machine
 
 ```shell
-➜  ~ kubevpn proxy deployment/productpage --headers a=1
+➜  ~ kubevpn proxy deployment/productpage --headers foo=bar
 Connected to cluster
 Injecting inbound sidecar for deployment/productpage
 Checking rollout status for deployment/productpage
@@ -20,7 +20,7 @@ Rollout successfully for deployment/productpage
 ➜  ~
 ```
 
-first access without header "a: 1", it will access existing pod on kubernetes cluster.
+first access without header "foo: bar", it will access existing pod on kubernetes cluster.
 
 ```shell
 ➜  ~ curl productpage:9080
@@ -34,10 +34,10 @@ first access without header "a: 1", it will access existing pod on kubernetes cl
 ...
 ```
 
-Now let's access local service with header `"a: 1"`
+Now let's access local service with HTTP header `"foo: bar"`
 
 ```shell
-➜  ~ curl productpage:9080 -H "a: 1"
+➜  ~ curl productpage:9080 -H "foo: bar"
 >>Received request: GET / from xxx.xxx.xxx.xxx:51296
 Hello world!  
 ```

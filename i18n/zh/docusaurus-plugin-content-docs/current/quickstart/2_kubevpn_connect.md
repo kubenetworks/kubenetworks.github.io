@@ -60,7 +60,7 @@ kubevpn connect --ssh-jump "--ssh-addr jump.naison.org --ssh-username naison --g
 传输引擎（"mix"|"raw"）mix：同时使用 gvisor 和 raw 模式（性能和稳定兼得），raw：使用 raw 模式（最稳定）
 
 --extra-cidr=[]:
-额外的网络 CIDR 字符串，将这些 cidr 网络添加到路由表中，例如：--extra-cidr 192.168.0.159/24
+额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
 
 --extra-domain=[]:
@@ -68,7 +68,7 @@ kubevpn connect --ssh-jump "--ssh-addr jump.naison.org --ssh-username naison --g
 foo.test.com
 
 --extra-node-ip=false:
-额外的节点 IP，将集群节点 IP 添加到路由表中。
+额外的 node IP，将集群节点 node IP 添加到路由表中。
 
 --foreground=false:
 前台挂起
@@ -86,10 +86,12 @@ GSSAPI 密码
 使用此镜像启动容器
 
 --lite=false:
-以轻量模式连接多个集群，你需要特别指定此选项
+以 lite 模式连接多个集群，，你需要特别指定此选项
+模式 lite: 可以链接到多个集群网络，但是仅支持链接到多集群。
+模式 full: 不仅支持链接到单个集群网络，还可以拦截工作负载流量到本地电脑。
 
 --remote-kubeconfig='':
-SSH 服务器的远程 kubeconfig 抽象路径，默认是 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
 
 --ssh-addr='':
 可选的 SSH 跳板服务器地址，如 <hostname>:<port>，例如：127.0.0.1:22

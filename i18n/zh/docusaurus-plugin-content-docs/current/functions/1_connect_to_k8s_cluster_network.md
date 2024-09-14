@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # 链接到集群网络
 
+使用命令 `kubevpn connect` 链接到集群，请注意这里需要输入电脑密码。因为需要 `root` 权限。(创建虚拟网卡)
+
 ```shell
 ➜  ~ kubevpn connect
 Password:
@@ -41,6 +43,8 @@ Configured DNS service
 ➜  ~
 ```
 
+提示已经链接到集群了。使用命令 `kubevpn status` 检查一下状态。
+
 ```shell
 ➜  ~ kubectl get pods -o wide
 NAME                                       READY   STATUS             RESTARTS   AGE     IP                NODE              NOMINATED NODE   READINESS GATES
@@ -51,6 +55,8 @@ productpage-788df7ff7f-jpkcs               1/1     Running            0         
 ratings-77b6cd4499-zvl6c                   1/1     Running            0          61d     172.29.0.86       192.168.104.255   <none>           <none>
 reviews-85c88894d9-vgkxd                   1/1     Running            0          24d     172.29.2.249      192.168.0.5       <none>           <none>
 ```
+
+找一个 pod 的 IP，比如 `productpage-788df7ff7f-jpkcs` 的 IP `172.29.2.134`
 
 ```shell
 ➜  ~ ping 172.29.2.134
@@ -65,6 +71,8 @@ PING 172.29.2.134 (172.29.2.134): 56 data bytes
 round-trip min/avg/max/stddev = 54.293/55.380/56.270/0.728 ms
 ```
 
+测试应该可以直接 Ping 通，说明本地可以正常访问到集群网络了。
+
 ```shell
 ➜  ~ kubectl get services -o wide
 NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                              AGE     SELECTOR
@@ -77,6 +85,8 @@ ratings                   ClusterIP   172.21.3.247    <none>        9080/TCP    
 reviews                   ClusterIP   172.21.8.24     <none>        9080/TCP                             114d    app=reviews
 ```
 
+找一个 service 的 IP，比如 `productpage` 的 IP `172.21.10.49`，试着访问一下服务 `productpage`
+
 ```shell
 ➜  ~ curl 172.21.10.49:9080
 <!DOCTYPE html>
@@ -87,3 +97,5 @@ reviews                   ClusterIP   172.21.8.24     <none>        9080/TCP    
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
+
+可以看到也可以正常访问，也就是可以在本地访问到集群的 pod 和 service 了～

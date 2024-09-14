@@ -4,6 +4,9 @@ sidebar_position: 1
 
 # Connect to kubernetes cluster
 
+use command `kubevpn connect` connect to k8s cluster network, prompt `Password:` need to input computer
+password. to enable root operation (create a tun device).
+
 ```shell
 ➜  ~ kubevpn connect
 Password:
@@ -41,12 +44,16 @@ Configured DNS service
 ➜  ~
 ```
 
+already connected to cluster network, use command `kubevpn status` to check status
+
 ```shell
 ➜  ~ kubevpn status
 ID Mode Cluster               Kubeconfig                    Namespace  Status
 0  full ccijorbccotmqodvr189g /Users/bytedance/.kube/config default Connected
 ➜  ~
 ```
+
+use pod `productpage-788df7ff7f-jpkcs` IP `172.29.2.134`
 
 ```shell
 ➜  ~ kubectl get pods -o wide
@@ -58,6 +65,8 @@ productpage-788df7ff7f-jpkcs               1/1     Running            0         
 ratings-77b6cd4499-zvl6c                   1/1     Running            0          61d     172.29.0.86       192.168.104.255   <none>           <none>
 reviews-85c88894d9-vgkxd                   1/1     Running            0          24d     172.29.2.249      192.168.0.5       <none>           <none>
 ```
+
+use `ping` to test connection, seems good
 
 ```shell
 ➜  ~ ping 172.29.2.134
@@ -72,6 +81,8 @@ PING 172.29.2.134 (172.29.2.134): 56 data bytes
 round-trip min/avg/max/stddev = 54.293/55.380/56.270/0.728 ms
 ```
 
+use service `productpage` IP `172.21.10.49`
+
 ```shell
 ➜  ~ kubectl get services -o wide
 NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                              AGE     SELECTOR
@@ -84,6 +95,8 @@ ratings                   ClusterIP   172.21.3.247    <none>        9080/TCP    
 reviews                   ClusterIP   172.21.8.24     <none>        9080/TCP                             114d    app=reviews
 ```
 
+use command `curl` to test service connection
+
 ```shell
 ➜  ~ curl 172.21.10.49:9080
 <!DOCTYPE html>
@@ -94,3 +107,5 @@ reviews                   ClusterIP   172.21.8.24     <none>        9080/TCP    
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
+
+seems good too~

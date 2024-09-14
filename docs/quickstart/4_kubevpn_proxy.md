@@ -37,25 +37,25 @@ kubevpn proxy deployment/authors deployment/productpage
 or
 
 ```shell
-  kubevpn proxy deployment authors productpage
+kubevpn proxy deployment authors productpage
 ```
 
-## Reverse proxy with mesh, traffic with header a=1, will hit local PC, otherwise no effect
+## Reverse proxy with mesh, traffic with HTTP header foo=bar, will hit local PC, otherwise no effect
 
 ```shell
-kubevpn proxy service/productpage --headers a=1
+kubevpn proxy service/productpage --headers foo=bar
 ```
 
-## Reverse proxy with mesh, traffic with header a=1 and b=2, will hit local PC, otherwise no effect
+## Reverse proxy with mesh, traffic with HTTP header foo=bar and env=dev, will hit local PC, otherwise no effect
 
 ```shell
-kubevpn proxy service/productpage --headers a=1 --headers b=2
+kubevpn proxy service/productpage --headers foo=bar --headers env=dev
 ```
 
 ## Connect to api-server behind of bastion host or ssh jump host and proxy kubernetes resource traffic into local PC
 
 ```shell
-kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers a=1
+kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
 ## It also support ProxyJump, like
@@ -67,7 +67,7 @@ kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username 
 ```
 
 ```shell
-kubevpn proxy service/productpage --ssh-alias <alias> --headers a=1
+kubevpn proxy service/productpage --ssh-alias <alias> --headers foo=bar
 ```
 
 ## Support ssh auth GSSAPI
@@ -137,7 +137,7 @@ GSSAPI password
 
 -H, --headers=[]:
 Traffic with special headers (use `and` to match all headers) with reverse it to local PC, If not special,
-redirect all traffic to local PC. eg: --headers a=1 --headers b=2
+redirect all traffic to local PC. eg: --headers foo=bar --headers env=dev
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 Use this image to startup container

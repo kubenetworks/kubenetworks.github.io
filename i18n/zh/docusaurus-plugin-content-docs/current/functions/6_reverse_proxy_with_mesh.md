@@ -4,10 +4,10 @@ sidebar_position: 6
 
 # 反向代理支持服务网格
 
-支持 HTTP, gRPC, Thrift 和 WebSocket 等, 携带了指定 header `"a: 1"` 的流量，将会路由到本地
+支持 HTTP, gRPC, Thrift 和 WebSocket 等, 携带了指定 header `"foo: bar"` 的流量，将会路由到本地
 
 ```shell
-➜  ~ kubevpn proxy deployment/productpage --headers a=1
+➜  ~ kubevpn proxy deployment/productpage --headers foo=bar
 Connected to cluster
 Injecting inbound sidecar for deployment/productpage
 Checking rollout status for deployment/productpage
@@ -19,6 +19,8 @@ Rollout successfully for deployment/productpage
 +----------------------------------------------------------+
 ➜  ~
 ```
+
+#### 不带 header 直接访问集群资源，可以看到返回的是集群中的服务内容。
 
 ```shell
 ➜  ~ curl productpage:9080
@@ -32,7 +34,9 @@ Rollout successfully for deployment/productpage
 ...
 ```
 
+#### 带上特定 header 访问集群资源，可以看到返回了本地服务的内容。
+
 ```shell
-➜  ~ curl productpage:9080 -H "a: 1"
+➜  ~ curl productpage:9080 -H "foo: bar"
 Hello world!%
 ```

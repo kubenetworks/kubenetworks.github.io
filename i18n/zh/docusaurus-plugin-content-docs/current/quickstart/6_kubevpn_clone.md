@@ -42,16 +42,16 @@ kubevpn clone deployment/authors deployment/productpage
 kubevpn clone deployment authors productpage
 ```
 
-# 使用服务网格克隆，带有头部 a=1 的流量会路由到克隆的工作负载，否则路由到原始工作负载
+# 使用服务网格克隆，带有HTTP header foo=bar 的流量会路由到克隆的工作负载，否则路由到原始工作负载
 
 ```shell
-kubevpn clone deployment/productpage --headers a=1
+kubevpn clone deployment/productpage --headers foo=bar
 ```
 
 # 克隆位于堡垒机或 SSH 跳板机后面的工作负载
 
 ```shell
-kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers a=1
+kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
 # 同样支持 ProxyJump，像这样
@@ -63,7 +63,7 @@ kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username 
 ```
 
 ```shell
-kubevpn clone service/productpage --ssh-alias <alias> --headers a=1
+kubevpn clone service/productpage --ssh-alias <alias> --headers foo=bar
 ```
 
 # 支持 SSH 认证 GSSAPI
@@ -84,7 +84,7 @@ kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAM
 传输引擎 ("mix"|"raw") mix: 同时使用 gvisor 和 raw（兼顾性能和稳定性），raw: 使用 raw 模式（最稳定）
 
 --extra-cidr=[]:
-额外的网络 CIDR 字符串，将这些 CIDR 网络添加到路由表中，例如：--extra-cidr 192.168.0.159/24
+额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
 
 --extra-domain=[]:
@@ -92,7 +92,7 @@ kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAM
 foo.test.com
 
 --extra-node-ip=false:
-额外的节点 IP，将集群节点 IP 添加到路由表中。
+额外的 node IP，将集群节点 node IP 添加到路由表中。
 
 --gssapi-cache='':
 GSSAPI 缓存文件路径，使用命令 `kinit -c /path/to/cache USERNAME@RELAM` 来生成
@@ -104,14 +104,14 @@ GSSAPI keytab 文件路径
 GSSAPI 密码
 
 -H, --headers=[]:
-带有特殊 HTTP header 的流量（使用 `and` 匹配所有头部）将被反向代理到目标集群的对应工作负载上。
-如果不指定，将重定向所有流量到目标集群的对应工作负载。例如：--headers a=1 --headers b=2
+带有特殊 HTTP header 的流量（使用 `and` 匹配所有HTTP header）将被反向代理到目标集群的对应工作负载上。
+如果不指定，将重定向所有流量到目标集群的对应工作负载。格式：<KEY>=<VALUE>例如：--headers foo=bar
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像来启动容器
 
 --remote-kubeconfig='':
-SSH 服务器的远程 kubeconfig 的抽象路径，默认是 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
 
 --ssh-addr='':
 可选的 SSH 跳板服务器地址，格式为 <hostname>:<port>，例如：127.0.0.1:22

@@ -4,10 +4,11 @@ sidebar_position: 8
 
 # 在 Docker 中使用 (Docker in Docker)
 
-如果你想在本地使用 Docker in Docker (DinD) 的方式启动开发模式, 由于程序会读写 `/tmp` 目录，您需要手动添加参数 `-v /tmp:/tmp`, 还有一点需要注意, 如果使用 DinD
-模式，为了共享容器网络和 pid, 还需要指定参数 `--network`
+如果你想在本地使用 Docker in Docker (DinD) 的方式启动开发模式, 由于程序会读写 `/tmp`
+目录，您需要手动添加参数 `-v /tmp:/tmp`, 还有一点需要注意, 如果使用 DinD 模式，为了共享容器网络和 pid,
+还需要指定参数 `--network`
 
-例如:
+例如，使用如下命令:
 
 ```shell
 docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/config:/root/.kube/config --platform linux/amd64 naison/kubevpn:latest
@@ -104,7 +105,7 @@ OK: 8 MiB in 19 packages
 >> Container Received request: GET / from 127.0.0.1:41230
 Hello world!/opt/microservices # 
 
-/opt/microservices # curl authors:9080/health -H "a: 1"
+/opt/microservices # curl authors:9080/health -H "foo: bar"
 >>Received request: GET /health from 223.254.0.109:57930
                                                         Hello world!/opt/microservices # 
 /opt/microservices # curl localhost:9080/health
@@ -121,6 +122,8 @@ root@d0b3dab8912a:/app# exit
 exit
 ➜  ~
 ```
+
+可以看到实际上是在本地使用 `Docker` 启动了三个容器。
 
 ```text
 ➜  ~ docker ps

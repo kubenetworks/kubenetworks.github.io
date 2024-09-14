@@ -62,7 +62,7 @@ GSSAPI keytab 文件路径
 GSSAPI 密码
 
 --remote-kubeconfig='':
-SSH 服务器上的远程 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
 
 --ssh-addr='':
 可选的 ssh 跳转服务器地址，格式为 <hostname>:<port>，例如：127.0.0.1:22

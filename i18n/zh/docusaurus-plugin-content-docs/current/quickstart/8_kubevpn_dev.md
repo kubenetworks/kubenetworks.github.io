@@ -27,10 +27,10 @@ kubevpn dev deployment/productpage
 kubevpn dev service/productpage
 ```
 
-# 开发具有网格的工作负载，带有特征 a=1 的流量将命中本地 PC，其它流量不受影响
+# 使用服务网格开发工作负载，带有 HTTP header foo=bar 的流量将命中本地 PC，其它流量不受影响
 
 ```shell
-kubevpn dev service/productpage --headers a=1
+kubevpn dev service/productpage --headers foo=bar
 ```
 
 # 开发不代理流量的工作负载
@@ -102,13 +102,15 @@ kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username 
 暴露一个端口或一系列端口
 
 --extra-cidr=[]:
-额外的网络 CIDR 字符串，将这些 cidr 网络添加到路由表，例如：--extra-cidr 192.168.0.159/24 --extra-cidr 192.168.1.160/32
+额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
+--extra-cidr 192.168.1.160/32
 
 --extra-domain=[]:
-额外的域字符串，解析的 IP 将添加到路由表，例如：--extra-domain test.abc.com --extra-domain foo.test.com
+额外的域名字符串，解析后的 IP 将添加到路由表中，例如：--extra-domain test.abc.com --extra-domain
+foo.test.com
 
 --extra-node-ip=false:
-额外的节点 IP，将集群节点 IP 添加到路由表。
+额外的 node IP，将集群节点 node IP 添加到路由表中。
 
 --gssapi-cache='':
 GSSAPI 缓存文件路径，使用命令 `kinit -c /path/to/cache USERNAME@RELAM` 生成
@@ -120,7 +122,8 @@ GSSAPI keytab 文件路径
 GSSAPI 密码
 
 -H, --headers=[]:
-带有特殊 HTTP header 的流量（使用 `and` 匹配所有头部）将被反向代理到本地 PC，如果不指定，将重定向所有流量到本地 PC。例如：--headers a=1 --headers b=2
+带有特殊 HTTP header 的流量（使用 `and` 匹配所有HTTP header）将被反向代理到本地 PC，如果不指定，将重定向所有流量到本地 PC。
+格式：<KEY>=<VALUE>, 例如：--headers foo=bar
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
@@ -144,7 +147,7 @@ GSSAPI 密码
 运行之前拉取镜像（"always"|"missing"|"never"）
 
 --remote-kubeconfig='':
-SSH 服务器的远程 kubeconfig 抽象路径，默认是 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
 
 --sig-proxy=true:
 将接收到的信号代理给进程

@@ -43,16 +43,16 @@ or
 kubevpn clone deployment authors productpage
 ```
 
-# clone with mesh, traffic with header a=1, will hit cloned workloads, otherwise hit origin workloads
+# clone with mesh, traffic with HTTP header foo=bar, will hit cloned workloads, otherwise hit origin workloads
 
 ```shell
-kubevpn clone deployment/productpage --headers a=1
+kubevpn clone deployment/productpage --headers foo=bar
 ```
 
 # clone workloads which api-server behind of bastion host or ssh jump host
 
 ```shell
-kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers a=1
+kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
 # It also supports ProxyJump, like
@@ -64,7 +64,7 @@ kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username 
 ```
 
 ```shell
-kubevpn clone service/productpage --ssh-alias <alias> --headers a=1
+kubevpn clone service/productpage --ssh-alias <alias> --headers foo=bar
 ```
 
 # Support ssh auth GSSAPI
@@ -107,7 +107,7 @@ GSSAPI password
 
 -H, --headers=[]:
 Traffic with special headers (use `and` to match all headers) with reverse it to target cluster cloned workloads.
-If not special, redirect all traffic to target cluster cloned workloads. eg: --headers a=1 --headers b=2
+If not special, redirect all traffic to target cluster cloned workloads. eg: --headers foo=bar --headers env=dev
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 Use this image to startup container

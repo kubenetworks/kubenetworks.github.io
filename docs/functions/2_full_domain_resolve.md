@@ -4,6 +4,14 @@ sidebar_position: 2
 
 # Domain resolve
 
+support k8s dns name resolve.
+
+a Pod/Service named `productpage` in the `default` namespace can successfully resolve by following name:
+
+- `productpage`
+- `productpage.default`
+- `productpage.default.svc.cluster.local`
+
 ```shell
 ➜  ~ curl productpage.default.svc.cluster.local:9080
 <!DOCTYPE html>

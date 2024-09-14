@@ -105,7 +105,7 @@ OK: 8 MiB in 19 packages
 >> Container Received request: GET / from 127.0.0.1:41230
 Hello world!/opt/microservices # 
 
-/opt/microservices # curl authors:9080/health -H "a: 1"
+/opt/microservices # curl authors:9080/health -H "foo: bar"
 >>Received request: GET /health from 223.254.0.109:57930
                                                         Hello world!/opt/microservices # 
 /opt/microservices # curl localhost:9080/health

@@ -35,25 +35,25 @@ kubevpn proxy deployment/authors deployment/productpage
 or
 
 ```shell
-  kubevpn proxy deployment authors productpage
+kubevpn proxy deployment authors productpage
 ```
 
-## 使用服务网格进行反向代理，带有头部 a=1 的流量将命中本地 PC，其它流量不受影响
+## 使用服务网格进行反向代理，带有HTTP header foo=bar 的流量将命中本地 PC，其它流量不受影响
 
 ```shell
-kubevpn proxy service/productpage --headers a=1
+kubevpn proxy service/productpage --headers foo=bar
 ```
 
-## 使用服务网格进行反向代理，带有头部 a=1 和 b=2 的流量将命中本地 PC，其它流量不受影响
+## 使用服务网格进行反向代理，带有HTTP header foo=bar 和 env=dev 的流量将命中本地 PC，其它流量不受影响
 
 ```shell
-kubevpn proxy service/productpage --headers a=1 --headers b=2
+kubevpn proxy service/productpage --headers foo=bar --headers env=dev
 ```
 
 ## 连接到位于堡垒机或 SSH 跳板机后的 api-server 并将 Kubernetes 资源流量代理到本地 PC
 
 ```shell
-kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers a=1
+kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
 ## 它也支持 ProxyJump，像这样
@@ -65,7 +65,7 @@ kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username 
 ```
 
 ```shell
-kubevpn proxy service/productpage --ssh-alias <alias> --headers a=1
+kubevpn proxy service/productpage --ssh-alias <alias> --headers foo=bar
 ```
 
 ## 支持 SSH 认证 GSSAPI
@@ -110,7 +110,7 @@ kubevpn proxy deployment/productpage
 传输引擎（"mix"|"raw"）mix：同时使用 gvisor 和 raw 模式（性能和稳定兼得），raw：使用 raw 模式（最稳定）
 
 --extra-cidr=[]:
-额外的网络 CIDR 字符串，将这些 cidr 网络添加到路由表中，例如：--extra-cidr 192.168.0.159/24
+额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
 
 --extra-domain=[]:
@@ -118,7 +118,7 @@ kubevpn proxy deployment/productpage
 foo.test.com
 
 --extra-node-ip=false:
-额外的节点 IP，将集群节点 IP 添加到路由表中。
+额外的 node IP，将集群节点 node IP 添加到路由表中。
 
 --foreground=false:
 前台挂起
@@ -133,7 +133,8 @@ GSSAPI keytab 文件路径
 GSSAPI 密码
 
 -H, --headers=[]:
-带有特殊 HTTP header 的流量（使用 `and` 匹配所有头部）将被反向代理到本地 PC，如果不指定，将重定向所有流量到本地 PC。例如：--headers a=1 --headers b=2
+带有特殊 HTTP header 的流量（使用 `and` 匹配所有HTTP header）将被反向代理到本地 PC，如果不指定，将重定向所有流量到本地 PC。
+格式：<KEY>=<VALUE>, 例如：--headers foo=bar
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
@@ -143,7 +144,7 @@ GSSAPI 密码
 localPort 将使用 containerPort。例如：tcp/80:8080 或 udp/5000:5001 或 80 或 80:8080
 
 --remote-kubeconfig='':
-SSH 服务器的远程 kubeconfig 抽象路径，默认是 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
 
 --ssh-addr='':
 可选的 SSH 跳板服务器地址，如 <hostname>:<port>，例如：127.0.0.1:22

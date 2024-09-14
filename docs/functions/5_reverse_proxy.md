@@ -4,6 +4,8 @@ sidebar_position: 5
 
 # Reverse proxy
 
+use command `kubevpn proxy` to proxy all inbound traffic to local computer.
+
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage
 Connected to cluster
@@ -54,20 +56,20 @@ then run it
 export selector=productpage
 export pod=`kubectl get pods -l app=${selector} -n default -o jsonpath='{.items[0].metadata.name}'`
 export pod_ip=`kubectl get pod $pod -n default -o jsonpath='{.status.podIP}'`
-curl -v -H "a: 1" http://$pod_ip:9080/health
+curl -v -H "foo: bar" http://$pod_ip:9080/health
 ```
 
 response would like below
 
 ```
-❯ curl -v -H "a: 1" http://$pod_ip:9080/health
+❯ curl -v -H "foo: bar" http://$pod_ip:9080/health
 *   Trying 192.168.72.77:9080...
 * Connected to 192.168.72.77 (192.168.72.77) port 9080 (#0)
 > GET /health HTTP/1.1
 > Host: 192.168.72.77:9080
 > User-Agent: curl/7.87.0
 > Accept: */*
-> a: 1
+> foo: bar
 > 
 >>Received request: GET /health from xxx.xxx.xxx.xxx:52974
 * Mark bundle as not supporting multiuse

@@ -9,7 +9,7 @@ with
 the specified header or all the traffic to the local Docker container.
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --headers a=1 --entrypoint sh
+➜  ~ kubevpn dev deployment/authors --headers foo=bar --entrypoint sh
 Starting connect
 Got network CIDR from cache
 Use exist traffic manager
@@ -92,7 +92,7 @@ Here is how to access pod in local docker container
 ```shell
 export authors_pod=`kubectl get pods -l app=authors -n default -o jsonpath='{.items[0].metadata.name}'`
 export authors_pod_ip=`kubectl get pod $authors_pod -n default -o jsonpath='{.status.podIP}'`
-curl -kv -H "a: 1" http://$authors_pod_ip:80/health
+curl -kv -H "foo: bar" http://$authors_pod_ip:80/health
 ```
 
 Verify logs of nginx container

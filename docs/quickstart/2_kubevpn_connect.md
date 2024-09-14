@@ -89,6 +89,8 @@ use this image to startup container
 
 --lite=false:
 connect to multiple cluster in lite mode, you needs to special this options
+mode lite: connect to multiple cluster network, design for only connecting to multiple cluster network
+mode full: not only connect to cluster network, it also supports proxy workloads inbound traffic to local PC
 
 --remote-kubeconfig='':
 Remote kubeconfig abstract path of ssh server, default is /home/$USERNAME/.kube/config

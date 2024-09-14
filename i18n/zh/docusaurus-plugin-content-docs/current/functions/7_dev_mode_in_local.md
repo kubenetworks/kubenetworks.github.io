@@ -7,7 +7,7 @@ sidebar_position: 7
 将 Kubernetes pod 运行在本地的 Docker 容器中🐳，同时配合 service mesh, 拦截带有指定 header 的流量到本地，或者所有的流量到本地。这个开发模式依赖于本地 Docker。
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --headers a=1 --entrypoint sh
+➜  ~ kubevpn dev deployment/authors --headers foo=bar --entrypoint sh
 Starting connect
 Got network CIDR from cache
 Use exist traffic manager
