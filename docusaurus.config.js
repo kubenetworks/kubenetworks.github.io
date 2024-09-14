@@ -80,6 +80,12 @@ const config = {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'commands',
+            position: 'left',
+            label: 'Commands',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'functions',
             position: 'left',
             label: 'Functions',

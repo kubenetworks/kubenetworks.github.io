@@ -11,6 +11,10 @@
     "message": "文档",
     "description": "Navbar item with label Docs"
   },
+  "item.label.Commands": {
+    "message": "命令参数",
+    "description": "Navbar item with label Commands"
+  },
   "item.label.Functions": {
     "message": "主要功能",
     "description": "Navbar item with label Functions"

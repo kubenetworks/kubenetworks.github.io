@@ -11,6 +11,10 @@
     "message": "Docs",
     "description": "Navbar item with label Docs"
   },
+  "item.label.Commands": {
+    "message": "Commands",
+    "description": "Navbar item with label Commands"
+  },
   "item.label.Functions": {
     "message": "Functions",
     "description": "Navbar item with label Functions"
