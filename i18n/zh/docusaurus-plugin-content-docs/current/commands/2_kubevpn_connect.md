@@ -56,9 +56,6 @@ kubevpn connect --ssh-jump "--ssh-addr jump.naison.org --ssh-username naison --g
 --debug=false:
 是否启用调试模式，true 或 false
 
---engine='raw':
-传输引擎（"mix"|"raw"）mix：同时使用 gvisor 和 raw 模式（性能和稳定兼得），raw：使用 raw 模式（最稳定）
-
 --extra-cidr=[]:
 额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
@@ -84,6 +81,9 @@ GSSAPI 密码
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
+
+--netstack='system':
+网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
 
 --lite=false:
 以 lite 模式连接多个集群，，你需要特别指定此选项

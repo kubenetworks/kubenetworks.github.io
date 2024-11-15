@@ -92,9 +92,6 @@ kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username 
 --dev-image='':
 用于启动 docker 容器，默认是 pod 镜像
 
---engine='raw':
-传输引擎（"mix"|"raw"），mix：同时使用 gvisor 和 raw（性能和稳定都较好），raw：使用原始模式（最稳定）
-
 --entrypoint='':
 覆盖镜像的默认入口点
 
@@ -127,6 +124,9 @@ GSSAPI 密码
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
+
+--netstack='system':
+网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
 
 --no-proxy=false:
 是否将远程工作负载流量代理到本地，true：仅在本地启动容器，不注入容器以截取流量，false：拦截流量并转发到本地

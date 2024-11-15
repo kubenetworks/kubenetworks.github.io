@@ -108,10 +108,6 @@ kubevpn proxy deployment/productpage
 --debug=false:
 Enable debug mode or not, true or false
 
---engine='raw':
-transport engine ("mix"|"raw") mix: use gvisor and raw both (both performance and stable), raw: use raw mode
-(best stable)
-
 --extra-cidr=[]:
 Extra network CIDR string, add those cidr network to route table, eg: --extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
@@ -141,6 +137,9 @@ redirect all traffic to local PC. eg: --headers foo=bar --headers env=dev
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 Use this image to startup container
+
+--netstack='system':
+network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
 
 --portmap=[]:
 Port map, map container port to local port, format: [tcp/udp]/containerPort:localPort, If not special,

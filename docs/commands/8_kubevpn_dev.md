@@ -93,10 +93,6 @@ enable debug mode or not, true or false
 --dev-image='':
 Use to startup docker container, Default is pod image
 
---engine='raw':
-transport engine ("mix"|"raw") mix: use gvisor and raw both (both performance and stable), raw: use raw mode
-(best stable)
-
 --entrypoint='':
 Overwrite the default ENTRYPOINT of the image
 
@@ -129,6 +125,9 @@ workloads successfully, If not special, redirect all traffic to local PC, format
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 use this image to startup container
+
+--netstack='system':
+network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
 
 --no-proxy=false:
 Whether proxy remote workloads traffic into local or not, true: just startup container on local without inject
