@@ -10,9 +10,10 @@ network, remote kubernetes cluster service can also access your local service. a
 on local Docker container with same environment、volume、and network. you can develop your application on local PC
 totally.
 
-# Install server (optional)
+# Install server in Kubernetes cluster (optional)
 
-you can install kubevpn server previously (it will automatically install by kubevpn by command `kubevpn connect`)
+you can install kubevpn server previously (it will automatically install by kubevpn client with
+command `kubevpn connect` if detect kubevpn server not exist)
 
 ```shell
 ➜ helm repo add kubevpn https://raw.githubusercontent.com/kubenetworks/kubevpn/master/charts
@@ -46,7 +47,7 @@ if using private docker registry, use the following command to install:
 helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn --set 'imagePullSecrets[0].name=registry' -n default --debug --set image.tag=v2.2.2
 ```
 
-# Install client
+# Install client on local PC
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

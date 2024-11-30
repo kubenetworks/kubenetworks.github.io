@@ -8,9 +8,9 @@ KubeVPN 提供了一个云原生开发环境, 可以在本地连接云端 kubern
 网络的工具，可以在本地直接访问远端集群的服务。也可以在远端集群访问到本地服务，便于调试及开发。同时还可以使用开发模式，直接在本地使用
 Docker 将远程容器运行在本地。
 
-# 安装 kubevpn server (可选)
+# 安装 kubevpn server 在 Kubernetes 集群中（可选）
 
-可以通过 helm 提前安装 server（当 client 链接时，如果 server 没有安装，client 将会自动安装 server），如下命令：
+可以通过 helm 提前在集群中安装 kubevpn server（当 kubevpn client 链接时，如果 server 没有安装，client 将会自动安装 server），如下命令：
 
 ```shell
 ➜ helm repo add kubevpn https://raw.githubusercontent.com/kubenetworks/kubevpn/master/charts
@@ -38,7 +38,7 @@ NOTES:
   ping $POD_IP
 ```
 
-# 安装 kubevpn client
+# 安装 kubevpn client 在本地电脑上
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
