@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Proxy with service mesh
+# Proxy with gvisor service mesh
 
 As shown in the diagram below, `User A` and `User B` use the `kubevpn proxy` command to proxy the same service `authors`
 respectively:

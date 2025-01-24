@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# 使用服务网格进行代理
+# 使用 gvisor 服务网格进行代理
 
 如下图所示，`用户 A` 和 `用户 B`，分别使用了 `kubevpn proxy`
 命令代理了同一个服务 `authors`:
