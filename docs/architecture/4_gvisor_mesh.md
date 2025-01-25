@@ -18,4 +18,60 @@ When the `authors` service in the cluster receives traffic:
 
 The principle is to use `envoy` as the data plane and implement a control plane for `envoy`.
 
+## Default mode(needs ```Privileged: true``` and cap ```NET_ADMIN```)
+
+The key is how to implement the function bellow.
+
+> When the `authors` service in the cluster receives traffic
+
+default mode use `iptables` `DNAT` traffic to port `:15006`, so works on `Pod` level, best experience.
+
+example:
+
+```shell
+kubevpn proxy deployment/authors --headers user=A
+```
+
+## Gvisor mode
+
+gvisor mode modify `k8s service` `targetPort` to envoy listener port. eg:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: authors
+    service: authors
+  name: authors
+  namespace: default
+spec:
+  clusterIP: 172.21.5.157
+  clusterIPs:
+    - 172.21.5.157
+  ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+      targetPort: 64071
+  selector:
+    app: authors
+  sessionAffinity: None
+  type: ClusterIP
+```
+
+so works on `k8s service` level, needs to access via `service`. if `Pod` registry their `IP` to registration center and
+access via `registration center`, this mode will not work.
+
+example:
+
+```shell
+kubevpn proxy deployment/authors --headers user=A --netstack gvisor
+```
+
+we can use this mode on AWS Fargate node.
+because [Fargate node](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-security-considerations.html)
+not support ```Privileged: true``` and cap
+```NET_ADMIN```
+
 ![gvisor-mesh.svg](gvisor-mesh.svg)
