@@ -1,32 +1,33 @@
 ---
-sidebar_position: 11
+sidebar_position: 13
 ---
 
-# Kubevpn reset
+# Kubevpn uninstall
 
-Reset workloads to origin specification proxied by kubevpn
+Cleanup all resources created by kubevpn in a Kubernetes cluster
 
-The reset operation will remove all containers vpn and envoy injected by kubevpn in the Kubernetes cluster, and restore
-service mesh rules.
+The uninstall operation will delete all resources created by kubevpn in the Kubernetes cluster, such as deployments,
+services, service accounts, etc. It will also delete local development Docker containers, Docker networks, host entries
+added by kubevpn, and clean up DNS settings.
 
 # Examples
 
-## Reset the deployment authors in default namespace
+## Cleanup the default namespace
 
 ```bash
-kubevpn reset deployment/authors
+kubevpn uninstall
 ```
 
-## Reset the deployment authors in another namespace test
+## Cleanup another namespace test
 
 ```shell
-kubevpn reset deployment/authors -n test
+kubevpn uninstall -n test
 ```
 
-## Reset the deployment authors in cluster api-server behind of bastion host or ssh jump host
+## Cleanup cluster api-server behind of bastion host or ssh jump host
 
 ```shell
-kubevpn reset deployment/authors --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
+kubevpn uninstall --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
 ```
 
 ## It also support ProxyJump, like
@@ -38,15 +39,15 @@ kubevpn reset deployment/authors --ssh-addr 192.168.1.100:22 --ssh-username root
 ```
 
 ```shell
-kubevpn reset deployment/authors --ssh-alias <alias>
+kubevpn uninstall --ssh-alias <alias>
 ```
 
 ## Support ssh auth GSSAPI
 
 ```shell
-kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
-kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
-kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
+kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
+kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
+kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
 ```
 
 # Options

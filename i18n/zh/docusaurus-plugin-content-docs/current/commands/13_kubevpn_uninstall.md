@@ -1,31 +1,32 @@
 ---
-sidebar_position: 11
+sidebar_position: 13
 ---
 
-# kubevpn reset
+# kubevpn uninstall
 
-重置工作负载为原来的规格
+清理在 Kubernetes 集群中由 kubevpn 创建的所有资源
 
-重置操作将会移除所有由 kubevpn 注入的容器，vpn 和 envoy。并且恢复所有的服务网格规则。
+卸载操作将删除在 Kubernetes 集群中由 kubevpn 创建的所有资源，例如 deployment、service、serviceAccount 等等，同时，它还将删除本地开发
+Docker 容器、Docker 网络、由 kubevpn 添加的 hosts 记录，并清理 DNS 设置。
 
 ## 示例
 
-### 重置在默认命名空间的 deployment authors
+### 重置默认命名空间：
 
 ```bash
-kubevpn reset deployment/authors
+kubevpn uninstall
 ```
 
 ### 重置另一个命名空间 test
 
 ```shell
-kubevpn reset deployment/authors -n test
+kubevpn uninstall -n test
 ```
 
 ### 连接到堡垒机或 ssh 跳转机后的集群 API 服务器
 
 ```shell
-kubevpn reset deployment/authors --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
+kubevpn uninstall --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
 ```
 
 ### 也支持 ProxyJump，例如
@@ -37,15 +38,15 @@ kubevpn reset deployment/authors --ssh-addr 192.168.1.100:22 --ssh-username root
 ```
 
 ```shell
-kubevpn reset deployment/authors --ssh-alias <alias>
+kubevpn uninstall --ssh-alias <alias>
 ```
 
 ### 支持使用 GSSAPI 进行 ssh 认证
 
 ```shell
-kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
-kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
-kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
+kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
+kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
+kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
 ```
 
 # 选项

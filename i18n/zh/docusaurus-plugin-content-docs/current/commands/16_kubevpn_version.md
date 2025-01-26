@@ -1,12 +1,12 @@
 ---
-sidebar_position: 15
+sidebar_position: 16
 ---
 
-# Kubevpn version
+# kubevpn version
 
-Print the client version information.
+打印客户端版本信息。
 
-## Example
+## 示例
 
 ```shell
 kubevpn version
@@ -24,4 +24,4 @@ KubeVPN: CLI
     Built Go version: go1.22.6
 ```
 
-**Options `--image` can overwrite `Image` value, use this image to start up `kubevpn-traffic-manager` pod**
+**选项 `--image` 可以覆盖 `Image` 中镜像，使用此镜像启动 `kubevpn-traffic-manager` pod**
