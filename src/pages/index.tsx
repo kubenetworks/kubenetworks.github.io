@@ -19,38 +19,50 @@ function HomepageHeader() {
     fetch(
       'https://raw.githubusercontent.com/kubenetworks/kubevpn/master/plugins/stable.txt',
     )
-        .then(res => res.ok ? res.text() : undefined)
-        .then(ver => ver && setVer(ver));
+      .then(res => (res.ok ? res.text() : undefined))
+      .then(ver => ver && setVer(ver));
   }, []);
 
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <img
-          style={{ width: 300, height: 100, objectFit: 'cover' }}
-          src={require('@site/static/img/logo.jpeg').default}
-        />
+        <h1
+          style={{
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            margin: '0.5rem 0',
+          }}
+        >
+          KubeVPN
+        </h1>
         <p className="hero__subtitle">
           <Translate>Cloud Native Dev Environment</Translate>
         </p>
         <div className={styles.buttons}>
           <Link
-              style={{width: 144, paddingRight: 0, paddingLeft: 0}}
-              className="button button--secondary button--lg"
-              to="/docs/quickstart"
+            style={{ width: 144, paddingRight: 0, paddingLeft: 0 }}
+            className="button button--secondary button--lg"
+            to="/docs/quickstart"
           >
             <Translate>QuickStart</Translate>
           </Link>
           <Link
-              style={{width: 144, paddingRight: 0, paddingLeft: 0, display: "flex", justifyContent: "center", alignItems: "center"}}
-              className="button button--secondary button--lg"
-              to="https://github.com/kubenetworks/kubevpn"
+            style={{
+              width: 144,
+              paddingRight: 0,
+              paddingLeft: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            className="button button--secondary button--lg"
+            to="https://github.com/kubenetworks/kubevpn"
           >
-          <img
-              style={{ marginRight: 8}}
+            <img
+              style={{ marginRight: 8 }}
               className={styles.githubLogo}
               src="img/github.svg"
-          ></img>
+            ></img>
             {ver}
           </Link>
         </div>
