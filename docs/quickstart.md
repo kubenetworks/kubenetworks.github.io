@@ -69,6 +69,12 @@ kubectl krew install kubevpn/kubevpn
 kubectl kubevpn
 ```
 
+### Install from script
+
+```shell
+curl -fsSL https://kubevpn.dev/install.sh | sh
+```
+
 ### Download from GitHub release
 
 [https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
@@ -88,6 +94,18 @@ brew install kubevpn
 kubectl krew index add kubevpn https://github.com/kubenetworks/kubevpn.git
 kubectl krew install kubevpn/kubevpn
 kubectl kubevpn
+```
+
+### Install from [snap](https://snapcraft.io/kubevpn)
+
+```shell
+sudo snap install kubevpn
+```
+
+### Install from script
+
+```shell
+curl -fsSL https://kubevpn.dev/install.sh | sh
 ```
 
 ### Download from GitHub release
