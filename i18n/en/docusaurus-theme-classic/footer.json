@@ -26,9 +26,5 @@
   "link.item.label.Blog": {
     "message": "Blog",
     "description": "The label of footer link with label=Blog"
-  },
-  "copyright": {
-    "message": "2023 kubenetworks / Built with Docusaurus",
-    "description": "The footer copyright"
   }
 }
