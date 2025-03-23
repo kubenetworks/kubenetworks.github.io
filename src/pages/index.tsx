@@ -13,14 +13,57 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
 
-  const [ver, setVer] = useState('latest');
+  const [ver, setVer] = useState(() => {
+    const cachedData = localStorage.getItem('kubevpn-version');
+    if (cachedData) {
+      const { version, timestamp } = JSON.parse(cachedData);
+      const now = Date.now();
+      if (now - timestamp < 600000) {
+        return version;
+      }
+    }
+    return 'latest';
+  });
 
   useEffect(() => {
-    fetch(
-      'https://raw.githubusercontent.com/kubenetworks/kubevpn/master/plugins/stable.txt',
-    )
-      .then(res => (res.ok ? res.text() : undefined))
-      .then(ver => ver && setVer(ver));
+    const fetchVersion = async () => {
+      // check local cache
+      const cachedData = localStorage.getItem('kubevpn-version');
+      const now = Date.now();
+
+      if (cachedData) {
+        const { version, timestamp } = JSON.parse(cachedData);
+        // cache 10 minutes
+        if (now - timestamp < 600000) {
+          setVer(version);
+          return;
+        }
+      }
+
+      // cache expired or doesn't exist, fetch
+      try {
+        const res = await fetch(
+          'https://raw.githubusercontent.com/kubenetworks/kubevpn/master/plugins/stable.txt',
+        );
+        if (res.ok) {
+          const version = await res.text();
+          if (version) {
+            setVer(version);
+            localStorage.setItem(
+              'kubevpn-version',
+              JSON.stringify({
+                version,
+                timestamp: now,
+              }),
+            );
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch version', error);
+      }
+    };
+
+    fetchVersion();
   }, []);
 
   return (
