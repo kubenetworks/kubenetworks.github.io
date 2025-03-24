@@ -4,9 +4,8 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Layout from '@theme/Layout';
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
-
 import Translate, { translate } from '@docusaurus/Translate';
-
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import config from '@generated/docusaurus.config';
 import styles from './index.module.css';
 
@@ -14,34 +13,44 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
 
   const [ver, setVer] = useState(() => {
-    const cachedData = localStorage.getItem('kubevpn-version');
-    if (cachedData) {
-      const { version, timestamp } = JSON.parse(cachedData);
-      const now = Date.now();
-      if (now - timestamp < 600000) {
-        return version;
+    if (ExecutionEnvironment.canUseDOM) {
+      const cachedData = localStorage.getItem('kubevpn-version');
+      if (cachedData) {
+        try {
+          const { version, timestamp } = JSON.parse(cachedData);
+          const now = Date.now();
+          if (now - timestamp < 600000) {
+            return version;
+          }
+        } catch (e) {
+          console.error('Failed to parse version from localStorage', e);
+        }
       }
     }
     return 'latest';
   });
 
   useEffect(() => {
+    if (!ExecutionEnvironment.canUseDOM) {
+      return;
+    }
+
     const fetchVersion = async () => {
       // check local cache
-      const cachedData = localStorage.getItem('kubevpn-version');
-      const now = Date.now();
-
-      if (cachedData) {
-        const { version, timestamp } = JSON.parse(cachedData);
-        // cache 10 minutes
-        if (now - timestamp < 600000) {
-          setVer(version);
-          return;
-        }
-      }
-
-      // cache expired or doesn't exist, fetch
       try {
+        const cachedData = localStorage.getItem('kubevpn-version');
+        const now = Date.now();
+
+        if (cachedData) {
+          const { version, timestamp } = JSON.parse(cachedData);
+          // cache 10 minutes
+          if (now - timestamp < 600000) {
+            setVer(version);
+            return;
+          }
+        }
+
+        // cache expired or doesn't exist, fetch
         const res = await fetch(
           'https://raw.githubusercontent.com/kubenetworks/kubevpn/master/plugins/stable.txt',
         );
