@@ -113,6 +113,11 @@ const config = {
             label: 'Blog',
           },
           {
+            label: "Donate",
+            to: "https://paypal.me/kubevpn",
+            position: "right",
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
