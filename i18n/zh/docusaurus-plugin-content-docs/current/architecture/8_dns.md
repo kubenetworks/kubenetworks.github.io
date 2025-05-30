@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # DNS 架构
@@ -13,4 +13,4 @@ sidebar_position: 7
 - `DNS server` 会尝试解析给到的 `name`，例如 `authors.default`
 - 如果查询不到，则会根据 `/etc/resolv.conf` 文件中的 `search` 规则，进行补全和重试
 
-![dns.svg](dns.svg)
+![dns.svg](img/dns.svg)

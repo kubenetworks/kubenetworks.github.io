@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Proxy with gvisor service mesh
+# Proxy with gVisor service mesh
 
 As shown in the diagram below, `User A` and `User B` use the `kubevpn proxy` command to proxy the same service `authors`
 respectively:
@@ -18,23 +18,9 @@ When the `authors` service in the cluster receives traffic:
 
 The principle is to use `envoy` as the data plane and implement a control plane for `envoy`.
 
-## Default mode(needs ```Privileged: true``` and cap ```NET_ADMIN```)
+## gVisor mode ( not need ```Privileged: true``` or cap ```NET_ADMIN``` )
 
-The key is how to implement the function bellow.
-
-> When the `authors` service in the cluster receives traffic
-
-default mode use `iptables` `DNAT` traffic to port `:15006`, so works on `Pod` level, best experience.
-
-example:
-
-```shell
-kubevpn proxy deployment/authors --headers user=A
-```
-
-## Gvisor mode
-
-gvisor mode modify `k8s service` `targetPort` to envoy listener port. eg:
+gVisor mode modify `k8s service` `targetPort` to envoy listener port. eg:
 
 ```yaml
 apiVersion: v1
@@ -74,4 +60,4 @@ because [Fargate node](https://docs.aws.amazon.com/AmazonECS/latest/developergui
 not support ```Privileged: true``` and cap
 ```NET_ADMIN```
 
-![gvisor-mesh.svg](gvisor-mesh.svg)
+![gvisor-mesh.svg](img/gvisor-mesh.svg)

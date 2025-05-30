@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Proxy mode
@@ -8,4 +8,4 @@ As shown in the diagram below, the user uses the command `kubevpn proxy deployme
 local computer. Therefore, whoever accesses the `authors` service in the cluster, the inbound traffic will be intercepted
 to the local computer.
 
-![proxy.svg](proxy.svg)
+![proxy.svg](img/proxy.svg)

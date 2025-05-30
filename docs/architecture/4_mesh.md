@@ -18,4 +18,18 @@ When the `authors` service in the cluster receives traffic:
 
 The principle is to use `envoy` as the data plane and implement a control plane for `envoy`.
 
-![mesh.svg](mesh.svg)
+## Default mode ( need ```Privileged: true``` and cap ```NET_ADMIN``` )
+
+The key is how to implement the function bellow.
+
+> When the `authors` service in the cluster receives traffic
+
+default mode use `iptables` `DNAT` traffic to port `:15006`, so works on `Pod` level, best experience.
+
+example:
+
+```shell
+kubevpn proxy deployment/authors --headers user=A
+```
+
+![mesh.svg](img/mesh.svg)

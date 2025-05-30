@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # 开发模式
@@ -20,4 +20,4 @@ sidebar_position: 5
 中的存储卷，环境变量和网络，都以 `Docker container`
 的形式运行在本地。这样在本地可以更快速的进行代码调试。
 
-![dev.svg](dev.svg)
+![dev.svg](img/dev.svg)

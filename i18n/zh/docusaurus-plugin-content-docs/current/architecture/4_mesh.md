@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# 使用 gvisor 服务网格进行代理
+# 使用服务网格进行代理
 
 如下图所示，`用户 A` 和 `用户 B`，分别使用了 `kubevpn proxy`
 命令代理了同一个服务 `authors`:
@@ -33,44 +33,4 @@ sidebar_position: 4
 kubevpn proxy deployment/authors --headers user=A
 ```
 
-## Gvisor 模式
-
-gvisor 模式修改了 `k8s service` 的 `targetPort` 为 `envoy` 的监听端口，例如：
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: authors
-    service: authors
-  name: authors
-  namespace: default
-spec:
-  clusterIP: 172.21.5.157
-  clusterIPs:
-    - 172.21.5.157
-  ports:
-    - name: http
-      port: 9080
-      protocol: TCP
-      targetPort: 64071
-  selector:
-    app: authors
-  sessionAffinity: None
-  type: ClusterIP
-```
-
-因此 gvisor 模式工作在`k8s service`服务级别，需要通过 `service name` 来访问。
-
-例如:
-
-```shell
-kubevpn proxy deployment/authors --headers user=A --netstack gvisor
-```
-
-我们可以在 `AWS Fargate` 上使用 `gvisor`
-模式，因为 [Fargate 节点](https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/developerguide/fargate-security-considerations.html)
-不支持 ```Privileged: true```特权模式和特性 ```NET_ADMIN```
-
-![gvisor-mesh.svg](gvisor-mesh.svg)
+![mesh.svg](img/mesh.svg)

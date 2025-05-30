@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Dev mode
@@ -20,4 +20,4 @@ The difference with the `service mesh` solution is: `User A` will use `Docker` t
 which means that the storage volume, environment variables and network in the `Pod` will be run locally in the form of
 a `Docker container`. This allows for faster code debugging locally.
 
-![dev.svg](dev.svg)
+![dev.svg](img/dev.svg)

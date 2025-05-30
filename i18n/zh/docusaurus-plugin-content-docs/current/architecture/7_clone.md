@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # 克隆模式
@@ -21,4 +21,4 @@ sidebar_position: 6
 - 用户 A 电脑上的 `~/code` 会被同步到集群中克隆的资源 `authors'` 的 `/app/code` 目录中
 - 用户 B 电脑上的 `~/code` 会被同步到集群中克隆的资源 `authors''` 的 `/app/code` 目录中
 
-![clone.svg](clone.svg)
+![clone.svg](img/clone.svg)

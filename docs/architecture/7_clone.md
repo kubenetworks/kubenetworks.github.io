@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Clone mode
@@ -23,4 +23,4 @@ File synchronization is implemented using `syncthing`:
 - The `~/code` on user B's computer will be synchronized to the `/app/code` directory of the cloned resource `authors''`
   in the cluster.
 
-![clone.svg](clone.svg)
+![clone.svg](img/clone.svg)

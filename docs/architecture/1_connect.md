@@ -7,4 +7,9 @@ sidebar_position: 1
 As shown in the diagram below, both computers can connect to the same cluster network using `kubevpn connect`, enabling
 them to access cluster resources locally.
 
-![connect.svg](connect.svg)
+## Requirement
+
+- Need ```Privileged: true```
+- Cap ```NET_ADMIN```
+
+![connect.svg](img/connect.svg)

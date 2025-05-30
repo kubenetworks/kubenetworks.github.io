@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # DNS architecture
@@ -13,4 +13,4 @@ When accessing resources in the cluster locally using a domain name:
 - The `DNS server` will try to resolve the given `name`, for example, `authors.default`.
 - If the query fails, it will complement the name and retry based on the `search` rules in the `/etc/resolv.conf` file.
 
-![dns.svg](dns.svg)
+![dns.svg](img/dns.svg)
