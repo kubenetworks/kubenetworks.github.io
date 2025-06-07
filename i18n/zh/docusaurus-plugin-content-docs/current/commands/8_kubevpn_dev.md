@@ -147,7 +147,7 @@ GSSAPI 密码
 运行之前拉取镜像（"always"|"missing"|"never"）
 
 --remote-kubeconfig='':
-远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径
 
 --sig-proxy=true:
 将接收到的信号代理给进程

@@ -144,7 +144,7 @@ GSSAPI 密码
 localPort 将使用 containerPort。例如：tcp/80:8080 或 udp/5000:5001 或 80 或 80:8080
 
 --remote-kubeconfig='':
-远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径
 
 --ssh-addr='':
 可选的 SSH 跳板服务器地址，如 <hostname>:<port>，例如：127.0.0.1:22

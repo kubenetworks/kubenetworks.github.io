@@ -62,7 +62,7 @@ GSSAPI keytab file path
 GSSAPI password
 
 --remote-kubeconfig='':
-Remote kubeconfig abstract path of ssh server, default is /home/$USERNAME/.kube/config
+Abstract path of kubeconfig on ssh remote server
 
 --ssh-addr='':
 Optional ssh jump server address to dial as <hostname>:<port>, eg: 127.0.0.1:22

@@ -146,7 +146,7 @@ Port map, map container port to local port, format: [tcp/udp]/containerPort:loca
 localPort will use containerPort. eg: tcp/80:8080 or udp/5000:5001 or 80 or 80:8080
 
 --remote-kubeconfig='':
-Remote kubeconfig abstract path of ssh server, default is /home/$USERNAME/.kube/config
+Abstract path of kubeconfig on ssh remote server
 
 --ssh-addr='':
 Optional ssh jump server address to dial as <hostname>:<port>, eg: 127.0.0.1:22

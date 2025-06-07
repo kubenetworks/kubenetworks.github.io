@@ -91,7 +91,7 @@ GSSAPI 密码
 模式 full: 不仅支持链接到单个集群网络，还可以拦截工作负载流量到本地电脑。
 
 --remote-kubeconfig='':
-远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径
 
 --ssh-addr='':
 可选的 SSH 跳板服务器地址，如 <hostname>:<port>，例如：127.0.0.1:22

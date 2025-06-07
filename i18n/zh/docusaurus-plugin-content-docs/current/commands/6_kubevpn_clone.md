@@ -111,7 +111,7 @@ GSSAPI 密码
 网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
 
 --remote-kubeconfig='':
-远程 SSH 服务器上 kubeconfig 文件的绝对路径，默认为 /home/$USERNAME/.kube/config
+远程 SSH 服务器上 kubeconfig 文件的绝对路径
 
 --ssh-addr='':
 可选的 SSH 跳板服务器地址，格式为 <hostname>:<port>，例如：127.0.0.1:22

@@ -149,7 +149,7 @@ Publish all exposed ports to random ports
 Pull image before running ("always"|"missing"|"never")
 
 --remote-kubeconfig='':
-Remote kubeconfig abstract path of ssh server, default is /home/$USERNAME/.kube/config
+Abstract path of kubeconfig on ssh remote server
 
 --sig-proxy=true:
 Proxy received signals to the process

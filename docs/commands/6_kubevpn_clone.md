@@ -112,7 +112,7 @@ Use this image to startup container
 network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
 
 --remote-kubeconfig='':
-Remote kubeconfig abstract path of ssh server, default is /home/$USERNAME/.kube/config
+Abstract path of kubeconfig on ssh remote server
 
 --ssh-addr='':
 Optional ssh jump server address to dial as <hostname>:<port>, eg: 127.0.0.1:22
