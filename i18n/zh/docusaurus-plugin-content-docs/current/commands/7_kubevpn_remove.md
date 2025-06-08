@@ -14,5 +14,5 @@ sidebar_position: 7
 ## 将代理资源恢复到原始状态
 
 ```shell
-kubevpn remove deployment/authors
+kubevpn remove deployment/authors-clone-645d7
 ```

@@ -15,5 +15,5 @@ these created resources.
 ## Restore proxy resources to origin spec
 
 ```shell
-kubevpn remove deployment/authors
+kubevpn remove deployment/authors-clone-645d7
 ```
