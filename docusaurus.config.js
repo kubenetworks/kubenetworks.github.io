@@ -162,7 +162,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} KubeVPN / Built with Docusaurus`,
+        copyright: `© ${new Date().getFullYear()} KubeVPN`,
       },
       prism: {
         theme: lightCodeTheme,
