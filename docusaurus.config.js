@@ -114,7 +114,7 @@ const config = {
           },
           {
             label: "Donate",
-            to: "https://paypal.me/kubevpn",
+            to: "docs/donate",
             position: "right",
           },
           {
