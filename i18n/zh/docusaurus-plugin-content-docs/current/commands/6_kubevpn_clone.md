@@ -4,42 +4,25 @@ sidebar_position: 6
 
 # kubevpn clone
 
-克隆工作负载运行到目标 kubeconfig 集群中，包括相同的卷、环境和网络配置
+克隆工作负载运行在当前工作空间中，可以使用相同的卷、环境和网络配置
 
-通过这种方式，您可以在相同或不同的集群中启动另一个 deployment，使用不同的镜像版本。它还支持服务网格代理。只有带有特殊 HTTP header 的流量才会被路由到克隆的资源。
+通过这种方式，您可以在当前工作空间中启动另一个克隆的 deployment，使用不同的镜像版本。它还支持服务网格代理。只有带有特殊 HTTP
+header 的流量才会被路由到克隆的资源。
 
 # 示例
 
 ## 克隆
 
-### 克隆 deployment 运行在在当前集群和当前命名空间中
+### 克隆默认 namespace 下的 deployment
 
 ```shell
 kubevpn clone deployment/productpage
 ```
 
-### 克隆 deployment 运行在当前集群中但使用不同命名空间
+### 克隆命名空间为 test 下的 deployment
 
 ```shell
 kubevpn clone deployment/productpage -n test
-```
-
-### 克隆 deployment 运行到另一个集群中
-
-```shell
-kubevpn clone deployment/productpage --target-kubeconfig ~/.kube/other-kubeconfig
-```
-
-### 克隆多个工作负载运行在在当前集群和当前命名空间中
-
-```shell
-kubevpn clone deployment/authors deployment/productpage
-```
-
-或
-
-```shell
-kubevpn clone deployment authors productpage
 ```
 
 # 使用服务网格克隆，带有HTTP header foo=bar 的流量会路由到克隆的工作负载，否则路由到原始工作负载
@@ -134,21 +117,10 @@ SSH 跳板服务器的用户名
 --sync='':
 将本地目录同步到远程 pod 目录。格式：LOCAL_DIR:REMOTE_DIR，例如：~/code:/app/code
 
---target-container='':
-使用特殊镜像启动的克隆容器，如果未指定，使用原始镜像
-
 --target-image='':
 使用此镜像启动容器，如果未指定，使用原始镜像
 
---target-kubeconfig='':
-将在此集群中创建克隆工作负载，如果未指定，使用原始集群
-
---target-namespace='':
-在此命名空间中克隆工作负载，如果未指定，使用原始命名空间
-
---target-registry='':
-使用此镜像仓库替换克隆工作负载的原始镜像仓库，如果未指定，使用原始镜像仓库
-
+--transfer-image=false:
 将镜像转存到远程仓库，它将镜像 docker.io/naison/kubevpn:v2.2.17 转存到 `--image`
 特定镜像，默认为：docker.io/naison/kubevpn:v2.2.17
 ```

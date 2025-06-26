@@ -165,6 +165,7 @@ SSH 跳板服务器的密码
 --ssh-username='':
 SSH 跳板服务器的用户名
 
+--transfer-image=false:
 将镜像转存到远程仓库，它将镜像 docker.io/naison/kubevpn:v2.2.17 转存到 `--image`
 特定镜像，默认为：docker.io/naison/kubevpn:v2.2.17
 ```
