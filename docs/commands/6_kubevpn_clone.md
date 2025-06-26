@@ -4,9 +4,9 @@ sidebar_position: 6
 
 # Kubevpn clone
 
-Clone workloads to run in target-kubeconfig cluster with same volume、env、and network
+Clone workloads to run in current namespace with same volume、env、and network
 
-In this way, you can start up another deployment in same cluster or not, but with different image version, it also
+In this way, you can start up another cloned deployment in same namespace, but with different image version, it also
 supports service mesh proxy. only traffic with special header will hit to cloned_resource.
 
 # Examples
