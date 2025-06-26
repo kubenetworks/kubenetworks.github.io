@@ -13,34 +13,16 @@ supports service mesh proxy. only traffic with special header will hit to cloned
 
 ## clone
 
-### clone deployment run into current cluster and current namespace
+### clone current namespace deployment
 
 ```shell
 kubevpn clone deployment/productpage
 ```
 
-### clone deployment run into current cluster with different namespace
+### clone deployment in namespace test
 
 ```shell
 kubevpn clone deployment/productpage -n test
-```
-
-### clone deployment run into another cluster
-
-```shell
-kubevpn clone deployment/productpage --target-kubeconfig ~/.kube/other-kubeconfig
-```
-
-### clone multiple workloads run into current cluster and current namespace
-
-```shell
-kubevpn clone deployment/authors deployment/productpage
-```
-
-or
-
-```shell
-kubevpn clone deployment authors productpage
 ```
 
 # clone with mesh, traffic with HTTP header foo=bar, will hit cloned workloads, otherwise hit origin workloads
@@ -136,21 +118,8 @@ Optional username for ssh jump server
 --sync='':
 Sync local dir to remote pod dir. format: LOCAL_DIR:REMOTE_DIR, eg: ~/code:/app/code
 
---target-container='':
-Clone container use special image to startup this container, if not special, use origin image
-
 --target-image='':
 Clone container use this image to startup container, if not special, use origin image
-
---target-kubeconfig='':
-Clone workloads will create in this cluster, if not special, use origin cluster
-
---target-namespace='':
-Clone workloads in this namespace, if not special, use origin namespace
-
---target-registry='':
-Clone workloads will create this registry domain to replace origin registry, if not special, use origin
-registry
 
 --transfer-image=false:
 transfer image to remote registry, it will transfer image docker.io/naison/kubevpn:v2.2.17 to flags `--image`
