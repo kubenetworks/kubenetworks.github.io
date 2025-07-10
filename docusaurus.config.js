@@ -113,9 +113,9 @@ const config = {
             label: 'Blog',
           },
           {
-            label: "Donate",
-            to: "https://paypal.me/kubevpn",
-            position: "right",
+            label: 'Donate',
+            to: 'docs/donate',
+            position: 'right',
           },
           {
             type: 'localeDropdown',
@@ -127,15 +127,15 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'GitHub',
+            title: 'Git Repo',
             items: [
               {
-                label: 'KubeVPN',
-                href: 'https://github.com/kubenetworks/kubevpn',
+                label: 'Gitee',
+                href: 'https://gitee.com/kubevpn/kubevpn',
               },
               {
-                label: 'KubeVPN Docs',
-                href: 'https://github.com/kubenetworks/kubenetworks.github.io',
+                label: 'GitLab',
+                href: 'https://gitlab.com/kubevpn/kubevpn',
               },
             ],
           },
@@ -159,10 +159,14 @@ const config = {
                 label: 'Blog',
                 href: 'https://wencaiwulue.github.io/',
               },
+              {
+                label: 'CSDN',
+                href: 'https://blog.csdn.net/u012803274',
+              },
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} KubeVPN / Built with Docusaurus`,
+        copyright: `© ${new Date().getFullYear()} KubeVPN`,
       },
       prism: {
         theme: lightCodeTheme,

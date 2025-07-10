@@ -52,7 +52,7 @@ access via `registration center`, this mode will not work.
 example:
 
 ```shell
-kubevpn proxy deployment/authors --headers user=A --netstack gvisor
+kubevpn proxy service/authors --headers user=A --netstack gvisor
 ```
 
 we can use this mode on AWS Fargate node.
