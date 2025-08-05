@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# kubevpn dev
+# kubevpn run
 
 在本地 Docker 容器中启动您的 Kubernetes 工作负载，具有相同的卷、环境变量和网络
 这个命令做了什么：
@@ -13,36 +13,28 @@ sidebar_position: 8
 
 # 示例
 
-## 开发工作负载
-
-### 开发 deployment
+## 运行工作负载
 
 ```shell
-kubevpn dev deployment/productpage
+kubevpn run deployment/productpage
 ```
 
-### 开发 service
+# 使用服务网格运行工作负载，带有 HTTP header foo=bar 的流量将命中本地 PC，其它流量不受影响
 
 ```shell
-kubevpn dev service/productpage
+kubevpn run service/productpage --headers foo=bar
 ```
 
-# 使用服务网格开发工作负载，带有 HTTP header foo=bar 的流量将命中本地 PC，其它流量不受影响
+# 运行不代理流量的工作负载
 
 ```shell
-kubevpn dev service/productpage --headers foo=bar
+kubevpn run service/productpage --no-proxy
 ```
 
-# 开发不代理流量的工作负载
+# 运行位于堡垒机或 SSH 跳板机后面的 API 服务器的工作负载
 
 ```shell
-kubevpn dev service/productpage --no-proxy
-```
-
-# 开发位于堡垒机或 SSH 跳板机后面的 API 服务器的工作负载
-
-```shell
-kubevpn dev deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
+kubevpn run deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
 ```
 
 # 它还支持 ProxyJump，像这样
@@ -54,27 +46,27 @@ kubevpn dev deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username ro
 ```
 
 ```shell
-kubevpn dev deployment/productpage --ssh-alias <alias>
+kubevpn run deployment/productpage --ssh-alias <alias>
 ```
 
 # 切换到终端模式；将 stdin 发送到 'bash' 并将 'bash' 的 stdout/stderror 从客户端发送回来
 
 ```shell
-kubevpn dev deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
 ```
 
 或
 
 ```shell
-kubevpn dev deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
 ```
 
 # 支持 SSH auth GSSAPI
 
 ```shell
-kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab --entrypoint /bin/bash
-kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache --entrypoint /bin/bash
-kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD> --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD> --entrypoint /bin/bash
 ```
 
 ## 选项
@@ -124,9 +116,6 @@ GSSAPI 密码
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
-
---netstack='system':
-网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
 
 --no-proxy=false:
 是否将远程工作负载流量代理到本地，true：仅在本地启动容器，不注入容器以截取流量，false：拦截流量并转发到本地

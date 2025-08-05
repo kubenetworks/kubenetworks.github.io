@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# 使用 dev 模式本地调试 server
+# 使用 run 模式本地调试 server
 
 ## 环境准备
 
@@ -50,7 +50,7 @@ Host ry-dev-agd
 ## 进行调试 debug
 
 ```shell
-kubevpn dev -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64 deployment/ry-server
+kubevpn run -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64 deployment/ry-server
 ```
 
 整体用法和 kubectl 很相似，具体参数说明:
@@ -71,7 +71,7 @@ kubevpn dev -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd
 可以看到一大串日志, 然后进入一个 terminal
 
 ```text
-➜  .kube kubevpn dev deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
+➜  .kube kubevpn run deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
 Password:
 Waiting jump to bastion host...
 +--------------------------------------------------------------------------------------------------+
@@ -154,7 +154,7 @@ Warn 2023-04-28 16:25:47,744 v1(7) logger.go:185  epscp.ry.server - default - 0 
 ## 完整日志
 
 ```text
-➜  .kube kubevpn dev deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
+➜  .kube kubevpn run deployment/ry-server -n vke-system --kubeconfig ~/.kube/ry-dev-agd --ssh-alias ry-dev-agd --image vecps-dev.cargo.io/infcprelease/kubevpn:v1.1.30 --headers user=naison --dev-image docker.io/naison/kubevpn:v1.1.30 --entrypoint bash -p 2345:2345 -p 6789:6789 -v /Users/bytedance/GolandProjects/ry-oem:/code --extra-cidr 100.125.0.30/32 --extra-cidr 10.1.0.237/32 --extra-cidr 10.1.0.254/32 --extra-cidr 10.1.0.117/32 --platform linux/arm64
 Password:
 Waiting jump to bastion host...
 +--------------------------------------------------------------------------------------------------+

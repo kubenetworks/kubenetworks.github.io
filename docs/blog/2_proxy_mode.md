@@ -105,9 +105,7 @@ Checking rollout status for deployment/ry-server
 Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "ry-server" rollout to finish: 1 old replicas are pending termination...
 Rollout successfully for deployment/ry-server
-+----------------------------------------------------------+
-| Now you can access resources in the kubernetes cluster ! |
-+----------------------------------------------------------+
+Now you can access resources in the kubernetes cluster !
 ```
 
 ## 在本地启动服务

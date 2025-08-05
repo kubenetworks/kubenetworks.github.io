@@ -2,12 +2,12 @@
 sidebar_position: 7
 ---
 
-# 本地进入开发模式
+# 本地进入运行模式
 
-将 Kubernetes pod 运行在本地的 Docker 容器中🐳，同时配合 service mesh, 拦截带有指定 header 的流量到本地，或者所有的流量到本地。这个开发模式依赖于本地 Docker。
+将 Kubernetes pod 运行在本地的 Docker 容器中🐳，同时配合 service mesh, 拦截带有指定 header 的流量到本地，或者所有的流量到本地。这个运行模式依赖于本地 Docker。
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --headers foo=bar --entrypoint sh
+➜  ~ kubevpn run deployment/authors --headers foo=bar --entrypoint sh
 Starting connect
 Got network CIDR from cache
 Use exist traffic manager
@@ -86,13 +86,13 @@ fc04e42799a5   nginx:latest                    "/docker-entrypoint.…"   37 sec
 如果你只是想在本地启动镜像，可以用一种简单的方式：
 
 ```shell
-kubevpn dev deployment/authors --no-proxy -it --rm
+kubevpn run deployment/authors --no-proxy -it --rm
 ```
 
 例如：
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --no-proxy
+➜  ~ kubevpn run deployment/authors --no-proxy
 Starting connect
 Got network CIDR from cache
 Use exist traffic manager
@@ -118,4 +118,4 @@ Created main container: authors_default_kubevpn_ff34b
 此时程序会挂起，默认为显示日志
 
 如果你想指定在本地启动容器的镜像, 可以使用参数 `--dev-image`, 当本地不存在该镜像时, 会从对应的镜像仓库拉取。如果你想指定启动参数，可以使用 `--entrypoint`
-参数，替换为你想要执行的命令，比如 `--entrypoint /bin/bash`, 更多使用参数，请参见 `kubevpn dev --help`.
+参数，替换为你想要执行的命令，比如 `--entrypoint /bin/bash`, 更多使用参数，请参见 `kubevpn run --help`.

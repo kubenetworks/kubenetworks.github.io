@@ -14,9 +14,7 @@ Checking rollout status for deployment/productpage
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "productpage" rollout to finish: 1 old replicas are pending termination...
 Rollout successfully for deployment/productpage
-+----------------------------------------------------------+
-| Now you can access resources in the kubernetes cluster ! |
-+----------------------------------------------------------+
+Now you can access resources in the kubernetes cluster !
 ➜  ~
 ```
 

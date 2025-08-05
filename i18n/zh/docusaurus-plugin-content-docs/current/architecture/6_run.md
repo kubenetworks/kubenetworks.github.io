@@ -2,12 +2,12 @@
 sidebar_position: 6
 ---
 
-# 开发模式
+# 运行模式
 
-如下图所示，`用户 A` 和 `用户 B`，分别使用了 `kubevpn dev` 和 `kubevpn proxy`
+如下图所示，`用户 A` 和 `用户 B`，分别使用了 `kubevpn run` 和 `kubevpn proxy`
 命令开发了同一个服务 `authors`:
 
-- 用户 A: `kubevpn dev deployment/authors --headers user=A`
+- 用户 A: `kubevpn run deployment/authors --headers user=A`
 - 用户 B: `kubevpn proxy deployment/authors --headers user=B`
 
 当集群中的 `authors` 服务收到流量时:
@@ -20,4 +20,4 @@ sidebar_position: 6
 中的存储卷，环境变量和网络，都以 `Docker container`
 的形式运行在本地。这样在本地可以更快速的进行代码调试。
 
-![dev.svg](img/dev.svg)
+![run.svg](img/run.svg)

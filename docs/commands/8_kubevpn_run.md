@@ -2,9 +2,9 @@
 sidebar_position: 8
 ---
 
-# Kubevpn dev
+# Kubevpn run
 
-Startup your kubernetes workloads in local Docker container with same volume、env、and network
+Run your kubernetes workloads in local Docker container with same volume、env、and network
 What did it do:
 
 * Download volume which MountPath point to, mount to docker container
@@ -13,36 +13,28 @@ What did it do:
 
 # Examples
 
-## Develop workloads
-
-### develop deployment
+## Run workloads
 
 ```shell
-kubevpn dev deployment/productpage
-```
-
-### develop service
-
-```shell
-kubevpn dev service/productpage
+kubevpn run deployment/productpage
 ```
 
 ## Develop workloads with mesh, traffic with HTTP header foo=bar, will hit local PC, otherwise no effect
 
 ```shell
-kubevpn dev service/productpage --headers foo=bar
+kubevpn run service/productpage --headers foo=bar
 ```
 
 ## Develop workloads without proxy traffic
 
 ```shell
-kubevpn dev service/productpage --no-proxy
+kubevpn run service/productpage --no-proxy
 ```
 
 ## Develop workloads which api-server behind of bastion host or ssh jump host
 
 ```shell
-kubevpn dev deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
+kubevpn run deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
 ```
 
 ## It also support ProxyJump, like
@@ -54,27 +46,27 @@ kubevpn dev deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username ro
 ```
 
 ```shell
-kubevpn dev deployment/productpage --ssh-alias <alias>
+kubevpn run deployment/productpage --ssh-alias <alias>
 ```
 
 ## Switch to terminal mode; send stdin to 'bash' and sends stdout/stderror from 'bash' back to the client
 
 ```shell
-kubevpn dev deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
 ```
 
 or
 
 ```shell
-kubevpn dev deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --kubeconfig ~/.kube/config --ssh-alias dev --entrypoint /bin/bash
 ```
 
 ## Support ssh auth GSSAPI
 
 ```shell
-kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab --entrypoint /bin/bash
-kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache --entrypoint /bin/bash
-kubevpn dev deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD> --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache --entrypoint /bin/bash
+kubevpn run deployment/authors -n default --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD> --entrypoint /bin/bash
 ```
 
 # Options
@@ -125,9 +117,6 @@ workloads successfully, If not special, redirect all traffic to local PC, format
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 use this image to startup container
-
---netstack='system':
-network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
 
 --no-proxy=false:
 Whether proxy remote workloads traffic into local or not, true: just startup container on local without inject

@@ -38,9 +38,7 @@ Forwarding port...
 Connected tunnel
 Adding route...
 Configured DNS service
-+----------------------------------------------------------+
-| Now you can access resources in the kubernetes cluster ! |
-+----------------------------------------------------------+
+Now you can access resources in the kubernetes cluster !
 ➜  ~
 ```
 
@@ -48,8 +46,8 @@ already connected to cluster network, use command `kubevpn status` to check stat
 
 ```shell
 ➜  ~ kubevpn status
-ID Mode Cluster               Kubeconfig                    Namespace  Status
-0  full ccijorbccotmqodvr189g /Users/bytedance/.kube/config default Connected
+CURRENT   CONNECTION ID   CLUSTER                 KUBECONFIG                      NAMESPACE   STATUS      NETIF
+*         03dc50feb8c3    ccijorbccotmqodvr189g   /Users/naison/.kube/config      default     connected   utun4
 ➜  ~
 ```
 

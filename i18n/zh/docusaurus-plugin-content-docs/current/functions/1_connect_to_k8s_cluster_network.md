@@ -37,13 +37,19 @@ Forwarding port...
 Connected tunnel
 Adding route...
 Configured DNS service
-+----------------------------------------------------------+
-| Now you can access resources in the kubernetes cluster ! |
-+----------------------------------------------------------+
+Now you can access resources in the kubernetes cluster !
 ➜  ~
 ```
 
 提示已经链接到集群了。使用命令 `kubevpn status` 检查一下状态。
+
+```shell
+➜  ~ kubevpn status
+CURRENT   CONNECTION ID   CLUSTER                 KUBECONFIG                      NAMESPACE   STATUS      NETIF
+*         03dc50feb8c3    ccijorbccotmqodvr189g   /Users/naison/.kube/config      default     connected   utun4
+➜  ~
+```
+
 
 ```shell
 ➜  ~ kubectl get pods -o wide

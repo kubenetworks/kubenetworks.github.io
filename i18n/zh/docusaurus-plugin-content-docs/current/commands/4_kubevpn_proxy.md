@@ -136,9 +136,6 @@ GSSAPI 密码
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
 
---netstack='system':
-网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
-
 --portmap=[]:
 端口映射，将容器端口映射到本地端口，格式：[tcp/udp]/containerPort:localPort，如果未指定，
 localPort 将使用 containerPort。例如：tcp/80:8080 或 udp/5000:5001 或 80 或 80:8080

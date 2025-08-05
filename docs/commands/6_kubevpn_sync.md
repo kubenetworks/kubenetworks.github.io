@@ -2,39 +2,39 @@
 sidebar_position: 6
 ---
 
-# Kubevpn clone
+# Kubevpn sync
 
-Clone workloads to run in current namespace with same volume、env、and network
+Sync workloads to run in current namespace with same volume、env、and network
 
-In this way, you can start up another cloned deployment in same namespace, but with different image version, it also
-supports service mesh proxy. only traffic with special header will hit to cloned_resource.
+In this way, you can start up another sync deployment in same namespace, but with different image version, it also
+supports service mesh proxy. only traffic with special header will hit to sync_resource.
 
 # Examples
 
-## clone
+## sync
 
-### clone current namespace deployment
+### sync current namespace deployment
 
 ```shell
-kubevpn clone deployment/productpage
+kubevpn sync deployment/productpage
 ```
 
-### clone deployment in namespace test
+### sync deployment in namespace test
 
 ```shell
-kubevpn clone deployment/productpage -n test
+kubevpn sync deployment/productpage -n test
 ```
 
-# clone with mesh, traffic with HTTP header foo=bar, will hit cloned workloads, otherwise hit origin workloads
+# sync with mesh, traffic with HTTP header foo=bar, will hit sync workloads, otherwise hit origin workloads
 
 ```shell
-kubevpn clone deployment/productpage --headers foo=bar
+kubevpn sync deployment/productpage --headers foo=bar
 ```
 
-# clone workloads which api-server behind of bastion host or ssh jump host
+# sync workloads which api-server behind of bastion host or ssh jump host
 
 ```shell
-kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
+kubevpn sync deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
 # It also supports ProxyJump, like
@@ -46,15 +46,15 @@ kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username 
 ```
 
 ```shell
-kubevpn clone service/productpage --ssh-alias <alias> --headers foo=bar
+kubevpn sync service/productpage --ssh-alias <alias> --headers foo=bar
 ```
 
 # Support ssh auth GSSAPI
 
 ```shell
-kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
-kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
-kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
+kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
+kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
+kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
 ```
 
 # Options
@@ -84,14 +84,11 @@ GSSAPI keytab file path
 GSSAPI password
 
 -H, --headers=[]:
-Traffic with special headers (use `and` to match all headers) with reverse it to target cluster cloned workloads.
-If not special, redirect all traffic to target cluster cloned workloads. eg: --headers foo=bar --headers env=dev
+Traffic with special headers (use `and` to match all headers) with reverse it to target cluster sync workloads.
+If not special, redirect all traffic to target cluster sync workloads. eg: --headers foo=bar --headers env=dev
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 Use this image to startup container
-
---netstack='system':
-network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
 
 --remote-kubeconfig='':
 Abstract path of kubeconfig on ssh remote server
@@ -119,7 +116,7 @@ Optional username for ssh jump server
 Sync local dir to remote pod dir. format: LOCAL_DIR:REMOTE_DIR, eg: ~/code:/app/code
 
 --target-image='':
-Clone container use this image to startup container, if not special, use origin image
+Sync container use this image to startup container, if not special, use origin image
 
 --transfer-image=false:
 transfer image to remote registry, it will transfer image docker.io/naison/kubevpn:v2.2.17 to flags `--image`

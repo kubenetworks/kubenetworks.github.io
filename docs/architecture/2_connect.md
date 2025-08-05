@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Connect mode with gVisor
+# Connect mode
 
 As shown in the diagram below, both computers can connect to the same cluster network using `kubevpn connect`, enabling
 them to access cluster resources locally.

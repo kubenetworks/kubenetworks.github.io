@@ -82,14 +82,6 @@ GSSAPI 密码
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像启动容器
 
---netstack='system':
-网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
-
---lite=false:
-以 lite 模式连接多个集群，，你需要特别指定此选项
-模式 lite: 可以链接到多个集群网络，但是仅支持链接到多集群。
-模式 full: 不仅支持链接到单个集群网络，还可以拦截工作负载流量到本地电脑。
-
 --remote-kubeconfig='':
 远程 SSH 服务器上 kubeconfig 文件的绝对路径
 

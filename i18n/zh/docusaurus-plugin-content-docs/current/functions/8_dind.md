@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # 在 Docker 中使用 (Docker in Docker)
 
-如果你想在本地使用 Docker in Docker (DinD) 的方式启动开发模式, 由于程序会读写 `/tmp`
+如果你想在本地使用 Docker in Docker (DinD) 的方式启动运行模式, 由于程序会读写 `/tmp`
 目录，您需要手动添加参数 `-v /tmp:/tmp`, 还有一点需要注意, 如果使用 DinD 模式，为了共享容器网络和 pid,
 还需要指定参数 `--network`
 
@@ -30,7 +30,7 @@ ca82aef6a9eb: Pull complete
 Digest: sha256:368db2e0d98f6866dcefd60512960ce1310e85c24a398fea2a347905ced9507d
 Status: Downloaded newer image for naison/kubevpn:latest
 WARNING: image with reference naison/kubevpn was found but does not match the specified platform: wanted linux/amd64, actual: linux/arm64
-root@5732124e6447:/app# kubevpn dev deployment/authors --headers user=naison --entrypoint sh
+root@5732124e6447:/app# kubevpn run deployment/authors --headers user=naison --entrypoint sh
 hostname is 5732124e6447
 Starting connect
 Got network CIDR from cache
@@ -59,7 +59,7 @@ Created main container: authors_default_kubevpn_6df5f
 /opt/microservices # ps -ef
 PID   USER     TIME  COMMAND
     1 root      0:00 {bash} /usr/bin/qemu-x86_64 /bin/bash /bin/bash
-   14 root      0:02 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn kubevpn dev deployment/authors --headers
+   14 root      0:02 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn kubevpn run deployment/authors --headers
    25 root      0:01 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn /usr/local/bin/kubevpn daemon
    37 root      0:04 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn /usr/local/bin/kubevpn daemon --sudo
    53 root      0:00 nginx: master process nginx -g daemon off;

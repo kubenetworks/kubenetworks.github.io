@@ -2,14 +2,14 @@
 sidebar_position: 7
 ---
 
-# Dev mode in Docker
+# Run mode in Docker
 
 Run the Kubernetes pod in the local Docker container 🐳, and cooperate with the service mesh to intercept the traffic
 with
 the specified header or all the traffic to the local Docker container.
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --headers foo=bar --entrypoint sh
+➜  ~ kubevpn run deployment/authors --headers foo=bar --entrypoint sh
 Starting connect
 Got network CIDR from cache
 Use exist traffic manager
@@ -104,13 +104,13 @@ docker logs $(docker ps --format '{{.Names}}' | grep nginx_default_kubevpn)
 If you just want to start up a docker image, you can use simple way like this:
 
 ```shell
-kubevpn dev deployment/authors --no-proxy -it --rm
+kubevpn run deployment/authors --no-proxy -it --rm
 ```
 
 Example：
 
 ```shell
-➜  ~ kubevpn dev deployment/authors --no-proxy
+➜  ~ kubevpn run deployment/authors --no-proxy
 Starting connect
 Got network CIDR from cache
 Use exist traffic manager
@@ -138,4 +138,4 @@ Now the main process will hang up to show you log.
 If you want to specify the image to start the container locally, you can use the parameter `--dev-image`. When the
 image does not exist locally, it will be pulled from the corresponding mirror warehouse. If you want to specify startup
 parameters, you can use `--entrypoint` parameter, replace it with the command you want to execute, such
-as `--entrypoint /bin/bash`, for more parameters, see `kubevpn dev --help`.
+as `--entrypoint /bin/bash`, for more parameters, see `kubevpn run --help`.

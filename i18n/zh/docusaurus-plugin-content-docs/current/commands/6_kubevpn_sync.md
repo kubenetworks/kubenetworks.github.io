@@ -2,39 +2,39 @@
 sidebar_position: 6
 ---
 
-# kubevpn clone
+# kubevpn sync
 
-克隆工作负载运行在当前工作空间中，可以使用相同的卷、环境和网络配置
+同步工作负载运行在当前工作空间中，可以使用相同的卷、环境和网络配置
 
-通过这种方式，您可以在当前工作空间中启动另一个克隆的 deployment，使用不同的镜像版本。它还支持服务网格代理。只有带有特殊 HTTP
-header 的流量才会被路由到克隆的资源。
+通过这种方式，您可以在当前工作空间中启动另一个同步的 deployment，使用不同的镜像版本。它还支持服务网格代理。只有带有特殊 HTTP
+header 的流量才会被路由到同步的资源。
 
 # 示例
 
-## 克隆
+## 同步
 
-### 克隆默认 namespace 下的 deployment
+### 同步默认 namespace 下的 deployment
 
 ```shell
-kubevpn clone deployment/productpage
+kubevpn sync deployment/productpage
 ```
 
-### 克隆命名空间为 test 下的 deployment
+### 同步命名空间为 test 下的 deployment
 
 ```shell
-kubevpn clone deployment/productpage -n test
+kubevpn sync deployment/productpage -n test
 ```
 
-# 使用服务网格克隆，带有HTTP header foo=bar 的流量会路由到克隆的工作负载，否则路由到原始工作负载
+# 使用服务网格同步，带有HTTP header foo=bar 的流量会路由到同步的工作负载，否则路由到原始工作负载
 
 ```shell
-kubevpn clone deployment/productpage --headers foo=bar
+kubevpn sync deployment/productpage --headers foo=bar
 ```
 
-# 克隆位于堡垒机或 SSH 跳板机后面的工作负载
+# 同步位于堡垒机或 SSH 跳板机后面的工作负载
 
 ```shell
-kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
+kubevpn sync deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
 # 同样支持 ProxyJump，像这样
@@ -46,15 +46,15 @@ kubevpn clone deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username 
 ```
 
 ```shell
-kubevpn clone service/productpage --ssh-alias <alias> --headers foo=bar
+kubevpn sync service/productpage --ssh-alias <alias> --headers foo=bar
 ```
 
 # 支持 SSH 认证 GSSAPI
 
 ```shell
-kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
-kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
-kubevpn clone service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
+kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
+kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
+kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
 ```
 
 选项:
@@ -89,9 +89,6 @@ GSSAPI 密码
 
 --image='docker.io/naison/kubevpn:v2.2.17':
 使用此镜像来启动容器
-
---netstack='system':
-网络协议栈（"system"|"gvisor"）gvisor：使用 gvisor （性能和稳定兼得），system：使用 system 模式（最稳定）
 
 --remote-kubeconfig='':
 远程 SSH 服务器上 kubeconfig 文件的绝对路径

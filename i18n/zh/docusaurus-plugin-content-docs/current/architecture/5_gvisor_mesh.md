@@ -51,7 +51,7 @@ spec:
 例如:
 
 ```shell
-kubevpn proxy service/authors --headers user=A --netstack gvisor
+kubevpn proxy service/authors --headers user=A
 ```
 
 我们可以在 `AWS Fargate` 上使用 `gvisor`

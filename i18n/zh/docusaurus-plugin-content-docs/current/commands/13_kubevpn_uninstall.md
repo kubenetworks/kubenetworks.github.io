@@ -6,7 +6,7 @@ sidebar_position: 13
 
 清理在 Kubernetes 集群中由 kubevpn 创建的所有资源
 
-卸载操作将删除在 Kubernetes 集群中由 kubevpn 创建的所有资源，例如 deployment、service、serviceAccount 等等，同时，它还将删除本地开发
+卸载操作将删除在 Kubernetes 集群中由 kubevpn 创建的所有资源，例如 deployment、service、serviceAccount 等等，同时，它还将删除本地运行
 Docker 容器、Docker 网络、由 kubevpn 添加的 hosts 记录，并清理 DNS 设置。
 
 ## 示例

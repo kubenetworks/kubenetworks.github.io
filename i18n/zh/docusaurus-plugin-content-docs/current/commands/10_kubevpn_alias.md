@@ -21,7 +21,6 @@ Flags:
   - connect
   - --kubeconfig=~/.kube/config
   - --namespace=default
-  - --lite
 ---
 
 Name: jumper

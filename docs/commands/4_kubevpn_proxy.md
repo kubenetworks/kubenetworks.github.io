@@ -138,9 +138,6 @@ redirect all traffic to local PC. eg: --headers foo=bar --headers env=dev
 --image='docker.io/naison/kubevpn:v2.2.17':
 Use this image to startup container
 
---netstack='system':
-network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
-
 --portmap=[]:
 Port map, map container port to local port, format: [tcp/udp]/containerPort:localPort, If not special,
 localPort will use containerPort. eg: tcp/80:8080 or udp/5000:5001 or 80 or 80:8080

@@ -2,12 +2,12 @@
 sidebar_position: 6
 ---
 
-# Dev mode
+# Run mode
 
-As shown in the figure below, `User A` and `User B` use the `kubevpn dev` and `kubevpn proxy` commands respectively to
+As shown in the figure below, `User A` and `User B` use the `kubevpn run` and `kubevpn proxy` commands respectively to
 develop the same service `authors`:
 
-- User A: `kubevpn dev deployment/authors --headers user=A`
+- User A: `kubevpn run deployment/authors --headers user=A`
 - User B: `kubevpn proxy deployment/authors --headers user=B`
 
 When the `authors` service in the cluster receives traffic:
@@ -20,4 +20,4 @@ The difference with the `service mesh` solution is: `User A` will use `Docker` t
 which means that the storage volume, environment variables and network in the `Pod` will be run locally in the form of
 a `Docker container`. This allows for faster code debugging locally.
 
-![dev.svg](img/dev.svg)
+![run.svg](img/run.svg)

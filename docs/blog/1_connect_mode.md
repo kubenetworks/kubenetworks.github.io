@@ -104,9 +104,7 @@ Forwarding port...
 Connected tunnel
 Adding route...
 Configured DNS service
-+----------------------------------------------------------+
-| Now you can access resources in the kubernetes cluster ! |
-+----------------------------------------------------------+
+Now you can access resources in the kubernetes cluster !
 ```
 
 ## 在本地启动服务

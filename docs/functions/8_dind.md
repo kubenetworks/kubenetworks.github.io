@@ -30,7 +30,7 @@ ca82aef6a9eb: Pull complete
 Digest: sha256:368db2e0d98f6866dcefd60512960ce1310e85c24a398fea2a347905ced9507d
 Status: Downloaded newer image for naison/kubevpn:latest
 WARNING: image with reference naison/kubevpn was found but does not match the specified platform: wanted linux/amd64, actual: linux/arm64
-root@5732124e6447:/app# kubevpn dev deployment/authors --headers user=naison --entrypoint sh
+root@5732124e6447:/app# kubevpn run deployment/authors --headers user=naison --entrypoint sh
 hostname is 5732124e6447
 Starting connect
 Got network CIDR from cache
@@ -59,7 +59,7 @@ Created main container: authors_default_kubevpn_6df5f
 /opt/microservices # ps -ef
 PID   USER     TIME  COMMAND
     1 root      0:00 {bash} /usr/bin/qemu-x86_64 /bin/bash /bin/bash
-   14 root      0:02 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn kubevpn dev deployment/authors --headers
+   14 root      0:02 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn kubevpn run deployment/authors --headers
    25 root      0:01 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn /usr/local/bin/kubevpn daemon
    37 root      0:04 {kubevpn} /usr/bin/qemu-x86_64 /usr/local/bin/kubevpn /usr/local/bin/kubevpn daemon --sudo
    53 root      0:00 nginx: master process nginx -g daemon off;

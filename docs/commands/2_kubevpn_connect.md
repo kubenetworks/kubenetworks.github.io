@@ -83,14 +83,6 @@ GSSAPI password
 --image='docker.io/naison/kubevpn:v2.2.17':
 use this image to startup container
 
---lite=false:
-connect to multiple cluster in lite mode, you needs to special this options
-mode lite: connect to multiple cluster network, design for only connecting to multiple cluster network
-mode full: not only connect to cluster network, it also supports proxy workloads inbound traffic to local PC
-
---netstack='system':
-network stack ("gvisor"|"system") gvisor: use gvisor (both performance and stable), system: use raw mode (best stable)
-
 --remote-kubeconfig='':
 Abstract path of kubeconfig on ssh remote server
 
