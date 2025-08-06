@@ -38,5 +38,9 @@
   "item.label.Donate": {
     "message": "捐赠支持",
     "description": "Donate item with label Blog"
+  },
+  "item.label.Lark": {
+    "message": "飞书",
+    "description": "Lark link"
   }
 }
