@@ -118,8 +118,8 @@ const config = {
             position: 'right',
           },
           {
-            type: "html",
-            value: '<a href="https://applink.larkoffice.com/client/chat/chatter/add_by_link?link_token=d00ubb87-739f-490b-80ad-26e242be3e40"><img style="width:20%;height:20%" src="/img/contact/lark.svg" alt="Lark" /></a>',
+            type: 'html',
+            value: '<a href="https://applink.larkoffice.com/client/chat/chatter/add_by_link?link_token=d00ubb87-739f-490b-80ad-26e242be3e40"><img style="width:30px;height:30px;vertical-align:middle" src="/img/contact/lark.svg" alt="Lark" /></a>',
             position: 'right',
           },
           {
