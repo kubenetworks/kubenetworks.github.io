@@ -46,13 +46,6 @@ const config = {
           editUrl:
             'https://github.com/kubenetworks/kubenetworks.github.io/tree/master/website/docs',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/kubenetworks/kubenetworks.github.io/tree/master/website/blog',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -105,12 +98,6 @@ const config = {
             sidebarId: 'faq',
             position: 'left',
             label: 'FAQ',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'blog',
-            position: 'left',
-            label: 'Blog',
           },
           {
             label: 'Donate',
