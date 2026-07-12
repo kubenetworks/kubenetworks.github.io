@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 800 430" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <defs>
+    <marker id="am" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="amg" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+    <marker id="amb" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">KubeVPN Multi-Cluster Connection Management</text>
+
+  <!-- Local Machine -->
+  <rect x="20" y="50" width="240" height="330" rx="10" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="140" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Local Machine</text>
+
+  <!-- Daemon -->
+  <rect x="40" y="90" width="200" height="40" rx="5" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="140" y="115" text-anchor="middle" font-size="12" fill="#333">KubeVPN Daemon</text>
+
+  <!-- TUN Devices -->
+  <rect x="40" y="145" width="90" height="40" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="85" y="163" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">utun4</text>
+  <text x="85" y="178" text-anchor="middle" font-size="9" fill="#888">Cluster A</text>
+
+  <rect x="150" y="145" width="90" height="40" rx="4" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.5"/>
+  <text x="195" y="163" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">utun5</text>
+  <text x="195" y="178" text-anchor="middle" font-size="9" fill="#888">Cluster B</text>
+
+  <!-- Connection table -->
+  <rect x="40" y="200" width="200" height="110" rx="4" fill="#fff" stroke="#78909C" stroke-width="1"/>
+  <text x="140" y="218" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Connection Table</text>
+  <line x1="40" y1="224" x2="240" y2="224" stroke="#DDD" stroke-width="1"/>
+  <text x="55" y="242" font-size="10" fill="#333">  03dc50  Cluster A  utun4</text>
+  <text x="55" y="260" font-size="10" fill="#4A90D9">* 86bfde  Cluster B  utun5</text>
+  <text x="55" y="282" font-size="9" fill="#888">  (* = current connection)</text>
+  <text x="55" y="300" font-size="9" fill="#888">  kubevpn conn use &lt;id&gt;</text>
+
+  <!-- Commands -->
+  <rect x="40" y="320" width="200" height="45" rx="4" fill="#FFF8E1" stroke="#F5A623" stroke-width="1"/>
+  <text x="140" y="340" text-anchor="middle" font-size="10" fill="#333">kubevpn conn ls</text>
+  <text x="140" y="356" text-anchor="middle" font-size="10" fill="#333">kubevpn conn use &lt;id&gt;</text>
+
+  <!-- ====== Cluster A ====== -->
+  <rect x="340" y="50" width="200" height="155" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="440" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Cluster A</text>
+  <text x="440" y="92" text-anchor="middle" font-size="10" fill="#666">~/.kube/config</text>
+
+  <rect x="360" y="102" width="160" height="30" rx="3" fill="#fff" stroke="#4CAF50" stroke-width="1"/>
+  <text x="440" y="122" text-anchor="middle" font-size="11" fill="#333">traffic-manager</text>
+
+  <rect x="360" y="140" width="70" height="28" rx="3" fill="#DCEDC8" stroke="#7CB342" stroke-width="1"/>
+  <text x="395" y="158" text-anchor="middle" font-size="9" fill="#333">Pod CIDR</text>
+
+  <rect x="440" y="140" width="80" height="28" rx="3" fill="#C8E6C9" stroke="#388E3C" stroke-width="1"/>
+  <text x="480" y="158" text-anchor="middle" font-size="9" fill="#333">Svc CIDR</text>
+
+  <!-- Cluster A connection -->
+  <line x1="130" y1="165" x2="340" y2="120" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#amg)"/>
+  <text x="230" y="130" text-anchor="middle" font-size="10" fill="#4CAF50">Connection 03dc50</text>
+
+  <!-- ====== Cluster B ====== -->
+  <rect x="580" y="50" width="200" height="155" rx="8" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+  <text x="680" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Cluster B</text>
+  <text x="680" y="92" text-anchor="middle" font-size="10" fill="#666">~/.kube/dev_config</text>
+
+  <rect x="600" y="102" width="160" height="30" rx="3" fill="#fff" stroke="#1976D2" stroke-width="1"/>
+  <text x="680" y="122" text-anchor="middle" font-size="11" fill="#333">traffic-manager</text>
+
+  <rect x="600" y="140" width="70" height="28" rx="3" fill="#BBDEFB" stroke="#1976D2" stroke-width="1"/>
+  <text x="635" y="158" text-anchor="middle" font-size="9" fill="#333">Pod CIDR</text>
+
+  <rect x="680" y="140" width="80" height="28" rx="3" fill="#90CAF9" stroke="#1565C0" stroke-width="1"/>
+  <text x="720" y="158" text-anchor="middle" font-size="9" fill="#333">Svc CIDR</text>
+
+  <!-- Cluster B connection -->
+  <line x1="195" y1="165" x2="580" y2="120" stroke="#1976D2" stroke-width="2.5" marker-end="url(#amb)"/>
+  <text x="490" y="220" text-anchor="middle" font-size="10" fill="#1976D2">Connection 86bfde (current *)</text>
+
+  <!-- Operations on Current Connection -->
+  <rect x="340" y="240" width="440" height="140" rx="8" fill="#FFF8E1" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="560" y="262" text-anchor="middle" font-size="13" font-weight="bold" fill="#E65100">Operations on Current Connection</text>
+
+  <rect x="360" y="278" width="190" height="30" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="455" y="298" text-anchor="middle" font-size="11" fill="#333">kubevpn sync deployment/X</text>
+
+  <rect x="570" y="278" width="190" height="30" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="665" y="298" text-anchor="middle" font-size="11" fill="#333">kubevpn proxy deployment/X</text>
+
+  <rect x="360" y="318" width="190" height="30" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="455" y="338" text-anchor="middle" font-size="11" fill="#333">kubevpn unsync ...</text>
+
+  <rect x="570" y="318" width="190" height="30" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="665" y="338" text-anchor="middle" font-size="11" fill="#333">kubevpn route add ...</text>
+
+  <text x="560" y="368" text-anchor="middle" font-size="10" fill="#888">All these commands operate on the current (*) connection</text>
+
+  <!-- Bottom -->
+  <text x="400" y="398" text-anchor="middle" font-size="11" fill="#888">Each connection has its own TUN device, routes, and DNS config</text>
+</svg>

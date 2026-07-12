@@ -23,7 +23,7 @@ command `kubevpn connect` if detect kubevpn server not exist)
 ```shell
 ➜ helm search repo kubevpn
 NAME            	CHART VERSION	APP VERSION	DESCRIPTION
-kubevpn/kubevpn 	2.2.2        	v2.2.2     	A Helm chart for KubeVPN
+kubevpn/kubevpn 	2.3.0        	v2.3.0     	A Helm chart for KubeVPN
 ```
 
 ```shell
@@ -44,7 +44,7 @@ NOTES:
 if using private docker registry, use the following command to install:
 
 ```shell
-helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn --set 'imagePullSecrets[0].name=registry' -n default --debug --set image.tag=v2.2.2
+helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn --set 'imagePullSecrets[0].name=registry' -n default --debug --set image.tag=latest
 ```
 
 # Install client on local PC

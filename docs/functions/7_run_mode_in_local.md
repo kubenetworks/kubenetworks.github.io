@@ -4,19 +4,26 @@ sidebar_position: 7
 
 # Run mode in Docker
 
-Run the Kubernetes pod in the local Docker container 🐳, and cooperate with the service mesh to intercept the traffic
-with
-the specified header or all the traffic to the local Docker container.
+Run the Kubernetes pod in the local Docker container 🐳, and cooperate with the service mesh to intercept traffic —
+either requests carrying the specified header (`--headers`), or, without headers, all traffic on the workload's
+declared container ports — to the local Docker container.
+
+:::note
+Without `--headers`, interception covers the workload's **declared container ports** only.
+Traffic to undeclared ports falls through to the real application in the cluster rather than
+to your local container. Use `--headers` for per-request splitting, or declare extra ports if
+you need them routed locally.
+:::
 
 ```shell
 ➜  ~ kubevpn run deployment/authors --headers foo=bar --entrypoint sh
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 Injecting inbound sidecar for deployment/authors
 Patching workload deployment/authors
 Checking rollout status for deployment/authors
@@ -112,12 +119,12 @@ Example：
 ```shell
 ➜  ~ kubevpn run deployment/authors --no-proxy
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 tar: removing leading '/' from member names
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/5631078868924498209:/var/run/secrets/kubernetes.io/serviceaccount
 tar: Removing leading `/' from member names

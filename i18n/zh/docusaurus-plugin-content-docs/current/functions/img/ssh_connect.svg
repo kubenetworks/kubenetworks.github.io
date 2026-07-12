@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 810 335" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <defs>
+    <marker id="as" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="aso" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F5A623"/>
+    </marker>
+    <marker id="asg" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7CB342"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="410" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">KubeVPN SSH — Jump Host &amp; Remote Terminal</text>
+
+  <!-- Local PC -->
+  <rect x="20" y="50" width="180" height="120" rx="8" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="110" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Local PC</text>
+
+  <rect x="35" y="88" width="150" height="30" rx="4" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="110" y="108" text-anchor="middle" font-size="11" fill="#333">kubevpn ssh</text>
+
+  <rect x="35" y="126" width="150" height="30" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="110" y="146" text-anchor="middle" font-size="11" fill="#333">TUN (full mode)</text>
+
+  <!-- Jump 1 -->
+  <rect x="240" y="65" width="110" height="75" rx="6" fill="#FFF3E0" stroke="#F5A623" stroke-width="2"/>
+  <text x="295" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">Jump 1</text>
+  <rect x="255" y="98" width="80" height="25" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="295" y="115" text-anchor="middle" font-size="10" fill="#333">sshd</text>
+
+  <!-- Jump 2 -->
+  <rect x="390" y="65" width="110" height="75" rx="6" fill="#FFF3E0" stroke="#F5A623" stroke-width="2"/>
+  <text x="445" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">Jump 2</text>
+  <rect x="405" y="98" width="80" height="25" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="445" y="115" text-anchor="middle" font-size="10" fill="#333">sshd</text>
+
+  <!-- dots -->
+  <text x="530" y="105" text-anchor="middle" font-size="20" fill="#F5A623">...</text>
+
+  <!-- Target Server -->
+  <rect x="570" y="50" width="220" height="120" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="680" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Target Server</text>
+
+  <rect x="590" y="88" width="90" height="30" rx="4" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="635" y="108" text-anchor="middle" font-size="11" fill="#333">ssh-daemon</text>
+
+  <rect x="690" y="88" width="85" height="30" rx="4" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="733" y="108" text-anchor="middle" font-size="11" fill="#333">PTY / Shell</text>
+
+  <rect x="590" y="126" width="185" height="30" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="683" y="146" text-anchor="middle" font-size="11" fill="#333">TUN + Inner Network Access</text>
+
+  <!-- Arrows -->
+  <line x1="200" y1="103" x2="235" y2="103" stroke="#F5A623" stroke-width="2" marker-end="url(#aso)"/>
+  <line x1="350" y1="103" x2="385" y2="103" stroke="#F5A623" stroke-width="2" marker-end="url(#aso)"/>
+  <line x1="500" y1="103" x2="520" y2="103" stroke="#F5A623" stroke-width="1.5"/>
+  <line x1="540" y1="103" x2="565" y2="103" stroke="#F5A623" stroke-width="2" marker-end="url(#aso)"/>
+
+  <!-- TUN tunnel (bottom) -->
+  <line x1="110" y1="170" x2="680" y2="170" stroke="#7CB342" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="400" y="190" text-anchor="middle" font-size="11" fill="#7CB342">Bidirectional TUN Tunnel (198.18.0.0/16) — Full Mode Only</text>
+
+  <!-- Auth Methods -->
+  <rect x="20" y="210" width="770" height="95" rx="8" fill="#FFF8E1" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="410" y="232" text-anchor="middle" font-size="13" font-weight="bold" fill="#E65100">Authentication Methods</text>
+
+  <rect x="40" y="245" width="120" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="100" y="264" text-anchor="middle" font-size="10" fill="#333">--ssh-password</text>
+
+  <rect x="170" y="245" width="110" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="225" y="264" text-anchor="middle" font-size="10" fill="#333">--ssh-keyfile</text>
+
+  <rect x="290" y="245" width="100" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="340" y="264" text-anchor="middle" font-size="10" fill="#333">--ssh-alias</text>
+
+  <rect x="400" y="245" width="120" height="28" rx="3" fill="#fff" stroke="#9C27B0" stroke-width="1"/>
+  <text x="460" y="264" text-anchor="middle" font-size="10" fill="#333">--gssapi-password</text>
+
+  <rect x="530" y="245" width="110" height="28" rx="3" fill="#fff" stroke="#9C27B0" stroke-width="1"/>
+  <text x="585" y="264" text-anchor="middle" font-size="10" fill="#333">--gssapi-keytab</text>
+
+  <rect x="650" y="245" width="110" height="28" rx="3" fill="#fff" stroke="#9C27B0" stroke-width="1"/>
+  <text x="705" y="264" text-anchor="middle" font-size="10" fill="#333">--gssapi-cache</text>
+
+  <text x="410" y="295" text-anchor="middle" font-size="10" fill="#888">ProxyJump: --ssh-jump or SSH config ProxyJump directive</text>
+</svg>

@@ -6,10 +6,11 @@ sidebar_position: 2
 
 Connect to kubernetes cluster network
 
-After connect to kubernetes cluster network, you can `ping PodIP` or `curl ServiceIP` in local PC, it also supports k8s
-DNS resolve. Like: `curl authors/authors.default/authors.default.svc/authors.default.svc.cluster.local`. So you can
-start up your application in local PC. depends on anything in k8s cluster is ok, connect to them just like in k8s
-cluster.
+Upon establishing a connection to the Kubernetes cluster network, you can directly access Pod IPs and Service IPs from
+your local machine. This includes capabilities such as ping Pod IPs or curl Service IPs. Full Kubernetes DNS resolution
+is supported, enabling access via standard naming conventions like
+`curl authors/authors.default/authors.default.svc/authors.default.svc.cluster.local`. So you can start up your
+application in local PC, depends on anything in k8s cluster is ok, connect to them just like in k8s cluster.
 
 # Examples
 
@@ -19,13 +20,20 @@ cluster.
 kubevpn connect
 ```
 
+## Connect and start a managed local SOCKS5 proxy for nested VPN cases
+
+```shell
+kubevpn connect --socks
+curl --proxy socks5h://127.0.0.1:1080 http://productpage.default.svc.cluster.local:9080
+```
+
 ## Connect to api-server behind of bastion host or ssh jump host
 
 ```shell
 kubevpn connect --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem
 ```
 
-## It also support ProxyJump, like
+## It also supports ProxyJump, like
 
 ```text
 ┌──────┐     ┌──────┐     ┌──────┐     ┌──────┐                 ┌────────────┐
@@ -80,11 +88,24 @@ GSSAPI keytab file path
 --gssapi-password='':
 GSSAPI password
 
---image='docker.io/naison/kubevpn:v2.2.17':
+--image='ghcr.io/kubenetworks/kubevpn:latest':
 use this image to startup container
+
+--image-pull-secret-name='':
+secret name to pull image if registry is private
+
+--manager-namespace='':
+The namespace where the traffic manager is to be found. Only works in cluster mode (install kubevpn server
+by helm)
 
 --remote-kubeconfig='':
 Abstract path of kubeconfig on ssh remote server
+
+--socks=false:
+Start a managed local SOCKS5 proxy after connect for nested VPN or route-conflict cases
+
+--socks-listen='127.0.0.1:1080':
+Listen address for the managed local SOCKS5 proxy
 
 --ssh-addr='':
 Optional ssh jump server address to dial as <hostname>:<port>, eg: 127.0.0.1:22
@@ -106,6 +127,6 @@ Optional password for ssh jump server
 Optional username for ssh jump server
 
 --transfer-image=false:
-transfer image to remote registry, it will transfer image docker.io/naison/kubevpn:v2.2.17 to flags `--image`
-special image, default: docker.io/naison/kubevpn:v2.2.17
+transfer image to remote registry, it will transfer image ghcr.io/kubenetworks/kubevpn:latest to flags
+`--image` special image, default: ghcr.io/kubenetworks/kubevpn:latest
 ```

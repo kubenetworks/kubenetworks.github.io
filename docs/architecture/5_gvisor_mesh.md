@@ -17,8 +17,10 @@ When the `authors` service in the cluster receives traffic:
 - Unmatched traffic in the `HTTP header` will hit the original `authors` service in the cluster.
 
 The principle is to use `envoy` as the data plane and implement a control plane for `envoy`.
+As with the default mesh mode, injection runs **server-side** in the traffic manager (the
+client only sends the intent over gRPC).
 
-## gVisor mode ( not need ```Privileged: true``` or cap ```NET_ADMIN``` )
+## gVisor mode ( not need `Privileged: true` or cap `NET_ADMIN` )
 
 gVisor mode modify `k8s service` `targetPort` to envoy listener port. eg:
 
@@ -55,9 +57,8 @@ example:
 kubevpn proxy service/authors --headers user=A
 ```
 
-we can use this mode on AWS Fargate node.
+We can use this mode on AWS Fargate node,
 because [Fargate node](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-security-considerations.html)
-not support ```Privileged: true``` and cap
-```NET_ADMIN```
+does not support `Privileged: true` and cap `NET_ADMIN`.
 
 ![gvisor-mesh.svg](img/gvisor-mesh.svg)

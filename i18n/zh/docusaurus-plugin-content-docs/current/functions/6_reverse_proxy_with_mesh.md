@@ -18,7 +18,7 @@ Now you can access resources in the kubernetes cluster !
 ➜  ~
 ```
 
-#### 不带 header 直接访问集群资源，可以看到返回的是集群中的服务内容。
+不带 header 直接访问集群资源，可以看到返回的是集群中的服务内容。
 
 ```shell
 ➜  ~ curl productpage:9080
@@ -32,7 +32,7 @@ Now you can access resources in the kubernetes cluster !
 ...
 ```
 
-#### 带上特定 header 访问集群资源，可以看到返回了本地服务的内容。
+带上特定 header `"foo: bar"` 访问集群资源，可以看到流量命中了本地服务。
 
 ```shell
 ➜  ~ curl productpage:9080 -H "foo: bar"

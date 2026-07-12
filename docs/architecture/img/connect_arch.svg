@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -10 925 530" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <defs>
+    <marker id="a1" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="a1b" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/>
+    </marker>
+    <marker id="a1g" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+    <marker id="a1o" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F5A623"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="460" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">KubeVPN Connect — Dual Daemon Architecture</text>
+
+  <!-- ====== Local Machine ====== -->
+  <rect x="15" y="45" width="400" height="440" rx="10" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="215" y="70" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">Local Machine</text>
+
+  <!-- CLI -->
+  <rect x="130" y="82" width="170" height="36" rx="5" fill="#fff" stroke="#78909C" stroke-width="1.5"/>
+  <text x="215" y="105" text-anchor="middle" font-size="12" fill="#333">kubevpn connect (CLI)</text>
+
+  <!-- gRPC arrow down -->
+  <line x1="215" y1="118" x2="215" y2="138" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#a1b)"/>
+  <text x="260" y="132" font-size="9" fill="#4A90D9">gRPC (unix socket)</text>
+
+  <!-- User Daemon -->
+  <rect x="35" y="142" width="360" height="130" rx="6" fill="#FFF8E1" stroke="#F5A623" stroke-width="2"/>
+  <text x="215" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#E65100">User Daemon (unprivileged)</text>
+
+  <rect x="50" y="172" width="150" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="125" y="191" text-anchor="middle" font-size="10" fill="#333">SSH Jump / Resolve</text>
+
+  <rect x="210" y="172" width="170" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="295" y="191" text-anchor="middle" font-size="10" fill="#333">Traffic Manager Create</text>
+
+  <rect x="50" y="208" width="150" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="125" y="227" text-anchor="middle" font-size="10" fill="#333">Proxy Injection</text>
+
+  <rect x="210" y="208" width="170" height="28" rx="3" fill="#fff" stroke="#F5A623" stroke-width="1"/>
+  <text x="295" y="227" text-anchor="middle" font-size="10" fill="#333">Health Check / OwnerID</text>
+
+  <rect x="50" y="244" width="330" height="22" rx="3" fill="#FFECB3" stroke="#F5A623" stroke-width="1"/>
+  <text x="215" y="260" text-anchor="middle" font-size="9" fill="#333">Connection Persistence (OffloadToConfig / LoadFromConfig)</text>
+
+  <!-- gRPC arrow down -->
+  <line x1="215" y1="272" x2="215" y2="294" stroke="#9C27B0" stroke-width="1.5" marker-end="url(#a1)"/>
+  <text x="270" y="288" font-size="9" fill="#9C27B0">gRPC (unix socket, sudo)</text>
+
+  <!-- Root Daemon -->
+  <rect x="35" y="298" width="360" height="120" rx="6" fill="#FCE4EC" stroke="#E91E63" stroke-width="2"/>
+  <text x="215" y="318" text-anchor="middle" font-size="13" font-weight="bold" fill="#C62828">Root Daemon (root privileges)</text>
+
+  <rect x="50" y="328" width="105" height="28" rx="3" fill="#fff" stroke="#E91E63" stroke-width="1"/>
+  <text x="103" y="347" text-anchor="middle" font-size="10" fill="#333">TUN Device</text>
+
+  <rect x="162" y="328" width="105" height="28" rx="3" fill="#fff" stroke="#E91E63" stroke-width="1"/>
+  <text x="215" y="347" text-anchor="middle" font-size="10" fill="#333">Route Table</text>
+
+  <rect x="274" y="328" width="105" height="28" rx="3" fill="#fff" stroke="#E91E63" stroke-width="1"/>
+  <text x="327" y="347" text-anchor="middle" font-size="10" fill="#333">DNS Config</text>
+
+  <rect x="50" y="364" width="160" height="28" rx="3" fill="#fff" stroke="#E91E63" stroke-width="1"/>
+  <text x="130" y="383" text-anchor="middle" font-size="10" fill="#333">Port-Forward (to TM)</text>
+
+  <rect x="220" y="364" width="160" height="28" rx="3" fill="#fff" stroke="#E91E63" stroke-width="1"/>
+  <text x="300" y="383" text-anchor="middle" font-size="10" fill="#333">gVisor Network Stack</text>
+
+  <!-- Apps at bottom -->
+  <rect x="50" y="430" width="120" height="30" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="110" y="450" text-anchor="middle" font-size="11" fill="#333">Local Apps</text>
+
+  <rect x="180" y="430" width="100" height="30" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="230" y="450" text-anchor="middle" font-size="11" fill="#333">ping / curl</text>
+
+  <rect x="290" y="430" width="100" height="30" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="340" y="450" text-anchor="middle" font-size="11" fill="#333">IDE / Debug</text>
+
+  <!-- Arrow Apps to TUN -->
+  <line x1="215" y1="425" x2="215" y2="418" stroke="#7CB342" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- ====== Kubernetes Cluster ====== -->
+  <rect x="480" y="45" width="420" height="440" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="690" y="70" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">Kubernetes Cluster</text>
+
+  <!-- Traffic Manager Pod -->
+  <rect x="500" y="85" width="380" height="200" rx="6" fill="#C8E6C9" stroke="#388E3C" stroke-width="2"/>
+  <text x="690" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#1B5E20">Traffic Manager Pod</text>
+  <text x="690" y="124" text-anchor="middle" font-size="10" fill="#666">kubevpn-traffic-manager</text>
+
+  <!-- Containers -->
+  <rect x="515" y="138" width="110" height="55" rx="4" fill="#fff" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="570" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">vpn</text>
+  <text x="570" y="174" text-anchor="middle" font-size="9" fill="#666">TCP Server</text>
+  <text x="570" y="186" text-anchor="middle" font-size="9" fill="#666">:10801</text>
+
+  <rect x="640" y="138" width="110" height="55" rx="4" fill="#fff" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="695" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">control-plane</text>
+  <text x="695" y="174" text-anchor="middle" font-size="9" fill="#666">Envoy xDS</text>
+  <text x="695" y="186" text-anchor="middle" font-size="9" fill="#666">Server</text>
+
+  <rect x="765" y="138" width="100" height="55" rx="4" fill="#fff" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="815" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">dns</text>
+  <text x="815" y="174" text-anchor="middle" font-size="9" fill="#666">DNS Forward</text>
+  <text x="815" y="186" text-anchor="middle" font-size="9" fill="#666">:53</text>
+
+  <!-- gVisor Stack -->
+  <rect x="515" y="205" width="350" height="35" rx="4" fill="#A5D6A7" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="690" y="228" text-anchor="middle" font-size="12" fill="#1B5E20">gVisor Userspace Network Stack (TCP/UDP/ICMP)</text>
+
+  <!-- TUN in TM -->
+  <rect x="515" y="248" width="350" height="28" rx="4" fill="#81C784" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="690" y="267" text-anchor="middle" font-size="12" fill="#fff">TUN Device (server-side)</text>
+
+  <!-- port-forward tunnel -->
+  <line x1="415" y1="380" x2="510" y2="168" stroke="#4A90D9" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#a1b)"/>
+  <text x="445" y="260" text-anchor="middle" font-size="11" fill="#4A90D9" transform="rotate(-60, 445, 260)">kubectl port-forward</text>
+
+  <!-- Cluster resources -->
+  <rect x="500" y="300" width="170" height="50" rx="5" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="585" y="322" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Pod Network</text>
+  <text x="585" y="340" text-anchor="middle" font-size="10" fill="#666">172.29.0.0/16</text>
+
+  <rect x="690" y="300" width="170" height="50" rx="5" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="775" y="322" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Service Network</text>
+  <text x="775" y="340" text-anchor="middle" font-size="10" fill="#666">172.21.0.0/16</text>
+
+  <!-- Workloads -->
+  <rect x="500" y="365" width="110" height="40" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1"/>
+  <text x="555" y="385" text-anchor="middle" font-size="10" fill="#333">productpage</text>
+  <text x="555" y="398" text-anchor="middle" font-size="9" fill="#888">172.29.2.134</text>
+
+  <rect x="620" y="365" width="110" height="40" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1"/>
+  <text x="675" y="385" text-anchor="middle" font-size="10" fill="#333">authors</text>
+  <text x="675" y="398" text-anchor="middle" font-size="9" fill="#888">172.29.2.132</text>
+
+  <rect x="740" y="365" width="110" height="40" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1"/>
+  <text x="795" y="385" text-anchor="middle" font-size="10" fill="#333">reviews</text>
+  <text x="795" y="398" text-anchor="middle" font-size="9" fill="#888">172.29.2.249</text>
+
+  <!-- kube-dns -->
+  <rect x="600" y="420" width="140" height="35" rx="4" fill="#BBDEFB" stroke="#1976D2" stroke-width="1.5"/>
+  <text x="670" y="442" text-anchor="middle" font-size="11" fill="#333">kube-dns / CoreDNS</text>
+
+  <!-- Bottom label -->
+  <text x="460" y="498" text-anchor="middle" font-size="11" fill="#888">No Privileged • No NET_ADMIN • gVisor userspace stack • Full DNS resolution</text>
+</svg>

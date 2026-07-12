@@ -14,10 +14,16 @@ Print the logs for the kubevpn daemon gRPC server. It will show both the sudo da
 kubevpn logs
 ```
 
-### follow more log
+### Follow more logs
 
 ```shell
 kubevpn logs -f
+```
+
+### Show recent 50 lines of log
+
+```shell
+kubevpn logs -l 50
 ```
 
 # Options
@@ -25,4 +31,7 @@ kubevpn logs -f
 ```text
 -f, --follow=false:
 Specify if the logs should be streamed.
+
+-l, --lines=10:
+Lines of recent log file to display.
 ```

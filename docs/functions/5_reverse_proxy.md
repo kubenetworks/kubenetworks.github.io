@@ -4,7 +4,16 @@ sidebar_position: 5
 
 # Reverse proxy
 
-use command `kubevpn proxy` to proxy all inbound traffic to local computer.
+use command `kubevpn proxy` to reverse inbound traffic of a workload to your local computer.
+
+:::note
+Proxying works at the **declared container ports** of the workload (the ports in its Pod
+spec, plus any `--portmap`). Envoy is injected server-side and, without `--headers`, matches
+every request on each declared port and forwards it to your machine over the tunnel. Traffic
+to **undeclared** ports has no listener and falls through to the real application in the
+cluster — it is not the old "capture every port" VPN sidecar. To cover extra ports, declare
+them with `--portmap`.
+:::
 
 ```shell
 ➜  ~ kubevpn proxy deployment/productpage

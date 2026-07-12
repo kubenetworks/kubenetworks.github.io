@@ -4,11 +4,10 @@ sidebar_position: 10
 
 # kubevpn alias
 
-配置文件别名，用于简化命令执行，类似于 ssh 别名配置
+配置文件别名，用于简化命令执行，类似于 SSH alias 配置。
 
-配置文件支持三个字段：`Name`、`Needs`、`Flags`，它将读取 `~/.kubevpn/config.yaml` 文件作为配置文件，也可以通过 `-f`
-参数指定特定的文件路径。它还支持依赖关系，例如一个集群的 API 服务器需要通过另一个集群访问，您可以使用 `needs`
-语法。它将首先对 `needs` 集群执行操作，然后对目标集群执行操作。
+读取 `~/.kubevpn/config.yaml` 文件作为配置源，也可以通过 `-f` 参数指定文件路径，或通过 `--remote` 指定远程配置文件。
+配置支持依赖关系，使用 `Needs` 语法可以先对依赖集群执行操作，然后对目标集群执行操作。
 
 # 示例
 
@@ -16,6 +15,7 @@ sidebar_position: 10
 
 ```yaml
 Name: dev
+Description: 这是开发环境
 Needs: jumper
 Flags:
   - connect
@@ -24,31 +24,50 @@ Flags:
 ---
 
 Name: jumper
+Description: 这是跳板机环境
 Flags:
   - connect
   - --kubeconfig=~/.kube/jumper_config
   - --namespace=test
   - --extra-hosts=xxx.com
+
+---
+
+Name: all-in-one
+Description: 使用 '--kubeconfig-json' 参数，无需指定 kubeconfig 路径
+Flags:
+  - connect
+  - --kubeconfig-json={"apiVersion":"v1","clusters":[{"cluster":{"certificate-authority-data":"LS0tLS1CRU..."}}]}
+  - --namespace=test
+  - --extra-hosts=xxx.com
 ```
 
-## 使用 kubevpn alias 配置简化命令执行，按顺序连接到集群网络：jumper --> dev
+配置文件支持四个字段：`Name`、`Description`、`Needs`、`Flags`
+
+## 使用别名配置简化命令，按顺序连接：jumper --> dev
 
 ```shell
 kubevpn alias dev
 ```
 
-## kubevpn alias jumper，仅连接到集群 jumper
+## 仅连接到集群 jumper
 
 ```shell
 kubevpn alias jumper
 ```
 
+## 支持 '--kubeconfig-json'，kubeconfig 会保存到 ~/.kubevpn/temp/[ALIAS_NAME]
+
+```shell
+kubevpn alias all-in-one
+```
+
 # 选项
 
 ```text
--f, --file='/Users/bytedance/.kubevpn/config.yaml':
-配置文件位置
+-f, --kubevpnconfig='~/.kubevpn/config.yaml':
+kubevpnconfig 文件路径
 
 -r, --remote='':
-远程配置文件，例如：https://raw.githubusercontent.com/kubenetworks/kubevpn/master/pkg/config/config.yaml
+远程配置文件地址
 ```

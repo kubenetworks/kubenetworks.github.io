@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 780 350" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arg" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="390" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">KubeVPN Route Management</text>
+
+  <!-- Local Machine -->
+  <rect x="20" y="50" width="340" height="270" rx="10" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="190" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Local Machine</text>
+
+  <!-- App -->
+  <rect x="40" y="90" width="120" height="35" rx="4" fill="#fff" stroke="#78909C" stroke-width="1.5"/>
+  <text x="100" y="112" text-anchor="middle" font-size="12" fill="#333">Application</text>
+
+  <!-- Arrow -->
+  <line x1="100" y1="125" x2="100" y2="145" stroke="#666" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- Route Table -->
+  <rect x="40" y="150" width="300" height="150" rx="5" fill="#fff" stroke="#4A90D9" stroke-width="2"/>
+  <text x="190" y="172" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A90D9">System Route Table</text>
+  <line x1="40" y1="180" x2="340" y2="180" stroke="#DDD" stroke-width="1"/>
+
+  <!-- Route entries -->
+  <text x="55" y="200" font-size="11" fill="#333" font-family="monospace">DESTINATION        GATEWAY      NETIF</text>
+  <text x="55" y="218" font-size="11" fill="#4CAF50" font-family="monospace">172.21.0.0/16      198.18.0.1   utun4</text>
+  <text x="55" y="236" font-size="11" fill="#4CAF50" font-family="monospace">172.29.0.0/16      198.18.0.1   utun4</text>
+  <text x="55" y="254" font-size="11" fill="#F5A623" font-family="monospace">192.168.0.0/24     198.18.0.1   utun4</text>
+  <text x="55" y="272" font-size="11" fill="#9C27B0" font-family="monospace">198.18.0.1/32      198.18.0.1   utun4</text>
+  <text x="55" y="290" font-size="11" fill="#888" font-family="monospace">0.0.0.0/0          gateway      en0</text>
+
+  <!-- Legend boxes -->
+  <rect x="40" y="305" width="10" height="10" fill="#4CAF50"/>
+  <text x="55" y="315" font-size="9" fill="#666">Auto (cluster CIDR)</text>
+  <rect x="160" y="305" width="10" height="10" fill="#F5A623"/>
+  <text x="175" y="315" font-size="9" fill="#666">--extra-cidr</text>
+  <rect x="260" y="305" width="10" height="10" fill="#9C27B0"/>
+  <text x="275" y="315" font-size="9" fill="#666">route add</text>
+
+  <!-- TUN Device -->
+  <rect x="390" y="90" width="160" height="70" rx="6" fill="#DCEDC8" stroke="#7CB342" stroke-width="2"/>
+  <text x="470" y="118" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">TUN Device</text>
+  <text x="470" y="138" text-anchor="middle" font-size="11" fill="#666">utun4 / tun0</text>
+  <text x="470" y="152" text-anchor="middle" font-size="10" fill="#888">198.18.0.0/16</text>
+
+  <!-- Arrow route to TUN -->
+  <line x1="340" y1="230" x2="385" y2="130" stroke="#7CB342" stroke-width="2" marker-end="url(#arg)"/>
+
+  <!-- Commands -->
+  <rect x="390" y="180" width="370" height="140" rx="6" fill="#FFF8E1" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="575" y="202" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">Route Commands</text>
+
+  <rect x="410" y="212" width="330" height="28" rx="3" fill="#fff" stroke="#4CAF50" stroke-width="1"/>
+  <text x="575" y="231" text-anchor="middle" font-size="11" font-family="monospace" fill="#333">kubevpn route add 192.168.5.0/24</text>
+
+  <rect x="410" y="248" width="330" height="28" rx="3" fill="#fff" stroke="#E91E63" stroke-width="1"/>
+  <text x="575" y="267" text-anchor="middle" font-size="11" font-family="monospace" fill="#333">kubevpn route delete 192.168.5.0/24</text>
+
+  <rect x="410" y="284" width="330" height="28" rx="3" fill="#fff" stroke="#4A90D9" stroke-width="1"/>
+  <text x="575" y="303" text-anchor="middle" font-size="11" font-family="monospace" fill="#333">kubevpn route search 198.18.0.1</text>
+
+  <!-- Cluster -->
+  <rect x="580" y="55" width="180" height="100" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="670" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">K8s Cluster</text>
+  <text x="670" y="100" font-size="10" text-anchor="middle" fill="#666">Pod: 172.29.0.0/16</text>
+  <text x="670" y="116" font-size="10" text-anchor="middle" fill="#666">Svc: 172.21.0.0/16</text>
+  <text x="670" y="132" font-size="10" text-anchor="middle" fill="#666">Extra: 192.168.0.0/24</text>
+
+  <!-- Arrow TUN to Cluster -->
+  <line x1="550" y1="120" x2="575" y2="105" stroke="#4CAF50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arg)"/>
+  <text x="560" y="95" font-size="10" fill="#4CAF50">Tunnel</text>
+</svg>

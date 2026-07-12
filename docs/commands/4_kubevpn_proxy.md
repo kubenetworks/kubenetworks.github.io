@@ -58,7 +58,7 @@ kubevpn proxy service/productpage --headers foo=bar --headers env=dev
 kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
-## It also support ProxyJump, like
+## It also supports ProxyJump, like
 
 ```text
 ┌──────┐     ┌──────┐     ┌──────┐     ┌──────┐                 ┌────────────┐
@@ -133,10 +133,17 @@ GSSAPI password
 
 -H, --headers=[]:
 Traffic with special headers (use `and` to match all headers) with reverse it to local PC, If not special,
-redirect all traffic to local PC. eg: --headers foo=bar --headers env=dev
+redirect all traffic to local PC. format: <KEY>=<VALUE> eg: --headers foo=bar --headers env=dev
 
---image='docker.io/naison/kubevpn:v2.2.17':
+--image='ghcr.io/kubenetworks/kubevpn:latest':
 Use this image to startup container
+
+--image-pull-secret-name='':
+secret name to pull image if registry is private
+
+--manager-namespace='':
+The namespace where the traffic manager is to be found. Only works in cluster mode (install kubevpn server
+by helm)
 
 --portmap=[]:
 Port map, map container port to local port, format: [tcp/udp]/containerPort:localPort, If not special,
@@ -165,6 +172,6 @@ Optional password for ssh jump server
 Optional username for ssh jump server
 
 --transfer-image=false:
-transfer image to remote registry, it will transfer image docker.io/naison/kubevpn:v2.2.17 to flags `--image`
-special image, default: docker.io/naison/kubevpn:v2.2.17
+transfer image to remote registry, it will transfer image ghcr.io/kubenetworks/kubevpn:latest to flags
+`--image` special image, default: ghcr.io/kubenetworks/kubevpn:latest
 ```

@@ -36,18 +36,24 @@ kubevpn status -o json
 kubevpn status -o yaml
 ```
 
+## Query status with wide output (includes IP column)
+
+```shell
+kubevpn status -o wide
+```
+
 # Options
 
 ```text
 --alias='':
 Alias name, query connect status by alias config name
 
--f, --file='/Users/bytedance/.kubevpn/config.yaml':
-Config file location
+-f, --kubevpnconfig='~/.kubevpn/config.yaml':
+Path to the kubevpnconfig file to use for CLI requests.
 
 -o, --output='table':
-Output format. One of: (json, yaml, table)
+Output format. One of: (json, yaml, table, wide)
 
 -r, --remote='':
-Remote config file, e.g., https://raw.githubusercontent.com/kubenetworks/kubevpn/master/pkg/config/config.yaml
+Remote config file, eg: https://raw.githubusercontent.com/kubenetworks/kubevpn/master/pkg/config/config.yaml
 ```

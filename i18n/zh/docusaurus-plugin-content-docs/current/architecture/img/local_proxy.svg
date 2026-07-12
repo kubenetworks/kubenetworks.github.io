@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -8 880 445" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/>
+    </marker>
+    <marker id="arr-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="440" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">KubeVPN Local Proxy (proxy-out) Architecture</text>
+
+  <!-- ====== Local Machine ====== -->
+  <rect x="20" y="50" width="320" height="350" rx="10" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="180" y="75" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">Local Machine</text>
+
+  <!-- Applications -->
+  <rect x="40" y="90" width="120" height="40" rx="5" fill="#fff" stroke="#78909C" stroke-width="1.5"/>
+  <text x="100" y="114" text-anchor="middle" font-size="12" fill="#333">curl / wget</text>
+
+  <rect x="40" y="140" width="120" height="40" rx="5" fill="#fff" stroke="#78909C" stroke-width="1.5"/>
+  <text x="100" y="164" text-anchor="middle" font-size="12" fill="#333">Browser</text>
+
+  <rect x="40" y="190" width="120" height="40" rx="5" fill="#fff" stroke="#78909C" stroke-width="1.5"/>
+  <text x="100" y="214" text-anchor="middle" font-size="12" fill="#333">App / IDE</text>
+
+  <!-- Arrows to proxy -->
+  <line x1="160" y1="110" x2="200" y2="160" stroke="#78909C" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="160" y1="160" x2="200" y2="160" stroke="#78909C" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="160" y1="210" x2="200" y2="200" stroke="#78909C" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- SOCKS5 Proxy -->
+  <rect x="200" y="90" width="120" height="60" rx="5" fill="#C8E6C9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="260" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">SOCKS5</text>
+  <text x="260" y="132" text-anchor="middle" font-size="10" fill="#666">:1080</text>
+  <text x="260" y="145" text-anchor="middle" font-size="9" fill="#888">socks5h://</text>
+
+  <!-- HTTP CONNECT Proxy -->
+  <rect x="200" y="165" width="120" height="60" rx="5" fill="#FFECB3" stroke="#F5A623" stroke-width="2"/>
+  <text x="260" y="190" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">HTTP CONNECT</text>
+  <text x="260" y="207" text-anchor="middle" font-size="10" fill="#666">:3128</text>
+  <text x="260" y="220" text-anchor="middle" font-size="9" fill="#888">http://</text>
+
+  <!-- ClusterConnector -->
+  <rect x="60" y="260" width="260" height="60" rx="5" fill="#E1BEE7" stroke="#9C27B0" stroke-width="2"/>
+  <text x="190" y="285" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">ClusterConnector</text>
+  <text x="190" y="305" text-anchor="middle" font-size="10" fill="#666">Service → Endpoints → Pod</text>
+
+  <!-- Arrow from proxies to connector -->
+  <line x1="260" y1="150" x2="190" y2="255" stroke="#9C27B0" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="260" y1="225" x2="190" y2="255" stroke="#9C27B0" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- PodDialer -->
+  <rect x="100" y="340" width="180" height="40" rx="5" fill="#BBDEFB" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="190" y="365" text-anchor="middle" font-size="12" fill="#333">PodDialer (port-forward)</text>
+
+  <!-- Arrow connector to dialer -->
+  <line x1="190" y1="320" x2="190" y2="335" stroke="#4A90D9" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+  <!-- ====== Kubernetes Cluster ====== -->
+  <rect x="420" y="50" width="440" height="350" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="640" y="75" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">Kubernetes Cluster</text>
+
+  <!-- API Server -->
+  <rect x="450" y="95" width="180" height="50" rx="5" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="540" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">API Server</text>
+  <text x="540" y="135" text-anchor="middle" font-size="10" fill="#666">port-forward API</text>
+
+  <!-- kubectl port-forward arrow -->
+  <line x1="340" y1="360" x2="445" y2="120" stroke="#4A90D9" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr-blue)"/>
+  <text x="370" y="230" text-anchor="middle" font-size="11" fill="#4A90D9" transform="rotate(-55, 370, 230)">kubectl port-forward</text>
+
+  <!-- Service -->
+  <rect x="450" y="170" width="180" height="55" rx="5" fill="#C8E6C9" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="540" y="193" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Service</text>
+  <text x="540" y="210" text-anchor="middle" font-size="10" fill="#666">productpage:9080</text>
+
+  <!-- Endpoints -->
+  <rect x="450" y="240" width="180" height="40" rx="5" fill="#fff" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="540" y="264" text-anchor="middle" font-size="12" fill="#333">Endpoints (lookup)</text>
+
+  <!-- Pods -->
+  <rect x="450" y="300" width="120" height="45" rx="5" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="510" y="320" text-anchor="middle" font-size="11" fill="#333">Pod A</text>
+  <text x="510" y="335" text-anchor="middle" font-size="9" fill="#888">172.29.2.134</text>
+
+  <rect x="590" y="300" width="120" height="45" rx="5" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="650" y="320" text-anchor="middle" font-size="11" fill="#333">Pod B</text>
+  <text x="650" y="335" text-anchor="middle" font-size="9" fill="#888">172.29.2.135</text>
+
+  <rect x="730" y="300" width="120" height="45" rx="5" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="790" y="320" text-anchor="middle" font-size="11" fill="#333">Pod C</text>
+  <text x="790" y="335" text-anchor="middle" font-size="9" fill="#888">172.29.0.77</text>
+
+  <!-- Arrows Service -> Endpoints -> Pods -->
+  <line x1="540" y1="225" x2="540" y2="235" stroke="#388E3C" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="510" y1="280" x2="510" y2="295" stroke="#7CB342" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="540" y1="280" x2="650" y2="295" stroke="#7CB342" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="580" y1="280" x2="790" y2="295" stroke="#7CB342" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+  <!-- Arrow API to Service -->
+  <line x1="540" y1="145" x2="540" y2="165" stroke="#4CAF50" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+  <!-- Legend -->
+  <rect x="660" y="170" width="190" height="80" rx="5" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+  <text x="755" y="190" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">Scope</text>
+  <text x="755" y="208" text-anchor="middle" font-size="10" fill="#666">TCP traffic only</text>
+  <text x="755" y="224" text-anchor="middle" font-size="10" fill="#666">socks5h:// for DNS resolution</text>
+  <text x="755" y="240" text-anchor="middle" font-size="10" fill="#666">No TUN device needed</text>
+
+  <!-- Bottom label -->
+  <text x="440" y="415" text-anchor="middle" font-size="11" fill="#888">No OS routing changes • Works with nested VPNs • Standard proxy protocols</text>
+</svg>

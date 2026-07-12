@@ -32,31 +32,31 @@ kubevpn proxy service/productpage
 kubevpn proxy deployment/authors deployment/productpage
 ```
 
-or
+或
 
 ```shell
 kubevpn proxy deployment authors productpage
 ```
 
-## 使用服务网格进行反向代理，带有HTTP header foo=bar 的流量将命中本地 PC，其它流量不受影响
+## 使用服务网格进行反向代理，带有 HTTP header foo=bar 的流量将命中本地，其它流量不受影响
 
 ```shell
 kubevpn proxy service/productpage --headers foo=bar
 ```
 
-## 使用服务网格进行反向代理，带有HTTP header foo=bar 和 env=dev 的流量将命中本地 PC，其它流量不受影响
+## 带有 HTTP header foo=bar 和 env=dev 的流量将命中本地
 
 ```shell
 kubevpn proxy service/productpage --headers foo=bar --headers env=dev
 ```
 
-## 连接到位于堡垒机或 SSH 跳板机后的 api-server 并将 Kubernetes 资源流量代理到本地 PC
+## 通过堡垒机或 SSH 跳板机连接 api-server 并代理流量
 
 ```shell
 kubevpn proxy deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
-## 它也支持 ProxyJump，像这样
+## 支持 ProxyJump
 
 ```text
 ┌──────┐     ┌──────┐     ┌──────┐     ┌──────┐                 ┌────────────┐
@@ -104,7 +104,7 @@ kubevpn proxy deployment/productpage
 
 ```text
 --debug=false:
-是否启用调试模式，true 或 false
+是否启用调试模式
 
 --extra-cidr=[]:
 额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
@@ -130,11 +130,17 @@ GSSAPI keytab 文件路径
 GSSAPI 密码
 
 -H, --headers=[]:
-带有特殊 HTTP header 的流量（使用 `and` 匹配所有HTTP header）将被反向代理到本地 PC，如果不指定，将重定向所有流量到本地 PC。
-格式：<KEY>=<VALUE>, 例如：--headers foo=bar
+带有特殊 HTTP header 的流量（使用 `and` 匹配所有 header）将被反向代理到本地 PC，如果不指定，
+将重定向所有流量到本地 PC。格式：<KEY>=<VALUE> 例如：--headers foo=bar --headers env=dev
 
---image='docker.io/naison/kubevpn:v2.2.17':
+--image='ghcr.io/kubenetworks/kubevpn:latest':
 使用此镜像启动容器
+
+--image-pull-secret-name='':
+拉取私有仓库镜像时使用的 Secret 名称
+
+--manager-namespace='':
+流量管理器所在的命名空间。仅在集群模式下生效（通过 helm 安装 kubevpn server）
 
 --portmap=[]:
 端口映射，将容器端口映射到本地端口，格式：[tcp/udp]/containerPort:localPort，如果未指定，
@@ -163,6 +169,6 @@ SSH 跳板服务器的密码
 SSH 跳板服务器的用户名
 
 --transfer-image=false:
-将镜像转存到远程仓库，它将镜像 docker.io/naison/kubevpn:v2.2.17 转存到 `--image`
-特定镜像，默认为：docker.io/naison/kubevpn:v2.2.17
+将镜像转存到远程仓库，它将镜像 ghcr.io/kubenetworks/kubevpn:latest 转存到 `--image`
+指定的镜像，默认为：ghcr.io/kubenetworks/kubevpn:latest
 ```

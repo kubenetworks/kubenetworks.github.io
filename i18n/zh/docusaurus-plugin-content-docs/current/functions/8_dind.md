@@ -11,12 +11,12 @@ sidebar_position: 8
 例如，使用如下命令:
 
 ```shell
-docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/config:/root/.kube/config --platform linux/amd64 naison/kubevpn:latest
+docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/config:/root/.kube/config --platform linux/amd64 ghcr.io/kubenetworks/kubevpn:latest
 ```
 
 ```shell
-➜  ~ docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/vke:/root/.kube/config --platform linux/amd64 naison/kubevpn:latest
-Unable to find image 'naison/kubevpn:latest' locally
+➜  ~ docker run -it --privileged --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp -v ~/.kube/vke:/root/.kube/config --platform linux/amd64 ghcr.io/kubenetworks/kubevpn:latest
+Unable to find image 'ghcr.io/kubenetworks/kubevpn:latest' locally
 latest: Pulling from naison/kubevpn
 9c704ecd0c69: Already exists
 4987d0a976b5: Pull complete
@@ -28,17 +28,17 @@ ca82aef6a9eb: Pull complete
 1fd9534c7596: Pull complete
 588bd802eb9c: Pull complete
 Digest: sha256:368db2e0d98f6866dcefd60512960ce1310e85c24a398fea2a347905ced9507d
-Status: Downloaded newer image for naison/kubevpn:latest
+Status: Downloaded newer image for ghcr.io/kubenetworks/kubevpn:latest
 WARNING: image with reference naison/kubevpn was found but does not match the specified platform: wanted linux/amd64, actual: linux/arm64
 root@5732124e6447:/app# kubevpn run deployment/authors --headers user=naison --entrypoint sh
 hostname is 5732124e6447
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 Injecting inbound sidecar for deployment/authors
 Patching workload deployment/authors
 Checking rollout status for deployment/authors
@@ -130,6 +130,12 @@ exit
 CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS         PORTS     NAMES
 1cd576b51b66   naison/authors:latest           "sh"                     4 minutes ago   Up 4 minutes             authors_default_kubevpn_6df5f
 56a6793df82d   nginx:latest                    "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes             nginx_default_kubevpn_6df63
-d0b3dab8912a   naison/kubevpn:v2.0.0     "/bin/bash"              5 minutes ago   Up 5 minutes             upbeat_noyce
+d0b3dab8912a   ghcr.io/kubenetworks/kubevpn:latest  "/bin/bash"              5 minutes ago   Up 5 minutes             upbeat_noyce
 ➜  ~
+```
+
+* 测试完成后清理
+
+```shell
+kubectl delete -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
 ```

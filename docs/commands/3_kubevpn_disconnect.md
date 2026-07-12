@@ -14,19 +14,13 @@ to disconnect from a specific cluster.
 
 # Examples
 
-## disconnect from first cluster
+## Disconnect from a specific connection ID
 
 ```shell
-kubevpn disconnect 0
+kubevpn disconnect 03dc50feb8c3
 ```
 
-## disconnect from second cluster
-
-```shell
-kubevpn disconnect 1
-```
-
-## disconnect from all cluster
+## Disconnect from all cluster
 
 ```shell
 kubevpn disconnect --all
@@ -38,4 +32,6 @@ kubevpn disconnect --all
 --all=false:
 Disconnect all clusters, disconnect from all cluster networks
 
+--debug=false:
+enable debug mode or not, true or false
 ```

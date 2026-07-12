@@ -53,6 +53,9 @@ kubevpn uninstall --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-pass
 # Options
 
 ```text
+--debug=false:
+enable debug mode or not, true or false
+
 --gssapi-cache='':
 GSSAPI cache file path, use command `kinit -c /path/to/cache USERNAME@RELAM` to generate
 

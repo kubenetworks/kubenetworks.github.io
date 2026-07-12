@@ -18,12 +18,12 @@ CURRENT   CONNECTION ID   CLUSTER                 KUBECONFIG                    
 ```shell
 ➜  ~ kubevpn connect -n default --kubeconfig ~/.kube/dev_config
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 Now you can access resources in the kubernetes cluster !
 ```
 

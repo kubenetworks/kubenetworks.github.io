@@ -51,6 +51,9 @@ kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME
 # 选项
 
 ```text
+--debug=false:
+是否启用调试模式，true 或 false
+
 --gssapi-cache='':
 GSSAPI 缓存文件路径，使用命令 `kinit -c /path/to/cache USERNAME@RELAM` 生成
 

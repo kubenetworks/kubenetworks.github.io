@@ -16,9 +16,10 @@ sidebar_position: 5
 - `HTTP header` 中带有 `user: B` 的流量会击中 `用户 B` 的本地电脑
 - `HTTP header` 中不匹配的流量会击中集群中原始的 `authors` 服务
 
-原理是使用了 `envoy` 做了数据面，然后实现了一个 `envoy` 的控制面。
+原理是使用了 `envoy` 做了数据面，然后实现了一个 `envoy` 的控制面。与默认 mesh 模式一样，注入在**服务端**
+（流量管理器内）执行，客户端只通过 gRPC 下发意图。
 
-## gVisor 模式 ( 不需要特性 ```Privileged: true``` 和 ```NET_ADMIN``` )
+## gVisor 模式 ( 不需要 `Privileged: true` 和 `NET_ADMIN` )
 
 gVisor 模式修改了 `k8s service` 的 `targetPort` 为 `envoy` 的监听端口，例如：
 
@@ -56,6 +57,6 @@ kubevpn proxy service/authors --headers user=A
 
 我们可以在 `AWS Fargate` 上使用 `gvisor`
 模式，因为 [Fargate 节点](https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/developerguide/fargate-security-considerations.html)
-不支持 ```Privileged: true```特权模式和特性 ```NET_ADMIN```
+不支持 `Privileged: true` 特权模式和特性 `NET_ADMIN`。
 
 ![gvisor-mesh.svg](img/gvisor-mesh.svg)

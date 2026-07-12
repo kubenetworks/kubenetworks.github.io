@@ -16,3 +16,10 @@ sidebar_position: 7
 ```shell
 kubevpn unsync deployment/authors-sync-108ce
 ```
+
+# 选项
+
+```text
+--debug=false:
+是否启用调试模式，true 或 false
+```

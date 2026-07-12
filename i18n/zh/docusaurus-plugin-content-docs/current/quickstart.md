@@ -21,7 +21,7 @@ server），如下命令：
 ```shell
 ➜ helm search repo kubevpn
 NAME            	CHART VERSION	APP VERSION	DESCRIPTION
-kubevpn/kubevpn 	2.2.2        	v2.2.2     	A Helm chart for KubeVPN
+kubevpn/kubevpn 	2.3.0        	v2.3.0     	A Helm chart for KubeVPN
 ```
 
 ```shell
@@ -37,6 +37,12 @@ NOTES:
   kubevpn connect --namespace test
   export POD_IP=$(kubectl get pods --namespace test -l "app.kubernetes.io/name=kubevpn,app.kubernetes.io/instance=kubevpn" -o jsonpath="{.items[0].status.podIP}")
   ping $POD_IP
+```
+
+如果使用私有镜像仓库，使用以下命令安装：
+
+```shell
+helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn --set 'imagePullSecrets[0].name=registry' -n default --debug --set image.tag=latest
 ```
 
 # 安装 kubevpn client 在本地电脑上

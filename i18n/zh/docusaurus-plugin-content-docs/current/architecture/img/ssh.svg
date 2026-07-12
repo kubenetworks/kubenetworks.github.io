@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 -8 870 558" font-family="Arial, Helvetica, sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">KubeVPN SSH Architecture</text>
+
+  <!-- ====== SSH Jump Host Mode (Top) ====== -->
+  <text x="450" y="65" text-anchor="middle" font-size="15" font-weight="bold" fill="#4A90D9">Mode 1: SSH Jump Host</text>
+
+  <!-- Local Machine -->
+  <rect x="30" y="85" width="220" height="120" rx="8" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="140" y="105" text-anchor="middle" font-weight="bold" fill="#333">Local Machine</text>
+  <rect x="50" y="115" width="80" height="35" rx="4" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="90" y="137" text-anchor="middle" font-size="11" fill="#333">kubevpn</text>
+  <rect x="150" y="115" width="80" height="35" rx="4" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="190" y="137" text-anchor="middle" font-size="11" fill="#333">kubectl</text>
+  <text x="140" y="180" text-anchor="middle" font-size="11" fill="#666">127.0.0.1:N (forwarded)</text>
+
+  <!-- SSH Tunnel Arrow -->
+  <line x1="250" y1="145" x2="370" y2="145" stroke="#4A90D9" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="310" y="135" text-anchor="middle" font-size="11" fill="#4A90D9">SSH Tunnel</text>
+
+  <!-- Jump Host -->
+  <rect x="380" y="85" width="160" height="120" rx="8" fill="#FFF3E0" stroke="#F5A623" stroke-width="2"/>
+  <text x="460" y="105" text-anchor="middle" font-weight="bold" fill="#333">Jump Host</text>
+  <rect x="400" y="115" width="120" height="35" rx="4" fill="#fff" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="460" y="137" text-anchor="middle" font-size="11" fill="#333">sshd</text>
+  <text x="460" y="180" text-anchor="middle" font-size="11" fill="#666">Port Forward</text>
+
+  <!-- API Server Arrow -->
+  <line x1="540" y1="145" x2="650" y2="145" stroke="#F5A623" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="595" y="135" text-anchor="middle" font-size="11" fill="#F5A623">TCP</text>
+
+  <!-- K8s API Server -->
+  <rect x="660" y="85" width="200" height="120" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="760" y="105" text-anchor="middle" font-weight="bold" fill="#333">Kubernetes Cluster</text>
+  <rect x="680" y="115" width="160" height="35" rx="4" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="760" y="137" text-anchor="middle" font-size="11" fill="#333">API Server (:6443)</text>
+  <rect x="680" y="160" width="160" height="35" rx="4" fill="#fff" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="760" y="182" text-anchor="middle" font-size="11" fill="#333">Pod / Service Network</text>
+
+  <!-- ====== SSH Remote Terminal Mode (Bottom) ====== -->
+  <text x="450" y="250" text-anchor="middle" font-size="15" font-weight="bold" fill="#E65100">Mode 2: SSH Remote Terminal (Full Mode)</text>
+
+  <!-- Local Machine -->
+  <rect x="30" y="270" width="220" height="220" rx="8" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="140" y="290" text-anchor="middle" font-weight="bold" fill="#333">Local Machine</text>
+
+  <rect x="50" y="300" width="180" height="40" rx="4" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="140" y="318" text-anchor="middle" font-size="11" fill="#333">kubevpn ssh (CLI)</text>
+  <text x="140" y="330" text-anchor="middle" font-size="10" fill="#888">Terminal Session</text>
+
+  <rect x="50" y="350" width="180" height="40" rx="4" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="140" y="368" text-anchor="middle" font-size="11" fill="#333">Root Daemon</text>
+  <text x="140" y="380" text-anchor="middle" font-size="10" fill="#888">TUN Device + Routes</text>
+
+  <rect x="50" y="400" width="180" height="40" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="140" y="418" text-anchor="middle" font-size="11" fill="#333">TUN (utun/tun0)</text>
+  <text x="140" y="430" text-anchor="middle" font-size="10" fill="#888">198.18.0.0/16</text>
+
+  <rect x="50" y="450" width="180" height="30" rx="4" fill="#fff" stroke="#4A90D9" stroke-width="1.5"/>
+  <text x="140" y="470" text-anchor="middle" font-size="11" fill="#333">Local Apps</text>
+
+  <!-- WebSocket Arrow -->
+  <line x1="250" y1="320" x2="370" y2="320" stroke="#E65100" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="310" y="310" text-anchor="middle" font-size="11" fill="#E65100">WebSocket</text>
+
+  <!-- TUN Tunnel Arrow -->
+  <line x1="250" y1="420" x2="370" y2="420" stroke="#7CB342" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+  <text x="310" y="410" text-anchor="middle" font-size="11" fill="#7CB342">TUN Tunnel</text>
+
+  <!-- Remote Server -->
+  <rect x="380" y="270" width="220" height="220" rx="8" fill="#FFF3E0" stroke="#F5A623" stroke-width="2"/>
+  <text x="490" y="290" text-anchor="middle" font-weight="bold" fill="#333">Remote Server</text>
+
+  <rect x="400" y="300" width="180" height="40" rx="4" fill="#fff" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="490" y="318" text-anchor="middle" font-size="11" fill="#333">kubevpn ssh-daemon</text>
+  <text x="490" y="330" text-anchor="middle" font-size="10" fill="#888">WebSocket Handler</text>
+
+  <rect x="400" y="350" width="180" height="40" rx="4" fill="#fff" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="490" y="368" text-anchor="middle" font-size="11" fill="#333">PTY / Shell</text>
+  <text x="490" y="380" text-anchor="middle" font-size="10" fill="#888">/bin/bash</text>
+
+  <rect x="400" y="400" width="180" height="40" rx="4" fill="#DCEDC8" stroke="#7CB342" stroke-width="1.5"/>
+  <text x="490" y="418" text-anchor="middle" font-size="11" fill="#333">TUN (server side)</text>
+  <text x="490" y="430" text-anchor="middle" font-size="10" fill="#888">198.18.0.0/16</text>
+
+  <rect x="400" y="450" width="180" height="30" rx="4" fill="#fff" stroke="#F5A623" stroke-width="1.5"/>
+  <text x="490" y="470" text-anchor="middle" font-size="11" fill="#333">Inner Network Services</text>
+
+  <!-- Inner Network -->
+  <rect x="660" y="270" width="200" height="220" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+  <text x="760" y="290" text-anchor="middle" font-weight="bold" fill="#333">Inner Network</text>
+
+  <rect x="680" y="310" width="160" height="35" rx="4" fill="#fff" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="760" y="332" text-anchor="middle" font-size="11" fill="#333">192.168.1.0/24</text>
+
+  <rect x="680" y="355" width="160" height="35" rx="4" fill="#fff" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="760" y="377" text-anchor="middle" font-size="11" fill="#333">10.0.0.0/8</text>
+
+  <rect x="680" y="420" width="160" height="35" rx="4" fill="#fff" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="760" y="442" text-anchor="middle" font-size="11" fill="#333">Database / API</text>
+
+  <!-- Arrow from Remote to Inner -->
+  <line x1="600" y1="420" x2="670" y2="380" stroke="#9C27B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="640" y="390" text-anchor="middle" font-size="11" fill="#9C27B0">Access</text>
+
+  <!-- Legend -->
+  <rect x="350" y="505" width="200" height="25" rx="4" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+  <text x="450" y="522" text-anchor="middle" font-size="10" fill="#888">Lite mode: terminal only, no TUN</text>
+</svg>

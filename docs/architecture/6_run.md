@@ -20,4 +20,8 @@ The difference with the `service mesh` solution is: `User A` will use `Docker` t
 which means that the storage volume, environment variables and network in the `Pod` will be run locally in the form of
 a `Docker container`. This allows for faster code debugging locally.
 
+Traffic interception uses the same server-side mesh injection as `proxy`. Without `--headers`,
+only the workload's **declared container ports** are routed to the local container; undeclared
+ports fall through to the real application in the cluster.
+
 ![run.svg](img/run.svg)

@@ -14,3 +14,10 @@ also clean up the dns/hosts settings.
 ```bash
 kubevpn quit
 ```
+
+# Options
+
+```text
+--debug=false:
+enable debug mode or not, true or false
+```

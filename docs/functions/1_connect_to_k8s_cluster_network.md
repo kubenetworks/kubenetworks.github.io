@@ -11,33 +11,32 @@ password. to enable root operation (create a tun device).
 ➜  ~ kubevpn connect
 Password:
 Starting connect
-Getting network CIDR from cluster info...
-Getting network CIDR from CNI...
-Getting network CIDR from services...
-Labeling Namespace default
-Creating ServiceAccount kubevpn-traffic-manager
-Creating Roles kubevpn-traffic-manager
-Creating RoleBinding kubevpn-traffic-manager
-Creating Service kubevpn-traffic-manager
-Creating MutatingWebhookConfiguration kubevpn-traffic-manager
-Creating Deployment kubevpn-traffic-manager
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16
+Labeled namespace "default"
+Created ServiceAccount "kubevpn-traffic-manager"
+Created Role "kubevpn-traffic-manager"
+Created RoleBinding "kubevpn-traffic-manager"
+Created Service "kubevpn-traffic-manager"
+Created ConfigMap "kubevpn-traffic-manager"
+Created Deployment "kubevpn-traffic-manager"
 
 Pod kubevpn-traffic-manager-66d969fd45-9zlbp is Pending
-Container     Reason            Message
-control-plane ContainerCreating
-vpn           ContainerCreating
-webhook       ContainerCreating
+Container   Reason            Message
+vpn         ContainerCreating
+xds         ContainerCreating
+dns         ContainerCreating
 
 Pod kubevpn-traffic-manager-66d969fd45-9zlbp is Running
-Container     Reason           Message
-control-plane ContainerRunning
-vpn           ContainerRunning
-webhook       ContainerRunning
+Container   Reason           Message
+vpn         ContainerRunning
+xds         ContainerRunning
+dns         ContainerRunning
 
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Forwarded ports (TCP/UDP/xDS)
+Allocated TUN IP 198.18.0.100
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 Now you can access resources in the kubernetes cluster !
 ➜  ~
 ```
@@ -87,7 +86,7 @@ NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     
 authors                   ClusterIP   172.21.5.160    <none>        9080/TCP                             114d    app=authors
 details                   ClusterIP   172.21.6.183    <none>        9080/TCP                             114d    app=details
 kubernetes                ClusterIP   172.21.0.1      <none>        443/TCP                              319d    <none>
-kubevpn-traffic-manager   ClusterIP   172.21.2.86     <none>        8422/UDP,10800/TCP,9002/TCP,80/TCP   2m28s   app=kubevpn-traffic-manager
+kubevpn-traffic-manager   ClusterIP   172.21.2.86     <none>        10801/TCP,9002/TCP,53/UDP            2m28s   app=kubevpn-traffic-manager
 productpage               ClusterIP   172.21.10.49    <none>        9080/TCP                             114d    app=productpage
 ratings                   ClusterIP   172.21.3.247    <none>        9080/TCP                             114d    app=ratings
 reviews                   ClusterIP   172.21.8.24     <none>        9080/TCP                             114d    app=reviews

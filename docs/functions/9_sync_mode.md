@@ -10,20 +10,20 @@ with the specified header or all the traffic to the sync deployment.
 ```shell
 ➜  ~ kubevpn sync deployment/authors -c authors --headers foo=bar --sync ~/GolandProjects/bookinfo-authors:/app/code
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Forwarding from 127.0.0.1:51744 -> 10800
-Forwarding from [::1]:51744 -> 10800
-Forwarding from 127.0.0.1:51745 -> 10801
-Forwarding from [::1]:51745 -> 10801
-Forwarding from 127.0.0.1:51746 -> 10802
-Forwarding from [::1]:51746 -> 10802
-Connected tunnel
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Forwarding from 127.0.0.1:51744 -> 10801
+Forwarding from [::1]:51744 -> 10801
+Forwarding from 127.0.0.1:51745 -> 10802
+Forwarding from [::1]:51745 -> 10802
+Forwarding from 127.0.0.1:51746 -> 9002
+Forwarding from [::1]:51746 -> 9002
+Created TUN device "utun4"
 Handling connection for 51744
-Adding route...
-Configuring DNS service...
-Configured DNS service
+Added 2 pod/service CIDR routes
+Configuring DNS
+Configured DNS
 Sync workloads...
 Sync workload deployment/authors
 Defaulted container "authors" out of: nginx, authors

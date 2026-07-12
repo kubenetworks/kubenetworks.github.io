@@ -16,6 +16,10 @@ When the `authors` service in the cluster receives traffic:
 - Traffic with `user: B` in the `HTTP header` will hit the sync service `authors''`.
 - Unmatched traffic in the `HTTP header` will hit the original `authors` service in the cluster.
 
+Header-based traffic splitting to the sync clones uses the same **server-side** mesh injection
+as `proxy` (the client only sends the intent over gRPC; the traffic manager injects the envoy
+sidecar).
+
 File synchronization is implemented using `syncthing`:
 
 - The `~/code` on user A's computer will be synchronized to the `/app/code` directory of the sync resource `authors'`

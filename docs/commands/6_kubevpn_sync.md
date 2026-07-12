@@ -4,40 +4,32 @@ sidebar_position: 6
 
 # Kubevpn sync
 
-Sync workloads to run in current namespace with same volume、env、and network
+Sync local dir to cloned workloads which run in current namespace with same volume, env and network as target workloads
 
-In this way, you can start up another sync deployment in same namespace, but with different image version, it also
-supports service mesh proxy. only traffic with special header will hit to sync_resource.
+In this way, we startup another deployment in current namespace, but with different image version,
+it also supports service mesh proxy. Only traffic with special header will hit to sync resource.
 
 # Examples
 
-## sync
-
-### sync current namespace deployment
+## sync deployment with local dir sync
 
 ```shell
-kubevpn sync deployment/productpage
+kubevpn sync deployment/productpage --sync ~/code:/code/app
 ```
 
-### sync deployment in namespace test
+## sync with mesh, traffic with HTTP header foo=bar, will hit sync workloads, otherwise hit origin workloads
 
 ```shell
-kubevpn sync deployment/productpage -n test
+kubevpn sync deployment/productpage --sync ~/code:/code/app --headers foo=bar
 ```
 
-# sync with mesh, traffic with HTTP header foo=bar, will hit sync workloads, otherwise hit origin workloads
+## sync workloads which api-server behind of bastion host or ssh jump host
 
 ```shell
-kubevpn sync deployment/productpage --headers foo=bar
+kubevpn sync deployment/productpage --sync ~/code:/code/app --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
 ```
 
-# sync workloads which api-server behind of bastion host or ssh jump host
-
-```shell
-kubevpn sync deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username root --ssh-keyfile ~/.ssh/ssh.pem --headers foo=bar
-```
-
-# It also supports ProxyJump, like
+## It also supports ProxyJump, like
 
 ```text
 ┌──────┐     ┌──────┐     ┌──────┐     ┌──────┐                 ┌────────────┐
@@ -46,20 +38,24 @@ kubevpn sync deployment/productpage --ssh-addr 192.168.1.100:22 --ssh-username r
 ```
 
 ```shell
-kubevpn sync service/productpage --ssh-alias <alias> --headers foo=bar
+kubevpn sync deployment/productpage --sync ~/code:/code/app --ssh-alias <alias> --headers foo=bar
 ```
 
-# Support ssh auth GSSAPI
+## Support ssh auth GSSAPI
 
 ```shell
-kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
-kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
-kubevpn sync service/productpage --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
+kubevpn sync deployment/productpage --sync ~/code:/code/app --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-keytab /path/to/keytab
+kubevpn sync deployment/productpage --sync ~/code:/code/app --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-cache /path/to/cache
+kubevpn sync deployment/productpage --sync ~/code:/code/app --ssh-addr <HOST:PORT> --ssh-username <USERNAME> --gssapi-password <PASSWORD>
 ```
 
 # Options
 
 ```text
+-c, --container='':
+Container name. If omitted, use the kubectl.kubernetes.io/default-container annotation for selecting the
+container to be attached or the first container in the pod will be chosen
+
 --debug=false:
 Enable debug mode or not, true or false
 
@@ -87,8 +83,11 @@ GSSAPI password
 Traffic with special headers (use `and` to match all headers) with reverse it to target cluster sync workloads.
 If not special, redirect all traffic to target cluster sync workloads. eg: --headers foo=bar --headers env=dev
 
---image='docker.io/naison/kubevpn:v2.2.17':
+--image='ghcr.io/kubenetworks/kubevpn:latest':
 Use this image to startup container
+
+--image-pull-secret-name='':
+secret name to pull image if registry is private
 
 --remote-kubeconfig='':
 Abstract path of kubeconfig on ssh remote server
@@ -119,6 +118,6 @@ Sync local dir to remote pod dir. format: LOCAL_DIR:REMOTE_DIR, eg: ~/code:/app/
 Sync container use this image to startup container, if not special, use origin image
 
 --transfer-image=false:
-transfer image to remote registry, it will transfer image docker.io/naison/kubevpn:v2.2.17 to flags `--image`
-special image, default: docker.io/naison/kubevpn:v2.2.17
+transfer image to remote registry, it will transfer image ghcr.io/kubenetworks/kubevpn:latest to flags
+`--image` special image, default: ghcr.io/kubenetworks/kubevpn:latest
 ```

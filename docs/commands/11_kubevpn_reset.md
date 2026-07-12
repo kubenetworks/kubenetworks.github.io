@@ -6,8 +6,7 @@ sidebar_position: 11
 
 Reset workloads to origin specification proxied by kubevpn
 
-The reset operation will remove all containers vpn and envoy injected by kubevpn in the Kubernetes cluster, and restore
-service mesh rules.
+Reset will remove injected container envoy and vpn, and restore service mesh rules.
 
 # Examples
 
@@ -52,6 +51,9 @@ kubevpn reset deployment/authors --ssh-addr <HOST:PORT> --ssh-username <USERNAME
 # Options
 
 ```text
+--debug=false:
+enable debug mode or not, true or false
+
 --gssapi-cache='':
 GSSAPI cache file path, use command `kinit -c /path/to/cache USERNAME@RELAM` to generate
 

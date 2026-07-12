@@ -17,3 +17,10 @@ these created resources.
 ```shell
 kubevpn unsync deployment/authors-sync-108ce
 ```
+
+# Options
+
+```text
+--debug=false:
+enable debug mode or not, true or false
+```

@@ -4,49 +4,55 @@ sidebar_position: 9
 
 # kubevpn status
 
-展示连接状态和列出代理/同步资源
+显示连接状态和代理/同步资源列表
 
-展示连接状态和列出代理或同步资源，您可以通过状态字段和 netif 检查连接状态。如果 netif 为空，意味着 tun
-设备已关闭，因此它是不健康的，它还将显示路由信息，如果代理工作负载，不仅显示自己的代理资源，其他路由信息也会显示。
+显示连接状态和代理或同步资源信息。可以通过 status 字段和 netif 检查连接状态。如果 netif 为空，表示 TUN 设备已关闭，
+连接不健康。还会显示路由信息。
 
 # 示例
 
-## 展示连接状态和代理/同步资源列表
+## 显示连接状态和代理/同步资源列表
 
 ```shell
 kubevpn status
 ```
 
-## 通过别名配置名称 dev_new 查询状态
+## 通过别名配置名查询状态
 
 ```shell
 kubevpn status --alias dev_new
 ```
 
-## 以 json 格式输出状态查询结果
+## 以 JSON 格式输出
 
 ```shell
 kubevpn status -o json
 ```
 
-## 以 yaml 格式输出状态查询结果
+## 以 YAML 格式输出
 
 ```shell
 kubevpn status -o yaml
+```
+
+## 宽格式输出（包含 IP 列）
+
+```shell
+kubevpn status -o wide
 ```
 
 # 选项
 
 ```text
 --alias='':
-别名，通过别名配置名称查询连接状态
+别名，通过别名配置名查询连接状态
 
--f, --file='/Users/bytedance/.kubevpn/config.yaml':
-配置文件位置
+-f, --kubevpnconfig='~/.kubevpn/config.yaml':
+kubevpnconfig 文件路径
 
 -o, --output='table':
-输出格式。可选项：(json, yaml, table)
+输出格式，可选：(json, yaml, table, wide)
 
 -r, --remote='':
-远程配置文件，例如：https://raw.githubusercontent.com/kubenetworks/kubevpn/master/pkg/config/config.yaml
+远程配置文件地址
 ```

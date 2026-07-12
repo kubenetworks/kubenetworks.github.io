@@ -4,17 +4,22 @@ sidebar_position: 7
 
 # 本地进入运行模式
 
-将 Kubernetes pod 运行在本地的 Docker 容器中🐳，同时配合 service mesh, 拦截带有指定 header 的流量到本地，或者所有的流量到本地。这个运行模式依赖于本地 Docker。
+将 Kubernetes pod 运行在本地的 Docker 容器中🐳，同时配合 service mesh 拦截流量到本地——可以是带有指定 header（`--headers`）的请求，或在不带 header 时拦截工作负载**已声明容器端口**上的所有流量。这个运行模式依赖于本地 Docker。
+
+:::note
+不带 `--headers` 时，拦截只覆盖工作负载的**已声明容器端口**。发往未声明端口的流量会回落到集群中的
+真实应用，而非本地容器。需要按请求分流请用 `--headers`，需要额外端口路由到本地请显式声明这些端口。
+:::
 
 ```shell
 ➜  ~ kubevpn run deployment/authors --headers foo=bar --entrypoint sh
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 Injecting inbound sidecar for deployment/authors
 Patching workload deployment/authors
 Checking rollout status for deployment/authors
@@ -83,6 +88,20 @@ fc04e42799a5   nginx:latest                    "/docker-entrypoint.…"   37 sec
 ➜  ~
 ```
 
+通过 Pod IP 访问本地 Docker 容器中的服务
+
+```shell
+export authors_pod=`kubectl get pods -l app=authors -n default -o jsonpath='{.items[0].metadata.name}'`
+export authors_pod_ip=`kubectl get pod $authors_pod -n default -o jsonpath='{.status.podIP}'`
+curl -kv -H "foo: bar" http://$authors_pod_ip:80/health
+```
+
+查看 nginx 容器日志
+
+```shell
+docker logs $(docker ps --format '{{.Names}}' | grep nginx_default_kubevpn)
+```
+
 如果你只是想在本地启动镜像，可以用一种简单的方式：
 
 ```shell
@@ -94,12 +113,12 @@ kubevpn run deployment/authors --no-proxy -it --rm
 ```shell
 ➜  ~ kubevpn run deployment/authors --no-proxy
 Starting connect
-Got network CIDR from cache
-Use exist traffic manager
-Forwarding port...
-Connected tunnel
-Adding route...
-Configured DNS service
+Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
+Using traffic manager in namespace "default"
+Forwarded ports (TCP/UDP/xDS)
+Created TUN device "utun4"
+Added 2 pod/service CIDR routes
+Configured DNS
 tar: removing leading '/' from member names
 /var/folders/30/cmv9c_5j3mq_kthx63sb1t5c0000gn/T/5631078868924498209:/var/run/secrets/kubernetes.io/serviceaccount
 tar: Removing leading `/' from member names

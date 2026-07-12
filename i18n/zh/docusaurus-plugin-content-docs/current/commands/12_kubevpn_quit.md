@@ -13,3 +13,10 @@ sidebar_position: 12
 ```bash
 kubevpn quit
 ```
+
+# 选项
+
+```text
+--debug=false:
+是否启用调试模式，true 或 false
+```

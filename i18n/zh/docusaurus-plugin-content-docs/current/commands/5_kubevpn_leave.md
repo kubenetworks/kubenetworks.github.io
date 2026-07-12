@@ -8,7 +8,7 @@ sidebar_position: 5
 
 这个命令用于离开代理资源。在使用 `kubevpn proxy xxx`
 命令后，你可以使用这个命令来离开代理资源。你只能离开自己代理的资源。当最后一个用户离开代理资源时，它会恢复工作负载容器。(删除容器
-vpn 和 envoy-proxy)。
+vpn 和 envoy)。
 
 # 示例
 
@@ -16,4 +16,11 @@ vpn 和 envoy-proxy)。
 
 ```shell
 kubevpn leave deployment/authors
+```
+
+# 选项
+
+```text
+--debug=false:
+是否启用调试模式，true 或 false
 ```
