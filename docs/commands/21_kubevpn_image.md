@@ -27,7 +27,7 @@ kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest registry.example.org/kube
 ### Re-tag an image
 
 ```shell
-kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest ghcr.io/kubenetworks/kubevpn:v2.3.4
+kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest ghcr.io/kubenetworks/kubevpn:v2.11.5
 ```
 
 ### Copy with inline registry credentials (TLS auto-detected)

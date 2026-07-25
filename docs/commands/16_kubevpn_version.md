@@ -14,9 +14,9 @@ kubevpn version
 
 ```text
 KubeVPN: CLI
-    Version: v2.3.0
-    Daemon: v2.3.0
-    Image: ghcr.io/kubenetworks/kubevpn:v2.3.0
+    Version: v2.11.5
+    Daemon: v2.11.5
+    Image: ghcr.io/kubenetworks/kubevpn:v2.11.5
     Branch: master
     Git commit: ac918b5
     Built time: 2024-09-03 20:31:08

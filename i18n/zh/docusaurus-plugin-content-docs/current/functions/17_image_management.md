@@ -20,7 +20,7 @@ kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest registry.example.org/kube
 在同一仓库中，重新标记只发送带有新标签的 manifest：
 
 ```shell
-kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest ghcr.io/kubenetworks/kubevpn:v2.3.4
+kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest ghcr.io/kubenetworks/kubevpn:v2.11.5
 ```
 
 ## DSN 风格内联凭据

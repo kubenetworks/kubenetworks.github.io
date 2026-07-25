@@ -21,7 +21,7 @@ server），如下命令：
 ```shell
 ➜ helm search repo kubevpn
 NAME            	CHART VERSION	APP VERSION	DESCRIPTION
-kubevpn/kubevpn 	2.3.0        	v2.3.0     	A Helm chart for KubeVPN
+kubevpn/kubevpn 	2.11.5       	v2.11.5    	A Helm chart for KubeVPN
 ```
 
 ```shell

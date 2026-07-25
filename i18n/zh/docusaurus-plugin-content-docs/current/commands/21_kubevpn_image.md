@@ -25,7 +25,7 @@ kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest registry.example.org/kube
 ### 重新标记镜像
 
 ```shell
-kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest ghcr.io/kubenetworks/kubevpn:v2.3.4
+kubevpn image copy ghcr.io/kubenetworks/kubevpn:latest ghcr.io/kubenetworks/kubevpn:v2.11.5
 ```
 
 ### 使用内联凭据复制（TLS 自动检测）
