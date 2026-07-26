@@ -19,6 +19,7 @@ same as `kubectl options`。
 --disable-compression=false           If true, disables response compression for all requests to the server.
 --insecure-skip-tls-verify=false      If true, skips checking the server's certificate for validity, making HTTPS connections insecure.
 --kubeconfig=''                       Path to the kubeconfig file to use for CLI requests.
+--kubeconfig-json=''                  Json format of kubeconfig to use for CLI requests. Pass an inline JSON kubeconfig instead of a file path, e.g. --kubeconfig-json={"apiVersion":"v1","clusters":[...]}.
 --match-server-version=false          Ensures the server version matches the client version.
 -n, --namespace=''                    Defines the namespace scope for this CLI request.
 --password=''                         Password for basic authentication to the API server.

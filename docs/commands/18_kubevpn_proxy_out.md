@@ -25,6 +25,17 @@ curl --proxy socks5h://127.0.0.1:1080 http://productpage.default.svc.cluster.loc
 kubevpn proxy-out --listen-socks 127.0.0.1:1080 --listen-http-connect 127.0.0.1:3128
 ```
 
+## Host-direct egress: reach the internet via the host
+
+With `--egress` the proxy dials targets directly from the host, using the host's own DNS and network (socks5h host
+egress), instead of resolving cluster Services via the Kubernetes API. This reaches the public internet and — under an
+active VPN — the cluster too.
+
+```shell
+kubevpn proxy-out --egress --listen-socks 127.0.0.1:1080
+curl --proxy socks5h://127.0.0.1:1080 https://www.google.com
+```
+
 ## Access a Pod IP or Service ClusterIP through the proxy
 
 ```shell
@@ -43,6 +54,10 @@ export HTTPS_PROXY=http://127.0.0.1:3128
 # Options
 
 ```text
+--egress=false:
+Dial targets directly from the host (host DNS + network, socks5h egress) instead of resolving cluster Services via
+the Kubernetes API
+
 --listen-http-connect='':
 Local HTTP CONNECT listen address
 

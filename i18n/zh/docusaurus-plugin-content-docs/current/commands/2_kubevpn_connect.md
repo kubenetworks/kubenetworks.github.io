@@ -25,6 +25,17 @@ kubevpn connect --socks
 curl --proxy socks5h://127.0.0.1:1080 http://productpage.default.svc.cluster.local:9080
 ```
 
+## 连接并启动主机出口（host-egress）SOCKS5 代理
+
+加上 `--egress` 后，由用户守护进程托管的代理将直接从主机拨号，使用主机自身的 DNS 和网络
+（socks5h 主机出口）。这样可以访问公网，且在本 VPN 连接下也能访问集群。`--egress` 必须与 `--socks`
+配合使用。
+
+```shell
+kubevpn connect --socks --egress
+curl --proxy socks5h://127.0.0.1:1080 https://www.google.com
+```
+
 ## 连接到位于堡垒机或 SSH 跳板机后的 api-server
 
 ```shell
@@ -63,6 +74,10 @@ kubevpn connect --ssh-jump "--ssh-addr jump.naison.org --ssh-username naison --g
 --debug=false:
 是否启用调试模式，true 或 false
 
+--egress=false:
+与 --socks 配合：让托管代理直接从主机拨号（主机 DNS + 网络，socks5h 主机出口），可访问公网，
+且在本 VPN 下也能访问集群。必须与 --socks 配合使用。
+
 --extra-cidr=[]:
 额外的网段 CIDR，将这些 CIDR 网段添加到路由表中。例如：--extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
@@ -99,7 +114,7 @@ GSSAPI 密码
 远程 SSH 服务器上 kubeconfig 文件的绝对路径
 
 --socks=false:
-连接后启动本地托管的 SOCKS5 代理，适用于嵌套 VPN 或路由冲突场景
+连接后启动由用户守护进程托管的本地 SOCKS5 代理，适用于嵌套 VPN 或路由冲突场景
 
 --socks-listen='127.0.0.1:1080':
 本地 SOCKS5 代理的监听地址

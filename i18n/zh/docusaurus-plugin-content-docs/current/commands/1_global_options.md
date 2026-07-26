@@ -19,6 +19,7 @@ sidebar_position: 1
 --disable-compression=false             如果为 true，则对所有发送到服务器的请求禁用响应压缩。
 --insecure-skip-tls-verify=false        如果为 true，则不检查服务器的证书有效性。这会使您的 HTTPS 连接不安全。
 --kubeconfig=''                         用于 CLI 请求的 kubeconfig 文件路径。
+--kubeconfig-json=''                    用于 CLI 请求的 JSON 格式 kubeconfig。直接传入内联 JSON kubeconfig，无需文件路径，例如 --kubeconfig-json={"apiVersion":"v1","clusters":[...]}。
 --match-server-version=false            要求服务器版本与客户端版本匹配。
 -n, --namespace=''                      当前 CLI 请求的命名空间范围。
 --password=''                           API 服务器基本身份验证的密码。

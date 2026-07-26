@@ -27,6 +27,17 @@ kubevpn connect --socks
 curl --proxy socks5h://127.0.0.1:1080 http://productpage.default.svc.cluster.local:9080
 ```
 
+## Connect and start a host-egress SOCKS5 proxy
+
+With `--egress` the user-daemon-managed proxy dials directly from the host, using the host's own DNS and network
+(socks5h host egress). This reaches the public internet and — under this VPN — the cluster too. `--egress` must be
+used together with `--socks`.
+
+```shell
+kubevpn connect --socks --egress
+curl --proxy socks5h://127.0.0.1:1080 https://www.google.com
+```
+
 ## Connect to api-server behind of bastion host or ssh jump host
 
 ```shell
@@ -65,6 +76,10 @@ kubevpn connect --ssh-jump "--ssh-addr jump.naison.org --ssh-username naison --g
 --debug=false:
 enable debug mode or not, true or false
 
+--egress=false:
+With --socks: the managed proxy dials directly from the host (host DNS + network, socks5h egress), reaching the
+internet and — under this VPN — the cluster too. Must be used together with --socks.
+
 --extra-cidr=[]:
 Extra network CIDR string, add those cidr network to route table, eg: --extra-cidr 192.168.0.159/24
 --extra-cidr 192.168.1.160/32
@@ -102,7 +117,7 @@ by helm)
 Abstract path of kubeconfig on ssh remote server
 
 --socks=false:
-Start a managed local SOCKS5 proxy after connect for nested VPN or route-conflict cases
+Start a user-daemon-managed local SOCKS5 proxy after connect for nested VPN or route-conflict cases
 
 --socks-listen='127.0.0.1:1080':
 Listen address for the managed local SOCKS5 proxy

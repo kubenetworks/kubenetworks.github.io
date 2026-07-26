@@ -24,6 +24,16 @@ curl --proxy socks5h://127.0.0.1:1080 http://productpage.default.svc.cluster.loc
 kubevpn proxy-out --listen-socks 127.0.0.1:1080 --listen-http-connect 127.0.0.1:3128
 ```
 
+## 主机直连出口：通过主机访问公网
+
+加上 `--egress` 后，代理将直接从主机拨号目标，使用主机自身的 DNS 和网络（socks5h 主机出口），
+而不是通过 Kubernetes API 解析集群服务。这样可以访问公网，且在已有 VPN 连接下也能访问集群。
+
+```shell
+kubevpn proxy-out --egress --listen-socks 127.0.0.1:1080
+curl --proxy socks5h://127.0.0.1:1080 https://www.google.com
+```
+
 ## 通过代理访问 Pod IP 或 Service ClusterIP
 
 ```shell
@@ -42,6 +52,9 @@ export HTTPS_PROXY=http://127.0.0.1:3128
 # 选项
 
 ```text
+--egress=false:
+直接从主机拨号目标（主机 DNS + 网络，socks5h 主机出口），而不是通过 Kubernetes API 解析集群服务
+
 --listen-http-connect='':
 本地 HTTP CONNECT 监听地址
 
