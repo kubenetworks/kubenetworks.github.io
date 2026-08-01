@@ -47,6 +47,51 @@ Supports multi-hop SSH chains via `--ssh-jump` or SSH config `ProxyJump`:
 └──────┘     └──────┘     └──────┘     └──────┘                 └────────────┘
 ```
 
+## SSH Data-plane Bypass (auto-detect)
+
+When you connect with `--ssh-addr` and that SSH host happens to be a Kubernetes node, kubevpn can tunnel the entire
+VPN data plane through the SSH connection instead of `kubectl port-forward`. This avoids the API server entirely and
+sidesteps the well-known port-forward "black-hole" problem (a local TCP connection that looks alive but never carries
+data). Because a node's kube-proxy rules make the traffic manager's ClusterIP directly reachable, the SSH host can dial
+it directly.
+
+### Auto-detection (zero new flags)
+
+When `--ssh-addr` is provided, the root daemon automatically probes whether the SSH host can reach the traffic
+manager's ClusterIP:
+
+```text
+probeSSHDataPlane()
+  1. Get Service "kubevpn-traffic-manager" → ClusterIP
+  2. SSH dial → tcp://<ClusterIP>:10801  (3s timeout)
+  3. Success → sshForward()   — SSH tunnel for all data-plane ports
+     Failure → portForward()  — standard kubectl port-forward (unchanged)
+```
+
+No new CLI flags and no new proto fields. A bastion-only SSH host (not a K8s node) fails the probe silently and falls
+back to the standard port-forward path — fully backward compatible.
+
+### Path comparison
+
+```text
+Standard path (port-forward):
+  TUN ─▶ 127.0.0.1:<local> ─▶ [SPDY/WS via API server] ─▶ pod:10801
+
+SSH data-plane path:
+  TUN ─▶ 127.0.0.1:<local> ─▶ [SSH tunnel] ─▶ node ─▶ ClusterIP:10801 ─▶ pod:10801
+```
+
+| Aspect | port-forward | SSH data-plane |
+|---|---|---|
+| API server dependency | Yes (SPDY/WebSocket) | No |
+| Black-hole risk | Known issue | SSH TCP is reliable |
+| Reconnection | Client-side detect + retry | `PortMapUntil` auto-reconnects |
+| Pod restart handling | Must re-find pod | ClusterIP is stable; kube-proxy updates endpoints |
+| Requirement | kubeconfig access | SSH access to a K8s node |
+
+Liveness is unchanged: the heartbeat watchdog operates at the TUN layer, so it works regardless of whether the
+underlying transport is port-forward or an SSH tunnel.
+
 ## SSH Remote Terminal
 
 The `kubevpn ssh` command creates an interactive terminal on a remote server through a WebSocket connection to the
