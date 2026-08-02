@@ -36,11 +36,31 @@ Local Application
 
 ## How it works
 
+The local proxy has two connector modes, selected by `--egress`:
+
+**Cluster mode (default, no `--egress`)**
+
 1. Start local SOCKS5 and/or HTTP CONNECT listener
 2. When a connection arrives, resolve the destination hostname to a Kubernetes service
 3. Look up service endpoints to find a ready pod
 4. Use `kubectl port-forward` to establish a TCP connection to the target pod
 5. Relay traffic bidirectionally between client and pod
+
+**Host-egress mode (`--egress`)**
+
+1. Start local SOCKS5 and/or HTTP CONNECT listener
+2. When a connection arrives, dial the target directly from the host
+3. Use the host's own DNS and network (socks5h host egress) — no Kubernetes API resolution
+4. Relay traffic bidirectionally
+
+Host-egress mode reaches the public internet directly. Under an active VPN connection it also reaches the cluster,
+because the host's routing table already points cluster CIDRs into the VPN tunnel.
+
+## User-daemon-managed proxy
+
+Besides the standalone `kubevpn proxy-out` command, the same proxy can be started automatically by `kubevpn connect
+--socks`. In that form the **user daemon** manages the proxy lifecycle: it stays up for the duration of the connection
+and is torn down on disconnect. With `kubevpn connect --socks --egress` the managed proxy runs in host-egress mode.
 
 ## Protocols
 
