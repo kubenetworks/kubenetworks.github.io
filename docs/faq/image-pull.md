@@ -11,30 +11,21 @@ Answer: here are three solutions to solve this problem
   Example:
 
 ``` shell
-➜  ~ kubevpn version
-KubeVPN: CLI
-    Version: v2.11.5
-    Daemon: v2.11.5
-    Image: ghcr.io/kubenetworks/kubevpn:v2.11.5
-    Branch: master
-    Git commit: ac918b5
-    Built time: 2024-09-03 20:31:08
-    Built OS/Arch: darwin/arm64
-    Built Go version: go1.22.6
+kubevpn version
 ```
 
-Image is `ghcr.io/kubenetworks/kubevpn:v2.11.5`, transfer this image to private docker registry
+Look for the `Image:` line in the output, which will show something like `ghcr.io/kubenetworks/kubevpn:v2.x.x` — transfer this image to your private docker registry:
 
 ```text
-docker pull ghcr.io/kubenetworks/kubevpn:v2.11.5
-docker tag ghcr.io/kubenetworks/kubevpn:v2.11.5 [docker registry]/[namespace]/[repo]:[tag]
+docker pull ghcr.io/kubenetworks/kubevpn:v2.x.x
+docker tag ghcr.io/kubenetworks/kubevpn:v2.x.x [docker registry]/[namespace]/[repo]:[tag]
 docker push [docker registry]/[namespace]/[repo]:[tag]
 ```
 
 Then you can use this image, as follows:
 
 ```text
-➜  ~ kubevpn connect --image [docker registry]/[namespace]/[repo]:[tag]
+kubevpn connect --image [docker registry]/[namespace]/[repo]:[tag]
 Starting connect
 Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16
 ...
@@ -45,7 +36,7 @@ Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16
   Example
 
 ```shell
-➜  ~ kubevpn connect --transfer-image --image registry.example.org/kubevpn/kubevpn:latest
+kubevpn connect --transfer-image --image registry.example.org/kubevpn/kubevpn:latest
 Starting connect
 Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
 Using traffic manager in namespace "default"
@@ -54,7 +45,6 @@ Allocated TUN IP 198.18.0.100
 Created TUN device "utun4"
 Configured DNS
 Now you can access resources in the kubernetes cluster !
-➜  ~
 ```
 
 - Solution 3: Use the `kubevpn image copy` command to copy the image to your private registry:

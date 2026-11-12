@@ -6,6 +6,37 @@
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  height: 120px;
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.featureCard {
+  margin-bottom: 2rem;
+}
+
+.featureLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.featureLink:hover,
+.featureLink:focus {
+  background-color: var(--ifm-color-emphasis-100);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.featureLink:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.featureButton {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
 }

@@ -7,11 +7,25 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
       - name: Build website
-        run: |
-          npm install
-          npm run build
+        run: npm run build
+
+      - name: Verify generated site
+        run: node scripts/verify-build.js

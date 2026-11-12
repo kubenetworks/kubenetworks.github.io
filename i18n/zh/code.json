@@ -26,6 +26,51 @@
   "Homepage": {
     "message": "主页"
   },
+  "Access Cluster Network": {
+    "message": "访问集群网络"
+  },
+  "Connect directly to your Kubernetes cluster network from local": {
+    "message": "从本地直接连接到 Kubernetes 集群网络"
+  },
+  "Header Traffic Interception": {
+    "message": "Header 流量拦截"
+  },
+  "Intercept and route traffic with headers to your local services": {
+    "message": "根据 Header 拦截并路由流量到本地服务"
+  },
+  "Run Pods Locally in Docker": {
+    "message": "在本地 Docker 中运行 Pod"
+  },
+  "Run Kubernetes pods locally with same environment, volumes and network": {
+    "message": "使用相同的环境、卷和网络在本地运行 Kubernetes Pod"
+  },
+  "File Sync": {
+    "message": "文件同步"
+  },
+  "Sync files between local and remote pods seamlessly": {
+    "message": "在本地和远程 Pod 之间无缝同步文件"
+  },
+  "Multiple Clusters": {
+    "message": "多集群"
+  },
+  "Connect to multiple Kubernetes clusters simultaneously": {
+    "message": "同时连接到多个 Kubernetes 集群"
+  },
+  "Nested VPN / Proxy-Out": {
+    "message": "嵌套 VPN / Proxy-Out"
+  },
+  "Chain VPN connections or route traffic through proxy": {
+    "message": "链式 VPN 连接或通过代理路由流量"
+  },
+  "View Guide": {
+    "message": "查看指南"
+  },
+  "See it in action": {
+    "message": "实际使用示例"
+  },
+  "Terminal demo": {
+    "message": "终端演示"
+  },
   "theme.ErrorPageContent.title": {
     "message": "当前页面遇到了问题",
     "description": "The title of the fallback page when the page crashed"

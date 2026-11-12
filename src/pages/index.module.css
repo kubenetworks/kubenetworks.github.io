@@ -28,3 +28,82 @@
   width: 20px;
   height: 20px;
 }
+
+.terminalSection {
+  padding: 3rem 0;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.terminal {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.terminalHeader {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #2d2d2d;
+}
+
+.terminalButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.terminalButton {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminalButton:nth-child(1) {
+  background-color: #ff5f56;
+}
+
+.terminalButton:nth-child(2) {
+  background-color: #ffbd2e;
+}
+
+.terminalButton:nth-child(3) {
+  background-color: #27ca3f;
+}
+
+.terminalTitle {
+  color: #aaa;
+  font-size: 0.875rem;
+}
+
+.terminalBody {
+  padding: 1.5rem;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.terminalLine {
+  margin-bottom: 0.5rem;
+}
+
+.prompt {
+  color: #27ca3f;
+  margin-right: 0.75rem;
+}
+
+.command {
+  color: #fff;
+}
+
+.output {
+  color: #aaa;
+}

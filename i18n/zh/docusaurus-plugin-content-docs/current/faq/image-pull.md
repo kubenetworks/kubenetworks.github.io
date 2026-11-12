@@ -10,30 +10,21 @@ sidebar_position: 1
   例如:
 
 ``` shell
-➜  ~ kubevpn version
-KubeVPN: CLI
-    Version: v2.11.5
-    Daemon: v2.11.5
-    Image: ghcr.io/kubenetworks/kubevpn:v2.11.5
-    Branch: master
-    Git commit: ac918b5
-    Built time: 2024-09-03 20:31:08
-    Built OS/Arch: darwin/arm64
-    Built Go version: go1.22.6
+kubevpn version
 ```
 
-镜像是 `ghcr.io/kubenetworks/kubevpn:v2.11.5`，将此镜像转存到自己的镜像仓库。
+查找输出中的 `Image:` 行，它会显示类似 `ghcr.io/kubenetworks/kubevpn:v2.x.x` 的内容 — 将此镜像转存到您的私有镜像仓库：
 
 ```text
-docker pull ghcr.io/kubenetworks/kubevpn:v2.11.5
-docker tag ghcr.io/kubenetworks/kubevpn:v2.11.5 [镜像仓库地址]/[命名空间]/[镜像仓库]:[镜像版本号]
+docker pull ghcr.io/kubenetworks/kubevpn:v2.x.x
+docker tag ghcr.io/kubenetworks/kubevpn:v2.x.x [镜像仓库地址]/[命名空间]/[镜像仓库]:[镜像版本号]
 docker push [镜像仓库地址]/[命名空间]/[镜像仓库]:[镜像版本号]
 ```
 
 然后就可以使用这个镜像了，如下：
 
 ```text
-➜  ~ kubevpn connect --image [镜像仓库地址]/[命名空间]/[镜像仓库]:[镜像版本号]
+kubevpn connect --image [镜像仓库地址]/[命名空间]/[镜像仓库]:[镜像版本号]
 Starting connect
 Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16
 ...
@@ -43,7 +34,7 @@ Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16
   例如：
 
 ```shell
-➜  ~ kubevpn connect --transfer-image --image registry.example.org/kubevpn/kubevpn:latest
+kubevpn connect --transfer-image --image registry.example.org/kubevpn/kubevpn:latest
 Starting connect
 Detected cluster CIDRs: 172.29.0.0/16, 172.21.0.0/16 (cached)
 Using traffic manager in namespace "default"
@@ -52,7 +43,6 @@ Allocated TUN IP 198.18.0.100
 Created TUN device "utun4"
 Configured DNS
 Now you can access resources in the kubernetes cluster !
-➜  ~
 ```
 
 - 第三种，使用 `kubevpn image copy` 命令将镜像复制到私有仓库：
