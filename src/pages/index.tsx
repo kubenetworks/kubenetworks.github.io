@@ -114,12 +114,62 @@ function HomepageHeader() {
               style={{ marginRight: 8 }}
               className={styles.githubLogo}
               src="img/github.svg"
+              alt="GitHub"
             ></img>
             {ver}
           </Link>
         </div>
       </div>
     </header>
+  );
+}
+
+function TerminalDemo() {
+  const terminalAriaLabel = translate({ message: 'Terminal demo' });
+  return (
+    <section className={styles.terminalSection}>
+      <div className="container">
+        <h2 className={styles.sectionTitle}>
+          <Translate>See it in action</Translate>
+        </h2>
+        <div className={styles.terminal} role="region" aria-label={terminalAriaLabel}>
+          <div className={styles.terminalHeader}>
+            <div className={styles.terminalButtons}>
+              <span className={styles.terminalButton}></span>
+              <span className={styles.terminalButton}></span>
+              <span className={styles.terminalButton}></span>
+            </div>
+            <span className={styles.terminalTitle}>Terminal</span>
+          </div>
+          <div className={styles.terminalBody}>
+            <div className={styles.terminalLine}>
+              <span className={styles.prompt}>$</span>
+              <span className={styles.command}>kubevpn connect --namespace kubevpn-demo</span>
+            </div>
+            <div className={styles.terminalLine}>
+              <span className={styles.output}>Connecting to cluster...</span>
+            </div>
+            <div className={styles.terminalLine}>
+              <span className={styles.output}>Successfully connected!</span>
+            </div>
+            <div className={styles.terminalLine}>
+              <span className={styles.prompt}>$</span>
+              <span className={styles.command}>kubevpn status</span>
+            </div>
+            <div className={styles.terminalLine}>
+              <span className={styles.output}>✓ Connected to kubevpn-demo namespace</span>
+            </div>
+            <div className={styles.terminalLine}>
+              <span className={styles.prompt}>$</span>
+              <span className={styles.command}>curl http://productpage:9080</span>
+            </div>
+            <div className={styles.terminalLine}>
+              <span className={styles.output}>&lt;!DOCTYPE html&gt;...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -135,6 +185,7 @@ export default function Home(): React.JSX.Element {
     >
       <HomepageHeader />
       <main>
+        <TerminalDemo />
         <HomepageFeatures />
       </main>
     </Layout>
