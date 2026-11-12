@@ -8,44 +8,16 @@ KubeVPN 提供了一个云原生开发环境, 可以在本地连接云端 kubern
 网络的工具，可以在本地直接访问远端集群的服务。也可以在远端集群访问到本地服务，便于调试及开发。同时还可以使用运行模式，直接在本地使用
 Docker 将远程容器运行在本地。
 
-# 安装 kubevpn server 在 Kubernetes 集群中（可选）
+## 前置条件
 
-可以通过 helm 提前在集群中安装 kubevpn server（当 kubevpn client 链接时，如果 server 没有安装，client 将会自动安装
-server），如下命令：
+- Kubernetes 集群 (v1.20+)
+- 具有适当权限的 Kubeconfig
+- Docker（用于 `kubevpn run` 模式，可选）
+- 管理员/root 权限（用于创建 TUN 设备）
 
-```shell
-➜ helm repo add kubevpn https://raw.githubusercontent.com/kubenetworks/kubevpn/master/charts
-"kubevpn" has been added to your repositories
-```
+在开始之前，请查看[安全](./operations/security.md)文档。
 
-```shell
-➜ helm search repo kubevpn
-NAME            	CHART VERSION	APP VERSION	DESCRIPTION
-kubevpn/kubevpn 	2.11.5       	v2.11.5    	A Helm chart for KubeVPN
-```
-
-```shell
-➜  ~ helm install kubevpn kubevpn/kubevpn
-NAME: kubevpn
-LAST DEPLOYED: Thu Feb 15 21:36:57 2024
-NAMESPACE: test
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-1. Connect to cluster network by running these commands:
-  kubevpn connect --namespace test
-  export POD_IP=$(kubectl get pods --namespace test -l "app.kubernetes.io/name=kubevpn,app.kubernetes.io/instance=kubevpn" -o jsonpath="{.items[0].status.podIP}")
-  ping $POD_IP
-```
-
-如果使用私有镜像仓库，使用以下命令安装：
-
-```shell
-helm install kubevpn kubevpn/kubevpn --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn --set 'imagePullSecrets[0].name=registry' -n default --debug --set image.tag=latest
-```
-
-# 安装 kubevpn client 在本地电脑上
+## 安装客户端
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -77,8 +49,8 @@ curl -fsSL https://kubevpn.dev/install.sh | sh
 
 [https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
 
-</TabItem>
-<TabItem value="Linux" label="Linux">
+  </TabItem>
+  <TabItem value="Linux" label="Linux">
 
 ### 使用 [brew](https://brew.sh/)
 
@@ -110,11 +82,11 @@ curl -fsSL https://kubevpn.dev/install.sh | sh
 
 [https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
 
-</TabItem>
+  </TabItem>
 
-<TabItem value="Windows" label="Windows">
+  <TabItem value="Windows" label="Windows">
 
-### 使用 [scoop](https://scoop.sh/)
+### 使用 [scoop](https://scoop.sh/) 安装
 
 ```shell
 scoop bucket add extras
@@ -133,18 +105,113 @@ kubectl kubevpn
 
 [https://github.com/kubenetworks/kubevpn/releases/latest](https://github.com/kubenetworks/kubevpn/releases/latest)
 
-</TabItem>
+  </TabItem>
 
 </Tabs>
 
-# 安装 bookinfo 作为 demo 应用
+## 安装 kubevpn server 在 Kubernetes 集群中（可选）
+
+可以通过 helm 提前在集群中安装 kubevpn server（当 kubevpn client 链接时，如果 server 没有安装，client 将会自动安装
+server），如下命令：
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
+helm repo add kubevpn https://raw.githubusercontent.com/kubenetworks/kubevpn/master/charts
+helm repo update
 ```
-
-测试完成后清理可以执行以下命令
 
 ```shell
-kubectl delete -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml
+helm search repo kubevpn
 ```
+
+```shell
+helm install kubevpn kubevpn/kubevpn --namespace kubevpn --create-namespace
+```
+
+如果使用私有镜像仓库，使用以下命令安装：
+
+```shell
+helm install kubevpn kubevpn/kubevpn \
+  --set image.repository=[YOUR_PRIVATE_REGISTRY]/kubevpn/kubevpn \
+  --set 'imagePullSecrets[0].name=registry' \
+  --namespace kubevpn \
+  --create-namespace
+```
+
+## 创建演示命名空间
+
+让我们为演示创建一个专用的命名空间：
+
+```shell
+kubectl create namespace kubevpn-demo
+```
+
+## 安装 bookinfo 作为 demo 应用
+
+将示例 bookinfo 应用程序部署到演示命名空间：
+
+```shell
+kubectl apply -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml -n kubevpn-demo
+```
+
+等待所有 pod 准备就绪：
+
+```shell
+kubectl wait --for=condition=ready --timeout=5m pod --all -n kubevpn-demo
+```
+
+## 连接到集群
+
+现在让我们使用 KubeVPN 连接到集群：
+
+```shell
+kubevpn connect --namespace kubevpn-demo
+```
+
+## 检查连接状态
+
+验证您的连接：
+
+```shell
+kubevpn status
+```
+
+## 访问集群服务
+
+现在您可以直接从本地机器访问 productpage 服务：
+
+```shell
+curl http://productpage:9080
+```
+
+或在浏览器中打开：
+```
+http://productpage:9080
+```
+
+## 清理
+
+完成后，清理：
+
+（可选）如果使用了 `kubevpn proxy`，先清除代理资源：
+```shell
+kubevpn leave deployment/productpage -n kubevpn-demo
+```
+
+断开与集群的连接：
+```shell
+kubevpn disconnect --all
+```
+
+删除 bookinfo 应用程序：
+```shell
+kubectl delete -f https://raw.githubusercontent.com/kubenetworks/kubevpn/master/samples/bookinfo.yaml -n kubevpn-demo
+```
+
+删除演示命名空间：
+```shell
+kubectl delete namespace kubevpn-demo
+```
+
+:::warning
+您也可以使用 `kubevpn uninstall -n kubevpn-demo` 删除流量管理器及相关资源，但这会影响共享集群中使用同一命名空间的所有用户。仅当您确定没有其他人在该命名空间中使用 KubeVPN 时才使用此命令。
+:::
